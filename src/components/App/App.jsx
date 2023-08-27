@@ -5,17 +5,21 @@ import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
 import { Profile } from "../Profile/Profile";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
+import { Main } from "../Main/Main";
+import {Footer} from "../Footer/Footer";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="signin" element={Login} />
-        <Route path="signup" element={Register} />
-        <Route path="/*" element={NotFoundPage} />
+        <Route path="signin" element={<Login />} />
+        <Route path="signup" element={<Register />} />
+        <Route path="/me" element={<Profile />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
-         {/*<Route path="me" element={Profile} />*/}
+        <Footer />
     </div>
   );
 }
