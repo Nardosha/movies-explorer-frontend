@@ -2,13 +2,14 @@ import { NavLink } from "react-router-dom";
 
 export const BurgerMenu = () => {
   return (
-    <div className="burger">
-      <div className="burger__icon burger__icon_active"></div>
-      <div className="burger__icon burger__icon_active"></div>
+    <>
+      <div className="header__burger header__burger_active">
+        <span className="header_burger-el"></span>
+      </div>
 
-      <nav className="burger__menu">
-        <ul className="burger__list">
-          <li className="burger__item">
+      <nav className="header__menu header__menu_active">
+        <ul className="header__list">
+          <li className="header__item header__item_main">
             <NavLink
               to="/"
               className={(isActive) => (isActive ? "active" : "")}
@@ -16,7 +17,7 @@ export const BurgerMenu = () => {
               Главная
             </NavLink>
           </li>
-          <li className="burger__item">
+          <li className="header__item">
             <NavLink
               to="movies"
               className={(isActive) => (isActive ? "active" : "")}
@@ -24,7 +25,7 @@ export const BurgerMenu = () => {
               Фильмы
             </NavLink>
           </li>
-          <li className="burger__item">
+          <li className="header__item">
             <NavLink
               to="saved-movies"
               className={(isActive) => (isActive ? "active" : "")}
@@ -32,13 +33,13 @@ export const BurgerMenu = () => {
               Сохранённые фильмы
             </NavLink>
           </li>
-          <li className="burger__item">
-            <NavLink className="burger__profile-button" to="me">
+          <li className="header__item header__item_profile-button">
+            <NavLink className="header__profile-button" to="me">
               Аккаунт
             </NavLink>
           </li>
         </ul>
       </nav>
-    </div>
+    </>
   );
 };

@@ -9,10 +9,7 @@
 }
 
 .header__body {
-  margin: 0 auto;
-
   box-sizing: border-box;
-
   position: relative;
   display: flex;
   align-items: center;
@@ -21,6 +18,8 @@
   height: 74px;
   z-index: 2;
   padding: 18px 14px 18px 23px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .header__logo {
@@ -45,7 +44,7 @@
   left: 0;
   width: 100%;
   height: 2.5px;
-  transition: all 0.3s ease 0s;
+  transition: all 0.4s ease 0s;
 }
 
 .header_burger-el {
@@ -82,18 +81,28 @@
 .header__menu {
   position: fixed;
   top: 0;
-  right: 0;
+  right: -100%;
   width: 100%;
   height: 100%;
-  background-color: #447777;
-  padding: 144px 0 0 0;
+  background-color: var(--shadowed-background-color);
   display: flex;
   justify-content: center;
+  transition: all 0.4s ease 0s;
+}
+/*todo: switch background color*/
+
+
+.header__menu_active{
+  right: 0;
 }
 
 .header__list {
   list-style: none;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 144px 0 46px 0;
   margin: 0;
 }
 
@@ -105,6 +114,12 @@
   text-decoration: none;
 }
 
+.header__item_profile-button {
+  text-align: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
 
 @media (min-width: 375px) {
   .header__menu {
@@ -115,7 +130,7 @@
 
 @media (min-width: 769px) {
   .header {
-    background-color: rgb(237, 190, 255);
+    background-color: rgb(58, 96, 48);
   }
   .header__burger {
     display: none;
@@ -132,10 +147,12 @@
   .header__list {
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: flex-end;
     gap: 16px;
     width: 100%;
     height: 74px;
+    padding: 0;
   }
 
   .header__item_main {
@@ -149,12 +166,12 @@
 }
 
 @media (min-width: 1280px) {
-  .header {
-    max-width: 1280px;
-    min-height: 74px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ccffff;
-  }
+  /*.header__body {*/
+  /*  max-width: 1280px;*/
+  /*  min-height: 74px;*/
+  /*  display: flex;*/
+  /*  align-items: center;*/
+  /*  justify-content: space-between;*/
+  /*  background-color: #ccffff;*/
+  /*}*/
 }
