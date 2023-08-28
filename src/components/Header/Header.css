@@ -1,0 +1,151 @@
+.header {
+  background-color: var(--primary-background-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 74px;
+  width: 100%;
+  z-index: 10;
+}
+
+.header__body {
+  margin: 0 auto;
+
+  box-sizing: border-box;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  height: 74px;
+  z-index: 2;
+  padding: 18px 14px 18px 23px;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+}
+
+.header__burger {
+  display: block;
+  position: relative;
+  width: 22px;
+  height: 20.5px;
+  z-index: 10;
+}
+
+.header_burger-el,
+.header__burger::before,
+.header__burger::after {
+  background-color: var(--main-text-color);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  transition: all 0.3s ease 0s;
+}
+
+.header_burger-el {
+  top: 50%;
+  transform: scale(1) translate(0px, -50%);
+}
+
+.header__burger_active .header_burger-el {
+  transform: scale(0) translate(0px, -50%);
+}
+
+.header__burger::before {
+  content: "";
+  top: 0;
+}
+
+.header__burger::after {
+  content: "";
+  bottom: 0;
+}
+
+.header__burger_active:before {
+  top: 50%;
+  height: 3px;
+  transform: translate(0px, -50%) rotate(-45deg);
+}
+
+.header__burger_active:after {
+  bottom: 50%;
+  height: 3px;
+  transform: translate(0px, 50%) rotate(45deg);
+}
+
+.header__menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #447777;
+  padding: 144px 0 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.header__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header__item {
+  font-family: Inter, Aria, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--main-text-color);
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .header {
+    background-color: rgb(237, 190, 255);
+  }
+  .header__burger {
+    display: none;
+  }
+
+  .header__menu {
+    position: relative;
+    width: 100%;
+    background-color: unset;
+    height: 74px;
+  }
+
+  .header__list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    width: 100%;
+    height: 74px;
+  }
+
+  .header__item_main {
+    display: none;
+  }
+
+  .header__item_profile-button {
+    flex: 1 0 auto;
+    text-align: end;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header {
+    max-width: 1280px;
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ccffff;
+  }
+}

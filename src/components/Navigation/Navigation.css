@@ -1,0 +1,22 @@
+.header__logo {
+  position: relative;
+  background: var(--main-text-color);
+  width: 22px;
+  height: 21px;
+
+}
+
+.header__logo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 22px;
+  background-color: var(--main-text-color);
+}
+.header__logo::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 22px;
+  background-color: var(--main-text-color);
+}

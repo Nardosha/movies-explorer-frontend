@@ -15,7 +15,7 @@ function App() {
   const isLogged = useRef(true);
 
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <Routes>
         <Route path="signin" element={<Login />} />
@@ -23,7 +23,7 @@ function App() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/me" element={<Profile />} />
-        <Route path="/" element={<Main isLogged={isLogged.current} />} />
+        <Route path="/" element={<Main />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

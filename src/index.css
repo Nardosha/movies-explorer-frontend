@@ -1,4 +1,10 @@
 @import "./vendor/fonts/fonts.css";
 @import "./vendor/normalize.css";
+@import "./components/root/root.css";
 
 @import "./components/App/App.css";
+@import "./components/Header/Header.css";
+/*@import "./components/Navigation/Navigation.css";*/
+@import "./components/Main/Main.css";
+
+
