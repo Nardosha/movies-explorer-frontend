@@ -137,6 +137,10 @@
 }
 
 @media (min-width: 375px) {
+  .header__body {
+    padding: 18px 30px 18px 30px;
+  }
+
   .header__menu {
     width: 68.3%;
   }
@@ -146,6 +150,11 @@
   .header {
     background-color: rgb(58, 96, 48);
   }
+
+  .header__body {
+    padding: 18px 70px 18px 70px;
+  }
+
   .header__burger {
     display: none;
   }
@@ -179,5 +188,11 @@
     flex: 1 0 auto;
     text-align: end;
     flex-direction: row;
+  }
+
+  .header__link {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 138.5%;
   }
 }
