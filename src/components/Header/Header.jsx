@@ -3,6 +3,7 @@ import logo from "../../images/icons/logo__COLOR_main-1-min.svg";
 import { useState } from "react";
 import { ProfileButton } from "../ProfileButton/ProfileButton";
 import { Logo } from "../AppLogo/Logo";
+import {LoginButton} from "../LoginButton/LoginButton";
 export const Header = ({ isLogged }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -89,6 +90,11 @@ export const Header = ({ isLogged }) => {
             <button className="header__action-button">Аккаунт</button>
           </div>
         )}
+
+        <LoginButton />
+
+        <ProfileButton/>
+
       </div>
     </div>
   );

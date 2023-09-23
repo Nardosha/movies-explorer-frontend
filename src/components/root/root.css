@@ -1,6 +1,9 @@
 :root {
-    --main-text-color: #ffffff;
+    --main-text-color: #fff;
+    --secondary-text-color: #000;
     --primary-background-color: #202020;
     --secodary-background-color: #272727;
     --shadowed-background-color: #313131;
+
+    --login-button-color: #3DDC84;
 }
