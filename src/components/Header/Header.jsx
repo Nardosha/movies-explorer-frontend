@@ -18,7 +18,7 @@ export const Header = ({ isLogged }) => {
           <Logo />
         </NavLink>
 
-        {isLogged && (
+        {isLogged.current && (
           <div
             className={
               isMenuOpen
@@ -31,7 +31,7 @@ export const Header = ({ isLogged }) => {
           </div>
         )}
 
-        {isLogged && (
+        {isLogged.current && (
           <nav
             className={
               isMenuOpen ? "header__menu header__menu_active" : "header__menu"
@@ -84,17 +84,12 @@ export const Header = ({ isLogged }) => {
           </nav>
         )}
 
-        {!isLogged && (
+        {!isLogged.current && (
           <div className="header__actions">
             <button className="header__action-button">Регистрация</button>
-            <button className="header__action-button">Аккаунт</button>
+            <LoginButton />
           </div>
         )}
-
-        <LoginButton />
-
-        <ProfileButton/>
-
       </div>
     </div>
   );

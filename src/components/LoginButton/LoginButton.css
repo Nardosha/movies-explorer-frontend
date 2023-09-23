@@ -22,3 +22,13 @@
 .login-button:hover{
   opacity: 0.8;
 }
+
+@media (min-width: 320px) {
+  .login-button {
+    font-size: 12px;
+    line-height: 133%;
+    min-width: 54px;
+    min-height: 26px;
+    padding: 8px 20px;
+  }
+}

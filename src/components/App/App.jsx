@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header isLogged={isLogged} />
       <Routes>
         <Route path="signin" element={<Login />} />
         <Route path="signup" element={<Register />} />
