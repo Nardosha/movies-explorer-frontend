@@ -1,3 +1,3 @@
 export const AboutMe = () => {
-  return <div>ABOUT_ME</div>;
+  return <div>Студент</div>;
 };

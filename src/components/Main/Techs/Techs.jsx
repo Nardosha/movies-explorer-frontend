@@ -1,3 +1,3 @@
 export const Techs = () => {
-    return <div>TECHS</div>;
+    return <div>Технологии</div>;
 };
