@@ -6,7 +6,7 @@ import { Hero } from "../Hero/Hero";
 
 export const Promo = () => {
   return (
-    <div>
+    <div className="promo">
       <Hero />
       <AboutProject />
       <Techs />

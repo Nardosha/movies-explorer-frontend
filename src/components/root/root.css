@@ -1,10 +1,37 @@
 :root {
-    --main-text-color: #fff;
-    --secondary-text-color: #000;
-    --primary-background-color: #202020;
-    --secodary-background-color: #272727;
-    --shadowed-background-color: #313131;
-    --light-shodowed-background-color: #303030;
+  /*fonts*/
+  --font-family: Inter, Arial, sans-serif;
+  --basic-font-weight: 400;
 
-    --login-button-color: #3DDC84;
+
+  /*********MOBILE STYLES********/
+
+  /* title */
+  /*--title-font-size: 29px;*/
+  /*--title-line-height: 37px;*/
+  --mobile-button-font-size: 10px;
+  --mobile-line-height: 16px;
+
+
+  /*********TABLET STYLES********/
+
+  /* title */
+  --tablet-button-font-size: 12px;
+
+
+  --main-text-color: #fff;
+  --secondary-text-color: #000;
+  --primary-background-color: #202020;
+  --secodary-background-color: #272727;
+  --shadowed-background-color: #313131;
+  --light-shodowed-background-color: #303030;
+
+  --login-button-color: #3ddc84;
+
+
+
+  /*****QUERIES*****/
+  --mobile-query: 320px;
+  --tablet-query: 768px;
+  --desctop-query: 1280px;
 }
