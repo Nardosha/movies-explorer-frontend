@@ -35,7 +35,7 @@
 @media (min-width: 321px) {
   .hero {
     min-height: 728px;
-    padding: 20px 20px;
+    padding: 20px 20px 0 20px;
   }
 
   .hero__container {
@@ -54,7 +54,7 @@
 @media (min-width: 769px) {
   .hero {
     min-height: calc(493px + 20px);
-    padding: 20px 40px;
+    padding: 20px 40px 0 40px;
   }
 
   .hero__container {

@@ -8,9 +8,12 @@
 @import "./components/Main/Main.css";
 @import "./components/Main/Hero/Hero.css";
 @import "./components/Main/NavTab/NavTab.css";
+@import "./components/Main/Promo/Promo.css";
+@import "./components/Main/AboutProject/AboutProject.css";
 
 
 
+@import "./components/Separator/Separator.css";
 @import "./components/ProfileButton/ProfileButton.css";
 @import "./components/LoginButton/LoginButton.css";
 

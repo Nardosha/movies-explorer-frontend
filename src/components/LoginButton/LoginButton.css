@@ -6,10 +6,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: 160%;
-  color: var(--secondary-text-color);
+  color: var(--black-text-color);
   text-decoration: none;
   border-radius: 3px;
-  background-color: var(--login-button-color);
+  background-color: var(--primary-green-color);
   display: flex;
   align-items: center;
   justify-content: center;
