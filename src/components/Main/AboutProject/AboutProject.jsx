@@ -11,20 +11,20 @@ export const AboutProject = ({className}) => {
           <h3 className="about__item-title">
             Дипломный проект включал 5 этапов
           </h3>
-          <span className="about__item-description">
+          <p className="about__item-description">
             Составление плана, работу над бэкендом, вёрстку, добавление
             функциональности и финальные доработки.
-          </span>
+          </p>
         </li>
 
         <li className="about__list-item">
           <h3 className="about__item-title">
-            Дипломный проект включал 5 этапов
+            На выполнение диплома ушло 5 недель
           </h3>
-          <span className="about__item-description">
+          <p className="about__item-description">
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
             соблюдать, чтобы успешно защититься.
-          </span>
+          </p>
         </li>
       </ul>
 
@@ -34,7 +34,7 @@ export const AboutProject = ({className}) => {
             1 неделя
           </div>
           <div className="about__scheme-item about__scheme-item_colored">
-            2 недели
+            4 недели
           </div>
         </li>
         <li className="about__scheme-row">

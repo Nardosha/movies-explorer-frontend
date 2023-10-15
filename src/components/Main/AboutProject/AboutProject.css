@@ -27,7 +27,6 @@
   color: var(--basic-font-weight);
   font-family: var(--font-family);
   font-weight: var(--basic-font-weight);
-  line-height: 16px;
   padding: 0;
   margin: 0 0 56px 0;
 }
@@ -35,13 +34,13 @@
   font-size: 18px;
   letter-spacing: -0.72px;
   line-height: normal;
-  font-weight: 400;
   padding: 0;
   margin: 0 0 16px 0;
 }
 .about__item-description {
   font-size: 11px;
-  line-height: normal;
+  font-style: normal;
+  line-height: 16px;
   padding: 0;
   margin: 0;
 }
@@ -60,7 +59,7 @@
   list-style: none;
   line-height: normal;
   display: grid;
-  grid-template-rows: minmax(35px, 1fr);
+  grid-template-rows: fit-content(35px);
   grid-template-columns: 35% 65%;
   width: 100%;
   padding: 0;
@@ -68,23 +67,24 @@
 }
 
 .about__scheme-item {
-  color: #A0A0A0;
+  color: #a0a0a0;
   font-size: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 11px 10px;
+  padding: 10px 0 0 0 ;
 }
 
 .about__scheme-item_primary-colored {
   color: var(--black-text-color);
   background-color: var(--primary-green-color);
+  padding: 11px 10px;
 }
 
 .about__scheme-item_colored {
   color: var(--main-text-color);
   background-color: var(--light-shodowed-background-color);
-
+  padding: 11px 10px;
 }
 
 @media (min-width: 321px) {
@@ -129,6 +129,14 @@
 
   .about__scheme-item {
     font-size: 14px;
+    padding: 14px 0 0 0;
+  }
+
+  .about__scheme-item_primary-colored {
+    padding: 9px 10px;
+  }
+
+  .about__scheme-item_colored {
     padding: 9px 10px;
   }
 }
