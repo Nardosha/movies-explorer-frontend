@@ -1,0 +1,47 @@
+.search-form {
+  box-sizing: border-box;
+  position: relative;
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 14px;
+  margin: 0;
+}
+
+.search-form__label {
+  display: none;
+}
+
+.search-form__input {
+  line-height: 18px;
+  color: var(--main-text-color);
+  box-sizing: border-box;
+  background: #2f2f2f;
+  min-height: 44px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 13px;
+  margin: 0;
+}
+
+.search-form__input::placeholder {
+  color: var(--gray-text-color);
+}
+
+.search-form__button {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+  background-image: url("../../../images/movies/search-form/search-form__button.svg");
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  margin: 0;
+}
