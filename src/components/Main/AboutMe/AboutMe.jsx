@@ -3,7 +3,7 @@ import { Separator } from "../../Separator/Separator";
 export const AboutMe = () => {
   return (
     <section className="about-me">
-      <h2 className="about-me__title">О проекте</h2>
+      <h2 className="about-me__title">Студент</h2>
       <Separator className="about-me__separator" />
 
       <div className="about-me__container-info">
