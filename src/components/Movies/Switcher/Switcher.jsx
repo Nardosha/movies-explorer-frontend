@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Switcher = ({ title }) => {
+export const Switcher = ({ title, className }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const onChange = (event) => {
@@ -8,7 +8,7 @@ export const Switcher = ({ title }) => {
   };
 
   return (
-    <div className="switcher" onClick={onChange}>
+    <div className={`switcher ${className}`} onClick={onChange}>
       <div
         className={`switcher__slider ${
           isChecked && "switcher__slider_checked"

@@ -1,6 +1,6 @@
-export const SearchForm = () => {
+export const SearchForm = ({ className }) => {
   return (
-    <section className="search-form">
+    <section className={`search-form ${className}`}>
       <label className="search-form__label" htmlFor="search-input" />
       <input
         type="text"

@@ -3,5 +3,13 @@
 }
 
 .movies__search-form {
+  margin: 0 0 47px 0;
 }
 
+.movies__switcher {
+  margin: 0 0 40px 0;
+}
+
+.movies__separator {
+  margin: 0;
+}
