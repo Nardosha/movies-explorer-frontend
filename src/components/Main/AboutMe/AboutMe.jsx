@@ -34,26 +34,21 @@ export const AboutMe = () => {
       <ul className="about-me__portfolio-list">
         <li className="about-me__list-item">
           <a href="#" className="about-me__portfolio-link">
-            <span className="about-me__link-text">Статичный сайт</span>
-            <span className="about-me__link-icon">↗</span>
+            Статичный сайт
           </a>
         </li>
         <Separator className="about-me__link-separator" />
 
         <li className="about-me__list-item">
           <a href="#" className="about-me__portfolio-link">
-            <span className="about-me__link-text">Адаптивный сайт</span>
-            <span className="about-me__link-icon">↗</span>
+            Адаптивный сайт
           </a>
         </li>
         <Separator className="about-me__link-separator" />
 
         <li className="about-me__list-item">
           <a href="#" className="about-me__portfolio-link">
-            <span className="about-me__link-text">
-              Одностраничное приложение
-            </span>
-            <span className="about-me__link-icon">↗</span>
+            Одностраничное приложение
           </a>
         </li>
       </ul>

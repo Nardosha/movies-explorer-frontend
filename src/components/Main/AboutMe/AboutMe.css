@@ -81,6 +81,7 @@
   margin: 0 0 19px 0;
 }
 .about-me__portfolio-link {
+  position: relative;
   text-decoration: none;
   color: #fff;
   font-size: 18px;
@@ -91,6 +92,16 @@
   align-items: center;
   padding: 0;
   margin: 0;
+}
+
+.about-me__portfolio-link::after {
+  position: absolute;
+  content: "\2197";
+  top: 50%;
+  right: 0;
+  font-size: 18px;
+  line-height: 28px;
+  transform: translate(0, -50%);
 }
 
 .about-me__link-separator {
@@ -161,6 +172,11 @@
     line-height: 50px;
     letter-spacing: -1.12px;
   }
+
+  .about-me__portfolio-link::after {
+    font-size: 28px;
+    line-height: 50px;
+  }
 }
 
 @media (min-width: 769px) {
@@ -207,5 +223,9 @@
   .about-me__portfolio-link {
     font-size: 30px;
     letter-spacing: -1.2px;
+  }
+
+  .about-me__portfolio-link::after {
+    font-size: 30px;
   }
 }
