@@ -159,7 +159,7 @@
   opacity: 0.8;
 }
 
-@media (min-width: 375px) {
+@media (min-width: 321px) {
   .header__body {
     padding: 18px 38px 18px 30px;
   }

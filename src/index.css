@@ -18,6 +18,7 @@
 @import "./components/Movies/MoviesCardList/MovieCardList.css";
 @import "./components/Movies/MoviesCard/MovieCard.css";
 @import "./components/Movies/SearchForm/SearchForm.css";
+@import "./components/SavedMovies/SavedMovies.css";
 
 @import "./components/Movies/Switcher/Switcher.css";
 @import "./components/Separator/Separator.css";

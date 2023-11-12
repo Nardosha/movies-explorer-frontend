@@ -1,0 +1,19 @@
+.saved-movies {
+   position: relative;
+   width: 100%;
+   padding: 154px 0 20px 0;
+}
+
+.saved-movies__search-form {
+   margin: 0 0 47px 0;
+}
+
+.saved-movies__switcher {
+   padding: 0 14px;
+   margin: 0 0 40px 0;
+}
+
+.saved-movies__separator {
+   padding: 0 14px;
+   margin: 0;
+}

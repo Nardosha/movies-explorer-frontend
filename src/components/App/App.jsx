@@ -6,27 +6,38 @@ import { Register } from "../Register/Register";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
-import {Profile} from "../Profile/Profile";
+import { Profile } from "../Profile/Profile";
+import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
 
 function App() {
   const isLogged = useRef(true);
+
+  const [movies, setMovies] = useState(MOVIES);
+  const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
+
+  useEffect(() => {
+    if (isShowSavedMovies) {
+      console.log(isShowSavedMovies);
+      setMovies(movies.filter((movie) => movie.isSaved));
+    }
+  }, [isShowSavedMovies]);
+  console.log(movies);
 
   return (
     <div className="app">
       <Header isLogged={isLogged} />
 
-
       <Routes>
-      {/*  <Route path="signin" element={<Login />} />*/}
-      {/*  <Route path="signup" element={<Register />} />*/}
-        <Route path="/movies" element={<Movies />} />
-      {/*  <Route path="/saved-movies" element={<SavedMovies />} />*/}
-      {/*  <Route path="/me" element={<Profile />} />*/}
+        {/*  <Route path="signin" element={<Login />} />*/}
+        {/*  <Route path="signup" element={<Register />} />*/}
+        <Route path="/movies" element={<Movies movies={movies} />} />
+        <Route path="/saved-movies" element={<SavedMovies movies={movies} showSavedMovies={true} />} />
+        {/*  <Route path="/me" element={<Profile />} />*/}
         <Route path="/" element={<Main />} />
-      {/*  <Route path="/*" element={<NotFoundPage />} />*/}
+        {/*  <Route path="/*" element={<NotFoundPage />} />*/}
       </Routes>
       <Footer />
     </div>

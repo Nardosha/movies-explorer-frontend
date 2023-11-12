@@ -1,23 +1,22 @@
-import { useState } from "react";
-
-export const MovieCard = ({ movieInfo }) => {
-  const [movie, setMovie] = useState(movieInfo);
-
-  console.log({ ...movie });
+export const MovieCard = ({ movie, showSavedMovies }) => {
+  console.log("MovieCard", showSavedMovies);
 
   return (
     <div className="movie-card">
-      {movie.isOwn && (
-        <div className="movie-card__state">
-          {movie.isSaved ? (
-            <button className="movie-card__button">Сохранено</button>
-          ) : (
-            <button className="movie-card__button">Сохранить!</button>
-          )}
-        </div>
+      {showSavedMovies && (
+        <button className="movie-card__button movie-card__delete-button" />
       )}
 
-      <div className="movie-card___container">
+      {!showSavedMovies &&
+        (movie.isSaved ? (
+          <button className="movie-card__button movie-card__saved-button" />
+        ) : (
+          <button className="movie-card__button movie-card__save-button">
+            Сохранить
+          </button>
+        ))}
+
+      <div className="movie-card__container">
         <img
           className="movie-card__image"
           src={require(`../../../images/card-${movie.id}.jpg`)}

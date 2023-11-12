@@ -1,6 +1,6 @@
 export const SearchForm = ({ className }) => {
   return (
-    <section className={`search-form ${className}`}>
+    <div className={`search-form ${className}`}>
       <label className="search-form__label" htmlFor="search-input" />
       <input
         type="text"
@@ -10,6 +10,6 @@ export const SearchForm = ({ className }) => {
       />
 
       <button className="search-form__button" />
-    </section>
+    </div>
   );
 };
