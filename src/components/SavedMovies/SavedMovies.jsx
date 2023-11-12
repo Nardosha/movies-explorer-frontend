@@ -1,6 +1,7 @@
 import { SearchForm } from "../Movies/SearchForm/SearchForm";
 import { Switcher } from "../Movies/Switcher/Switcher";
 import { MovieCardList } from "../Movies/MoviesCardList/MovieCardList";
+import {Separator} from "../Separator/Separator";
 
 export const SavedMovies = ({ movies, showSavedMovies }) => {
   const savedMovies = movies.filter((movie) => movie.isSaved);
@@ -10,7 +11,7 @@ export const SavedMovies = ({ movies, showSavedMovies }) => {
       <SearchForm className="saved-movies__search-form" />
       <Switcher className="saved-movies__switcher" title="Короткометражки" />
 
-      {/*<Separator className="movies__separator" />*/}
+      <Separator className="movies__separator" />
 
       <MovieCardList movies={savedMovies} showSavedMovies={showSavedMovies} />
     </section>
