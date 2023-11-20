@@ -1,7 +1,8 @@
 import { SearchForm } from "../Movies/SearchForm/SearchForm";
 import { Switcher } from "../Movies/Switcher/Switcher";
 import { MovieCardList } from "../Movies/MoviesCardList/MovieCardList";
-import {Separator} from "../Separator/Separator";
+import { Separator } from "../Separator/Separator";
+import { MoreButton } from "../MoreButton/MoreButton";
 
 export const SavedMovies = ({ movies, showSavedMovies }) => {
   const savedMovies = movies.filter((movie) => movie.isSaved);
@@ -14,6 +15,8 @@ export const SavedMovies = ({ movies, showSavedMovies }) => {
       <Separator className="movies__separator" />
 
       <MovieCardList movies={savedMovies} showSavedMovies={showSavedMovies} />
+
+      <MoreButton className="saved-movies__more-button" />
     </section>
   );
 };
