@@ -14,10 +14,12 @@
 @import "./components/Main/AboutMe/AboutMe.css";
 @import "./components/Footer/Footer.css";
 
-@import "./components/Movies/Movies.css";
 @import "./components/Movies/MoviesCardList/MovieCardList.css";
+@import "./components/MoreButton/MoreButton.css";
 @import "./components/Movies/MoviesCard/MovieCard.css";
 @import "./components/Movies/SearchForm/SearchForm.css";
+@import "./components/Movies/Movies.css";
+
 @import "./components/SavedMovies/SavedMovies.css";
 
 @import "./components/Movies/Switcher/Switcher.css";
