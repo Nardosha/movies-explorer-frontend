@@ -2,6 +2,7 @@ import { SearchForm } from "./SearchForm/SearchForm";
 import { Switcher } from "./Switcher/Switcher";
 import { Separator } from "../Separator/Separator";
 import { MovieCardList } from "./MoviesCardList/MovieCardList";
+import { MoreButton } from "../MoreButton/MoreButton";
 
 export const Movies = ({ movies }) => {
   return (
@@ -11,7 +12,9 @@ export const Movies = ({ movies }) => {
 
       <Separator className="movies__separator" />
 
-      <MovieCardList movies={movies} />
+      <MovieCardList className="movies__list" movies={movies} />
+
+      <MoreButton className="movies__more-button" />
     </section>
   );
 };
