@@ -37,6 +37,8 @@
 
 @media (min-width: 500px) {
   .movie-card-list__list {
+    row-gap: 47px;
+    column-gap: 30px;
     grid-template-columns: repeat(2, fit-content(339px));
   }
 }
@@ -48,6 +50,7 @@
 
   .movie-card-list__list {
     grid-template-columns: repeat(3, minmax(min-content, 1fr));
-    row-gap: 60px;
+    row-gap: 59px;
+    column-gap: 30px;
   }
 }

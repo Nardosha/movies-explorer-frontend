@@ -21,13 +21,6 @@ export const MOVIES = [
     url: "",
   },
   {
-    id: 4,
-    title: "По волнам: Искусство звука в кино",
-    duration: "1ч 17м",
-    isSaved: false,
-    url: "",
-  },
-  {
     id: 5,
     title: "Баския: Взрыв реальности",
     duration: "1ч 17м",
@@ -79,6 +72,13 @@ export const MOVIES = [
   {
     id: 12,
     title: "Пи Джей Харви: A dog called money",
+    duration: "1ч 17м",
+    isSaved: false,
+    url: "",
+  },
+  {
+    id: 4,
+    title: "По волнам: Искусство звука в кино",
     duration: "1ч 17м",
     isSaved: false,
     url: "",

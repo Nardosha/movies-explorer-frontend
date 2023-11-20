@@ -52,7 +52,7 @@
 .movie-card__info-list {
   list-style: none;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 10px;
   padding: 0;
@@ -67,6 +67,7 @@
 }
 
 .movie-card__duration {
+  box-sizing: border-box;
   color: #8b8b8b;
   border-radius: 3px;
   font-size: 11px;
@@ -88,11 +89,19 @@
   .movie-card__title {
     font-size: 13px;
   }
-
 }
 
 @media (min-width: 769px) {
   .movie-card__container {
     gap: 14px;
+  }
+
+  .movie-card__image {
+    min-height: 201px;
+    min-width: 360px;
+  }
+
+  .movie-card__info-list {
+    padding: 0 14px 0 14px;
   }
 }

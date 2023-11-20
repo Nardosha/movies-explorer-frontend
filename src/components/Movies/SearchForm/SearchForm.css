@@ -43,3 +43,9 @@
   padding: 0;
   margin: 0;
 }
+
+@media (min-width: 321px) {
+  .search-form__input {
+    min-height: 50px;
+  }
+  }
