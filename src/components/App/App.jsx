@@ -1,7 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Link, Route, Routes } from "react-router-dom";
-import { Login } from "../Login/Login";
+import { Route, Routes } from "react-router-dom";
 import { Register } from "../Register/Register";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
@@ -11,6 +10,7 @@ import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Profile } from "../Profile/Profile";
 import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
+import { SignIn } from "../Login/SignIn";
 
 function App() {
   const isLogged = useRef(false);
@@ -31,7 +31,7 @@ function App() {
       {isLogged.current && <Header isLogged={isLogged} />}
 
       <Routes>
-        <Route path="signin" element={<Login />} />
+        <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<Register />} />
         <Route path="/movies" element={<Movies movies={movies} />} />
         <Route
