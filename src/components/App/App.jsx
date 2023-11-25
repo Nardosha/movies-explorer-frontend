@@ -1,7 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
 import { Route, Routes } from "react-router-dom";
-import { Register } from "../Register/Register";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
@@ -10,7 +9,8 @@ import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Profile } from "../Profile/Profile";
 import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
-import { SignIn } from "../Login/SignIn";
+import { SignIn } from "../SignIn/SignIn";
+import {SignUp} from "../SignUp/SignUp";
 
 function App() {
   const isLogged = useRef(false);
@@ -32,7 +32,7 @@ function App() {
 
       <Routes>
         <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<Register />} />
+        <Route path="signup" element={<SignUp />} />
         <Route path="/movies" element={<Movies movies={movies} />} />
         <Route
           path="/saved-movies"

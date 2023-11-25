@@ -1,4 +1,4 @@
-.register {
+.sign-up {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -10,11 +10,11 @@
   min-height: 100vh;
 }
 
-.register__logo {
+.sign-up__logo {
   margin: 0 auto 50px auto;
 }
 
-.register__title {
+.sign-up__title {
   color: var(--main-text-color);
   font-family: var(--font-family);
   font-size: 24px;
@@ -24,7 +24,7 @@
   margin: 0 auto 80px auto;
 }
 
-.register__form {
+.sign-up__form {
   position: relative;
   color: var(--main-text-color);
   font-family: var(--font-family);
@@ -40,26 +40,26 @@
   flex: 1 1 auto;
 }
 
-.register__form-inputs {
+.sign-up__form-inputs {
   height: 100%;
   width: 100%;
 }
 
-.register__name-input {
+.sign-up__name-input {
   margin: 0 0 20px 0;
 }
 
-.register__email-input {
+.sign-up__email-input {
   margin: 0 0 20px 0;
 }
-.register__password-input {
+.sign-up__password-input {
   margin: 0 0 20px 0;
 }
 
-.register__submit-button {
+.sign-up__submit-button {
   margin: 0 0 14px 0;
 }
-.register__navigation {
+.sign-up__navigation {
   color: var(--gray-text-color);
   font-family: var(--font-family);
   font-size: 12px;
@@ -69,7 +69,7 @@
   gap: 7px;
 }
 
-.register__signin-link {
+.sign-up__sign-in-link {
   text-decoration: none;
   color: #4285F4;
   font-size: 12px;

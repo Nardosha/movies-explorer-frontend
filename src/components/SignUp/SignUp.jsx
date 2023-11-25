@@ -1,24 +1,24 @@
+import { NavLink } from "react-router-dom";
 import { Logo } from "../Logo/Logo";
 import { FormInput } from "../FormInput/FormInput";
-import { Link, NavLink, Route } from "react-router-dom";
 import { SubmitButton } from "../SubmitButton/SubmitButton";
 
-export const Register = () => {
+export const SignUp = () => {
   return (
-    <div className="register">
-      <Logo className="register__logo" />
+    <div className="sign-up">
+      <Logo className="sign-up__logo" />
 
-      <h1 className="register__title">Добро пожаловать!</h1>
+      <h1 className="sign-up__title">Добро пожаловать!</h1>
 
-      <form action="" className="register__form">
-        <div className="register__form-inputs">
+      <form action="" className="sign-up__form">
+        <div className="sign-up__form-inputs">
           <FormInput
             label="Имя"
             id="name"
             name="name"
             placeholder="Введите имя"
             required
-            className="register__name-input"
+            className="sign-up__name-input"
           />
 
           <FormInput
@@ -27,7 +27,7 @@ export const Register = () => {
             name="email"
             placeholder="Введите e-mail"
             required
-            className="register__email-input"
+            className="sign-up__email-input"
           />
 
           <FormInput
@@ -35,20 +35,22 @@ export const Register = () => {
             id="password"
             name="password"
             placeholder="Введите пароль"
-            className="register__password"
+            className="sign-up__password"
             required
           />
         </div>
 
         <SubmitButton
           text="Зарегистрироваться"
-          className="register__submit-button"
+          className="sign-up__submit-button"
         />
       </form>
 
-      <div className="register__navigation">
+      <div className="sign-up__navigation">
         <span>Уже зарегистрированы?</span>
-        <NavLink className="register__signin-link" to="/signin">Войти</NavLink>
+        <NavLink className="sign-up__sign-in-link" to="/signin">
+          Войти
+        </NavLink>
       </div>
     </div>
   );
