@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
@@ -14,9 +14,13 @@ import { SignUp } from "../SignUp/SignUp";
 
 function App() {
   const isLogged = useRef(false);
-
   const [movies, setMovies] = useState(MOVIES);
+  const location = useLocation();
   const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
+  const validRoutes = ["/movies", "saved-movies", "/me", "/main"];
+  const isShowSignComponents = validRoutes.includes(location.pathname);
+
+  console.log(Routes);
 
   useEffect(() => {
     if (isShowSavedMovies) {
@@ -24,15 +28,14 @@ function App() {
       setMovies(movies.filter((movie) => movie.isSaved));
     }
   }, [isShowSavedMovies]);
-  console.log(movies);
 
   return (
     <div className="app">
-      {isLogged.current && <Header isLogged={isLogged} />}
+      {isShowSignComponents && <Header isLogged={isLogged} />}
 
       <Routes>
-        <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/movies" element={<Movies movies={movies} />} />
         <Route
           path="/saved-movies"
@@ -42,7 +45,8 @@ function App() {
         <Route path="/main" element={<Main />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
-      {isLogged.current && <Footer />}
+
+      {isShowSignComponents && <Footer />}
     </div>
   );
 }
