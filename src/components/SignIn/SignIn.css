@@ -45,15 +45,16 @@
   width: 100%;
 }
 
-.sign-in__name-input {
-  margin: 0 0 20px 0;
-}
-
 .sign-in__email-input {
   margin: 0 0 20px 0;
 }
 .sign-in__password-input {
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
+}
+
+.sign-up__error-message {
+  color: var(--error-text-color);
+  font-size: 10px;
 }
 
 .sign-in__submit-button {
@@ -71,6 +72,6 @@
 
 .sign-in__sign-up-link {
   text-decoration: none;
-  color: #4285F4;
+  color: #4285f4;
   font-size: 12px;
 }

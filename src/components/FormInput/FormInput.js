@@ -1,9 +1,11 @@
 export const FormInput = ({
   name,
+  type = "text",
   label,
   placeholder,
   required,
   className,
+  hasError,
 }) => {
   return (
     <div className={`form-input ${className}`}>
@@ -12,8 +14,10 @@ export const FormInput = ({
       </label>
 
       <input
-        type="text"
-        className="form-input__input"
+        type={type}
+        className={`form-input__input ${
+          hasError ? "form-input__input_error" : ""
+        }`}
         id={name}
         name={name}
         placeholder={placeholder}

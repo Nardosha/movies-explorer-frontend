@@ -10,7 +10,7 @@ import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Profile } from "../Profile/Profile";
 import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
 import { SignIn } from "../SignIn/SignIn";
-import {SignUp} from "../SignUp/SignUp";
+import { SignUp } from "../SignUp/SignUp";
 
 function App() {
   const isLogged = useRef(false);

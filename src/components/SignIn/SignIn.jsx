@@ -2,8 +2,12 @@ import { NavLink } from "react-router-dom";
 import { Logo } from "../Logo/Logo";
 import { FormInput } from "../FormInput/FormInput";
 import { SubmitButton } from "../SubmitButton/SubmitButton";
+import { useState } from "react";
 
 export const SignIn = () => {
+  const [isFormValid, setIsFormValid] = useState(true);
+  const [formErrorText, setFormErrorText] = useState("Что-то пошло не так");
+
   return (
     <div className="sign-in">
       <Logo className="sign-in__logo" />
@@ -14,21 +18,29 @@ export const SignIn = () => {
         <div className="sign-in__form-inputs">
           <FormInput
             label="E-mail"
+            type="email"
             id="email"
             name="email"
             placeholder="Введите e-mail"
-            required
             className="sign-in__email-input"
+            hasError={false}
+            required
           />
 
           <FormInput
             label="Пароль"
+            type="password"
             id="password"
             name="password"
             placeholder="Введите пароль"
-            className="sign-in__password"
+            className="sign-in__password-input"
+            hasError={false}
             required
           />
+
+          {!isFormValid && (
+            <div className="sign-up__error-message">{formErrorText}</div>
+          )}
         </div>
 
         <SubmitButton text="Войти" className="sign-in__submit-button" />
