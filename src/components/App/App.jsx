@@ -38,8 +38,8 @@ function App() {
           path="/saved-movies"
           element={<SavedMovies movies={movies} showSavedMovies={true} />}
         />
-        <Route path="/me" target="_black" element={<Profile />} />
-        <Route path="/" element={<Main />} />
+        <Route path="/me" element={<Profile />} />
+        <Route path="/main" element={<Main />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       {isLogged.current && <Footer />}
