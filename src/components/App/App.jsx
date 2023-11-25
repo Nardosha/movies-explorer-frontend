@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
@@ -13,7 +13,7 @@ import { Profile } from "../Profile/Profile";
 import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
 
 function App() {
-  const isLogged = useRef(true);
+  const isLogged = useRef(false);
 
   const [movies, setMovies] = useState(MOVIES);
   const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
@@ -28,18 +28,21 @@ function App() {
 
   return (
     <div className="app">
-      <Header isLogged={isLogged} />
+      {isLogged.current && <Header isLogged={isLogged} />}
 
       <Routes>
-        {/*  <Route path="signin" element={<Login />} />*/}
-        {/*  <Route path="signup" element={<Register />} />*/}
+        <Route path="signin" element={<Login />} />
+        <Route path="signup" element={<Register />} />
         <Route path="/movies" element={<Movies movies={movies} />} />
-        <Route path="/saved-movies" element={<SavedMovies movies={movies} showSavedMovies={true} />} />
-        {/*  <Route path="/me" element={<Profile />} />*/}
+        <Route
+          path="/saved-movies"
+          element={<SavedMovies movies={movies} showSavedMovies={true} />}
+        />
+        <Route path="/me" target="_black" element={<Profile />} />
         <Route path="/" element={<Main />} />
-        {/*  <Route path="/*" element={<NotFoundPage />} />*/}
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
-      <Footer />
+      {isLogged.current && <Footer />}
     </div>
   );
 }

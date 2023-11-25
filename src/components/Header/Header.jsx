@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../images/icons/logo__COLOR_main-1-min.svg";
 import { useState } from "react";
 import { ProfileButton } from "../ProfileButton/ProfileButton";
-import { Logo } from "../AppLogo/Logo";
+import { Logo } from "../Logo/Logo";
 import {LoginButton} from "../LoginButton/LoginButton";
 export const Header = ({ isLogged }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
