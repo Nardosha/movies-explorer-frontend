@@ -1,0 +1,31 @@
+.form-input {
+  box-sizing: border-box;
+  position: relative;
+  font-family: var(--font-family);
+  width: 100%;
+}
+
+.form-input__label {
+  display: block;
+  color: var(--gray-text-color);
+  font-size: 10px;
+  text-align: left;
+  margin: 0 0 10px 0;
+}
+
+.form-input__input {
+  box-sizing: border-box;
+  font-size: 13px;
+  color: var(--main-text-color);
+  font-family: var(--font-family);
+  line-height: normal;
+  background-color: #2F2F2F;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /*min-height: 46px;*/
+  padding: 15px;
+}

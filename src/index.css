@@ -1,6 +1,8 @@
 @import "./vendor/fonts/fonts.css";
 @import "./vendor/normalize.css";
 @import "./components/root/root.css";
+@import "./components/FormInput/FormInput.css";
+@import "./components/SubmitButton/SubmitButton.css";
 
 @import "./components/App/App.css";
 @import "./components/Header/Header.css";
