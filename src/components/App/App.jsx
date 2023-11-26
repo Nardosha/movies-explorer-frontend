@@ -3,7 +3,6 @@ import { Header } from "../Header/Header";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
-import { Footer } from "../Footer/Footer";
 import { useEffect, useRef, useState } from "react";
 import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
@@ -11,6 +10,7 @@ import { Profile } from "../Profile/Profile";
 import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
 import { SignIn } from "../SignIn/SignIn";
 import { SignUp } from "../SignUp/SignUp";
+import { Footer } from "../Footer/Footer";
 
 function App() {
   const isLogged = useRef(true);

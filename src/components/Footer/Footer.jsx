@@ -1,4 +1,5 @@
 import { Separator } from "../Separator/Separator";
+import { NavigationLink } from "../NavigationLink/NavigationLink";
 
 export const Footer = () => {
   return (
@@ -11,15 +12,21 @@ export const Footer = () => {
       <div className="footer__list-info">
         <ul className="footer__link-list">
           <li className="footer__list-item">
-            <a href="#" className="footer__link">
-              Яндекс.Практикум
-            </a>
+            <NavigationLink
+              tittle="Яндекс.Практикум"
+              target="_blank"
+              to="https://practicum.yandex.ru/profile/frontend-developer/"
+              className="footer__link"
+            />
           </li>
 
           <li className="footer__list-item">
-            <a href="#" className="footer__link">
-              Github
-            </a>
+            <NavigationLink
+              to="https://github.com/Nardosha"
+              className="footer__link"
+              tittle="Github"
+              target="_blank"
+            />
           </li>
         </ul>
 
