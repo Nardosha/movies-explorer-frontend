@@ -79,3 +79,38 @@
   color: #4285F4;
   font-size: 12px;
 }
+
+@media (min-width: 321px) {
+  .sign-up {
+    max-width: 396px;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .sign-up__logo {
+    align-self: flex-start;
+    margin: 0 0 40px 0;
+  }
+
+  .sign-up__title {
+    align-self: flex-start;
+    margin: 0 0 40px 0;
+  }
+
+  .sign-up__form {
+    flex: unset;
+    max-width: 396px;
+  }
+
+  .sign-up__error-message {
+    min-height: 12px;
+  }
+
+  .sign-up__form-inputs {
+    margin: 0 0 69px 0;
+  }
+
+  .sign-up__navigation {
+    font-size: 14px;
+  }
+}

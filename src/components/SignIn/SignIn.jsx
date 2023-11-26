@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export const SignIn = () => {
   const [isFormValid, setIsFormValid] = useState(true);
-  const [formErrorText, setFormErrorText] = useState("Что-то пошло не так");
+  const [formErrorText, setFormErrorText] = useState("");
 
   return (
     <div className="sign-in">
@@ -38,9 +38,7 @@ export const SignIn = () => {
             required
           />
 
-          {!isFormValid && (
-            <div className="sign-up__error-message">{formErrorText}</div>
-          )}
+          <div className="sign-up__error-message">{formErrorText}</div>
         </div>
 
         <SubmitButton text="Войти" className="sign-in__submit-button" />
