@@ -4,6 +4,7 @@
 @import "./components/FormInput/FormInput.css";
 @import "./components/SubmitButton/SubmitButton.css";
 @import "./components/LoginButton/LoginButton.css";
+@import "./components/NavigationLink/NavigationLink.css";
 
 @import "./components/App/App.css";
 @import "./components/Main/Main.css";
@@ -33,3 +34,4 @@
 @import "./components/Header/Header.css";
 
 @import "./components/NotFoundPage/NotFoundPage.css";
+@import "./components/Preloader/Preloader.css";
