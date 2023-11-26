@@ -53,7 +53,7 @@
 }
 
 .sign-up__error-message {
-  color: var(--error-text-color);
+  color: var(--text-red-color);
   font-size: 10px;
 }
 

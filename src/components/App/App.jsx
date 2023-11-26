@@ -13,12 +13,14 @@ import { SignIn } from "../SignIn/SignIn";
 import { SignUp } from "../SignUp/SignUp";
 
 function App() {
-  const isLogged = useRef(false);
+  const isLogged = useRef(true);
   const [movies, setMovies] = useState(MOVIES);
   const location = useLocation();
   const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
-  const validRoutes = ["/movies", "saved-movies", "/me", "/main"];
-  const isShowSignComponents = validRoutes.includes(location.pathname);
+  const validRoutesForHeader = ["/movies", "saved-movies", "/me", "/main"];
+  const validRoutesForFooter = ["/movies", "saved-movies", "/main"];
+  const isShowHeader = validRoutesForHeader.includes(location.pathname);
+  const isShowFooter = validRoutesForFooter.includes(location.pathname);
 
   console.log(Routes);
 
@@ -31,7 +33,7 @@ function App() {
 
   return (
     <div className="app">
-      {isShowSignComponents && <Header isLogged={isLogged} />}
+      {isShowHeader && <Header isLogged={isLogged} />}
 
       <Routes>
         <Route path="/signin" element={<SignIn />} />
@@ -46,7 +48,7 @@ function App() {
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
 
-      {isShowSignComponents && <Footer />}
+      {isShowFooter && <Footer />}
     </div>
   );
 }

@@ -30,5 +30,5 @@
 }
 
 .form-input__input_error {
-  color: var(--error-text-color);
+  color: var(--text-red-color);
 }
