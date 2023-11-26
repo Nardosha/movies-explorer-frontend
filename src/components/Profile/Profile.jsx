@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import {Separator} from "../Separator/Separator";
 
 export const Profile = () => {
   return (

@@ -59,10 +59,10 @@
 }
 
 .profile__info-value {
-  width: 120px;
-  height: 14px;
   text-align: right;
   flex-shrink: 0;
+  width: 120px;
+  height: 14px;
   padding: 0;
   margin: 0;
 }
@@ -98,4 +98,42 @@
 .profile__link {
   text-decoration: none;
   color: var(--text-red-color);
+}
+
+@media (min-width: 321px) {
+  .profile {
+    padding: 310px 30px 60px;
+  }
+  .profile__title {
+    margin: 0 0 98px 0;
+  }
+
+  .profile__info-list {
+    max-width: 410px;
+    flex: unset;
+  }
+  .profile__action-list {
+    margin: auto;
+  }
+
+  .profile__action-button {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 769px) {
+  .profile {
+    padding: 148px 70px 70px;
+  }
+  .profile__title {
+    margin: 0 0 123px 0;
+  }
+
+  .profile__info-list {
+    max-width: 410px;
+    flex: 1 1 auto;
+  }
+  .profile__action-list {
+    margin: auto;
+  }
 }
