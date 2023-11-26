@@ -17,8 +17,8 @@ function App() {
   const [movies, setMovies] = useState(MOVIES);
   const location = useLocation();
   const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
-  const validRoutesForHeader = ["/movies", "saved-movies", "/me", "/main"];
-  const validRoutesForFooter = ["/movies", "saved-movies", "/main"];
+  const validRoutesForHeader = ["/movies", "/saved-movies", "/me", "/"];
+  const validRoutesForFooter = ["/movies", "/saved-movies", "/"];
   const isShowHeader = validRoutesForHeader.includes(location.pathname);
   const isShowFooter = validRoutesForFooter.includes(location.pathname);
 
@@ -44,7 +44,7 @@ function App() {
           element={<SavedMovies movies={movies} showSavedMovies={true} />}
         />
         <Route path="/me" element={<Profile />} />
-        <Route path="/main" element={<Main />} />
+        <Route path="/" element={<Main />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
 

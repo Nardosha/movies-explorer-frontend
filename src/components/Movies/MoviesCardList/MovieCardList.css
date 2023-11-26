@@ -30,6 +30,12 @@
 }
 
 @media (min-width: 321px) {
+  .movie-card-list__list {
+    row-gap: 47px;
+    column-gap: 30px;
+    grid-template-columns: repeat(2, fit-content(300px));
+  }
+
   .movie-card-list {
     padding: 0 30px 0 30px;
   }
@@ -44,6 +50,13 @@
 }
 
 @media (min-width: 769px) {
+  .movie-card-list__list {
+    row-gap: 59px;
+    column-gap: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
   .movie-card-list__list {
     grid-template-columns: repeat(3, minmax(min-content, 1fr));
     row-gap: 59px;

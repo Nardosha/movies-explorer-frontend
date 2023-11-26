@@ -16,6 +16,7 @@
 }
 
 .movies__switcher {
+  cursor: pointer;
   padding: 0 14px;
   margin: 0 0 40px 0;
 }

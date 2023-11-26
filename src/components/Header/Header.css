@@ -86,7 +86,9 @@
   background-color: #5d5d5d;
   display: flex;
   justify-content: center;
+  align-items: center;
   transition: all 0.4s ease 0s;
+  flex-direction: column;
 }
 /*todo: switch background color*/
 
@@ -96,12 +98,17 @@
 
 .header__list {
   list-style: none;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
   padding: 144px 0 46px 0;
   margin: 0;
+}
+
+.header__profile-button {
+  margin: 0 0 46px 0;
 }
 
 .header__link {
@@ -114,6 +121,10 @@
   font-style: normal;
   line-height: normal;
   position: relative;
+}
+
+.header__link:hover {
+  opacity: 0.7;
 }
 
 .header__link_active::after {
@@ -168,6 +179,14 @@
     width: 68.3%;
   }
 
+  .header__list {
+    padding: 159px 0 46px 0;
+  }
+
+  .header__profile-button {
+    margin: 0 0 90px 0;
+  }
+
   .header__actions {
     gap: 30px;
   }
@@ -183,10 +202,6 @@
 }
 
 @media (min-width: 769px) {
-  .header {
-    background-color: rgb(58, 96, 48);
-  }
-
   .header__body {
     padding: 18px 70px 18px 70px;
   }
@@ -197,10 +212,13 @@
 
   .header__menu {
     position: relative;
+    align-items: center;
     top: 0;
     right: 0;
     width: 100%;
+    min-width: 100%;
     background-color: unset;
+    flex-direction: row;
     height: 74px;
     padding: 0;
   }
@@ -209,9 +227,15 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    flex: unset;
     gap: 16px;
     height: 74px;
     padding: 0;
+    margin: 0 auto;
+  }
+
+  .header__profile-button {
+    margin: 0;
   }
 
   .header__item_main {

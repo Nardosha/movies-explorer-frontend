@@ -7,7 +7,7 @@ export const NotFoundPage = () => {
         <h1 className="not-found-page__title">404</h1>
         <p className="not-found-page__subtitle">Страница не найдена</p>
       </div>
-      <NavLink to="/main" replace className="not-found-page__link-back">
+      <NavLink to="/" replace className="not-found-page__link-back">
         Назад
       </NavLink>
     </div>

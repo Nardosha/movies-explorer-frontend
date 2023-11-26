@@ -25,7 +25,7 @@ export const Profile = () => {
           </li>
 
           <li className="profile__action-button">
-            <NavLink to="/main" className="profile__link">
+            <NavLink to="/" className="profile__link">
               Выйти из аккаунта
             </NavLink>
           </li>
