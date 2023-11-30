@@ -9,6 +9,7 @@ export const Movies = ({ movies }) => {
     <section className="movies">
       <SearchForm className="movies__search-form" />
       <Switcher className="movies__switcher" title="Короткометражки" />
+
       <Separator className="movies__separator" />
 
       <MovieCardList className="movies__list" movies={movies} />

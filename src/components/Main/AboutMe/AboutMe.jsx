@@ -1,12 +1,12 @@
 import { Separator } from "../../Separator/Separator";
 import { NavigationLink } from "../../NavigationLink/NavigationLink";
-import { Links, NavigationTitles } from "../../../utils/constants";
-import { Link } from "react-router-dom";
+import { Links } from "../../../utils/constants";
 
 export const AboutMe = () => {
   return (
     <section className="about-me">
       <h2 className="about-me__title">Студент</h2>
+
       <Separator className="about-me__separator" />
 
       <div className="about-me__container-info">

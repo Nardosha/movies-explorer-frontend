@@ -1,6 +1,5 @@
 .about-project {
   box-sizing: border-box;
-
   padding: 70px 18px 69px 18px;
 }
 
@@ -16,6 +15,7 @@
 }
 
 .about__separator {
+  background-color: #DADADA;;
   margin: 0 0 60px 0;
 }
 .about__list {

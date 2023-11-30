@@ -12,7 +12,7 @@ export const SavedMovies = ({ movies, showSavedMovies }) => {
       <SearchForm className="saved-movies__search-form" />
       <Switcher className="saved-movies__switcher" title="Короткометражки" />
 
-      <Separator className="movies__separator" />
+      <Separator className="saved-movies__separator" />
 
       <MovieCardList movies={savedMovies} showSavedMovies={showSavedMovies} />
 

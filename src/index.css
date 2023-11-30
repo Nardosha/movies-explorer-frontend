@@ -5,6 +5,7 @@
 @import "./components/SubmitButton/SubmitButton.css";
 @import "./components/LoginButton/LoginButton.css";
 @import "./components/NavigationLink/NavigationLink.css";
+@import "./components/Separator/Separator.css";
 
 @import "./components/App/App.css";
 @import "./components/Main/Main.css";
@@ -25,7 +26,6 @@
 @import "./components/SavedMovies/SavedMovies.css";
 
 @import "./components/Movies/Switcher/Switcher.css";
-@import "./components/Separator/Separator.css";
 @import "./components/RoundedButton/RoundedButton.css";
 @import "./components/Profile/Profile.css";
 
