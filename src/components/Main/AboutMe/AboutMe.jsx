@@ -1,4 +1,7 @@
 import { Separator } from "../../Separator/Separator";
+import { NavigationLink } from "../../NavigationLink/NavigationLink";
+import { Links, NavigationTitles } from "../../../utils/constants";
+import { Link } from "react-router-dom";
 
 export const AboutMe = () => {
   return (
@@ -17,9 +20,13 @@ export const AboutMe = () => {
             Контур». После того, как прошёл курс по веб-разработке, начал
             заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <a className="about-me__link" href="#">
-            Githab
-          </a>
+
+          <NavigationLink
+            tittle={Links.GITHUB}
+            to="https://github.com/Nardosha"
+            target="_blank"
+            className="about-me__link"
+          />
         </div>
 
         <img
@@ -33,23 +40,32 @@ export const AboutMe = () => {
 
       <ul className="about-me__portfolio-list">
         <li className="about-me__list-item">
-          <a href="#" className="about-me__portfolio-link">
-            Статичный сайт
-          </a>
+          <NavigationLink
+            tittle={Links.STATIC_WEBSITE}
+            to="#"
+            target="_blank"
+            className="about-me__portfolio-link"
+          />
         </li>
         <Separator className="about-me__link-separator" />
 
         <li className="about-me__list-item">
-          <a href="#" className="about-me__portfolio-link">
-            Адаптивный сайт
-          </a>
+          <NavigationLink
+            tittle={Links.ADAPTIVE_WEBSITE}
+            to="#"
+            target="_blank"
+            className="about-me__portfolio-link"
+          />
         </li>
         <Separator className="about-me__link-separator" />
 
         <li className="about-me__list-item">
-          <a href="#" className="about-me__portfolio-link">
-            Одностраничное приложение
-          </a>
+          <NavigationLink
+            tittle={Links.SPA}
+            to="#"
+            target="_blank"
+            className="about-me__portfolio-link"
+          />
         </li>
       </ul>
     </section>
