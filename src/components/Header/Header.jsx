@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { ProfileButton } from "../ProfileButton/ProfileButton";
 import { Logo } from "../Logo/Logo";
 import { LoginButton } from "../LoginButton/LoginButton";
+import { NavigationLink } from "../NavigationLink/NavigationLink";
 export const Header = ({ isLogged }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -77,7 +77,11 @@ export const Header = ({ isLogged }) => {
               </li>
             </ul>
 
-            <ProfileButton className="header__profile-button" />
+            <NavigationLink
+                title="Аккаунт"
+              to="me"
+              className="header__profile-button"
+            />
           </nav>
         )}
 
