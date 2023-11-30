@@ -22,7 +22,7 @@ export const AboutMe = () => {
           </p>
 
           <NavigationLink
-            tittle={Links.GITHUB}
+            title={Links.GITHUB}
             to="https://github.com/Nardosha"
             target="_blank"
             className="about-me__link"
@@ -41,7 +41,7 @@ export const AboutMe = () => {
       <ul className="about-me__portfolio-list">
         <li className="about-me__list-item">
           <NavigationLink
-            tittle={Links.STATIC_WEBSITE}
+            title={Links.STATIC_WEBSITE}
             to="#"
             target="_blank"
             className="about-me__portfolio-link"
@@ -51,7 +51,7 @@ export const AboutMe = () => {
 
         <li className="about-me__list-item">
           <NavigationLink
-            tittle={Links.ADAPTIVE_WEBSITE}
+            title={Links.ADAPTIVE_WEBSITE}
             to="#"
             target="_blank"
             className="about-me__portfolio-link"
@@ -61,7 +61,7 @@ export const AboutMe = () => {
 
         <li className="about-me__list-item">
           <NavigationLink
-            tittle={Links.SPA}
+            title={Links.SPA}
             to="#"
             target="_blank"
             className="about-me__portfolio-link"

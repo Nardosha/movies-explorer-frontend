@@ -13,7 +13,7 @@ export const Footer = () => {
         <ul className="footer__link-list">
           <li className="footer__list-item">
             <NavigationLink
-              tittle="Яндекс.Практикум"
+              title="Яндекс.Практикум"
               target="_blank"
               to="https://practicum.yandex.ru/profile/frontend-developer/"
               className="footer__link"
@@ -24,7 +24,7 @@ export const Footer = () => {
             <NavigationLink
               to="https://github.com/Nardosha"
               className="footer__link"
-              tittle="Github"
+              title="Github"
               target="_blank"
             />
           </li>
