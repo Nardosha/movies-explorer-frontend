@@ -26,7 +26,7 @@
 
 @import "./components/Movies/Switcher/Switcher.css";
 @import "./components/Separator/Separator.css";
-@import "./components/ProfileButton/ProfileButton.css";
+@import "./components/RoundedButton/RoundedButton.css";
 @import "./components/Profile/Profile.css";
 
 @import "./components/SignUp/SignUp.css";

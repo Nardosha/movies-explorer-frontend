@@ -1,4 +1,4 @@
-.profile-button {
+.rounded-button {
   box-sizing: border-box;
   font-family: Inter, Aria, sans-serif;
   font-size: 14px;
@@ -20,7 +20,7 @@
   margin: 0;
 }
 
-.profile-button:hover {
+.rounded-button:hover {
   opacity: 0.8;
 }
 

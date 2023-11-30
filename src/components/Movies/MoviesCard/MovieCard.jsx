@@ -1,3 +1,5 @@
+import {RoundedButton} from "../../RoundedButton/RoundedButton";
+
 export const MovieCard = ({ movie, showSavedMovies }) => {
   console.log("MovieCard", showSavedMovies);
 
@@ -11,9 +13,10 @@ export const MovieCard = ({ movie, showSavedMovies }) => {
         (movie.isSaved ? (
           <button className="movie-card__button movie-card__saved-button" />
         ) : (
-          <button className="movie-card__button movie-card__save-button">
-            Сохранить
-          </button>
+          <RoundedButton
+            title="Сохранить"
+            className="movie-card__button movie-card__save-button"
+          />
         ))}
 
       <div className="movie-card__container">

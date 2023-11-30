@@ -20,6 +20,7 @@
   background-color: transparent;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .movie-card__saved-button {
@@ -35,6 +36,10 @@
   color: var(--main-text-color);
   font-size: 10px;
   padding: 6px 7px;
+}
+
+.movie-card__save-button:hover {
+  opacity: 0.8;
 }
 
 .movie-card__delete-button {
