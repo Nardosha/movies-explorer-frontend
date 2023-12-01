@@ -14,7 +14,7 @@ export const SavedMovies = ({ movies, showSavedMovies }) => {
 
       <Separator className="saved-movies__separator" />
 
-      <MovieCardList movies={savedMovies} showSavedMovies={showSavedMovies} />
+      <MovieCardList movies={savedMovies} showSavedMovies={showSavedMovies} className="saved-movies__list"/>
 
       <MoreButton className="saved-movies__more-button" />
     </section>

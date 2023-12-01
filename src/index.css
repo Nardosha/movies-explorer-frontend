@@ -21,11 +21,11 @@
 @import "./components/MoreButton/MoreButton.css";
 @import "./components/Movies/MoviesCard/MovieCard.css";
 @import "./components/Movies/SearchForm/SearchForm.css";
-@import "./components/Movies/Movies.css";
+@import "./components/Movies/Switcher/Switcher.css";
 
+@import "./components/Movies/Movies.css";
 @import "./components/SavedMovies/SavedMovies.css";
 
-@import "./components/Movies/Switcher/Switcher.css";
 @import "./components/RoundedButton/RoundedButton.css";
 @import "./components/Profile/Profile.css";
 
