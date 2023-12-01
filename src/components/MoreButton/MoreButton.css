@@ -1,0 +1,28 @@
+.more-button {
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  background: transparent;
+  border: 1px solid #424242;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 36px;
+  min-width: 240px;
+  padding: 11px 20px 9px 20px;
+  margin: 0;
+}
+
+.more-button:hover {
+  opacity: 0.7;
+}
+
+@media (min-width: 321px) {
+  .more-button {
+    min-width: 320px;
+  }
+}
