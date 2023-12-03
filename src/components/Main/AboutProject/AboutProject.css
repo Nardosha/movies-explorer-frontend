@@ -3,7 +3,7 @@
   padding: 70px 18px 69px 18px;
 }
 
-.about__title {
+.about-project__title {
   color: var(--main-text-color);
   font-family: var(--font-family);
   font-weight: var(--basic-font-weight);
@@ -14,30 +14,30 @@
   margin: 0 0 28px 0;
 }
 
-.about__separator {
+.about-project__separator {
   background-color: #DADADA;;
   margin: 0 0 60px 0;
 }
-.about__list {
+.about-project__list {
   list-style: none;
   padding: 0;
   margin: 0 0 60px 0;
 }
-.about__list-item {
+.about-project__list-item {
   color: var(--basic-font-weight);
   font-family: var(--font-family);
   font-weight: var(--basic-font-weight);
   padding: 0;
   margin: 0 0 56px 0;
 }
-.about__item-title {
+.about-project__item-title {
   font-size: 18px;
   letter-spacing: -0.72px;
   line-height: normal;
   padding: 0;
   margin: 0 0 16px 0;
 }
-.about__item-description {
+.about-project__item-description {
   font-size: 11px;
   font-style: normal;
   line-height: 16px;
@@ -45,7 +45,7 @@
   margin: 0;
 }
 
-.about__scheme {
+.about-project__scheme {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,7 +55,7 @@
   margin: 0;
 }
 
-.about__scheme-row {
+.about-project__scheme-row {
   list-style: none;
   line-height: normal;
   display: grid;
@@ -66,7 +66,7 @@
   margin: 0;
 }
 
-.about__scheme-item {
+.about-project__scheme-item {
   color: #a0a0a0;
   font-size: 11px;
   display: flex;
@@ -75,13 +75,13 @@
   padding: 10px 0 0 0 ;
 }
 
-.about__scheme-item_primary-colored {
+.about-project__scheme-item_primary-colored {
   color: var(--black-text-color);
   background-color: var(--primary-green-color);
   padding: 11px 10px;
 }
 
-.about__scheme-item_colored {
+.about-project__scheme-item_colored {
   color: var(--main-text-color);
   background-color: var(--light-shodowed-background-color);
   padding: 11px 10px;
@@ -91,52 +91,52 @@
   .about-project {
     padding: 90px 50px 90px 50px;
   }
-  .about__title {
+  .about-project__title {
     font-size: 22px;
     letter-spacing: -0.88px;
     margin: 0 0 23px 0;
   }
 
-  .about__separator {
+  .about-project__separator {
     margin: 0 0 70px 0;
   }
 
-  .about__list {
+  .about-project__list {
     display: flex;
     justify-content: space-between;
     gap: 30px;
     margin: 0 0 93px 0;
   }
 
-  .about__list-item {
+  .about-project__list-item {
     margin: 0;
   }
 
-  .about__item-title {
+  .about-project__item-title {
     font-size: 20px;
     letter-spacing: -0.8px;
     margin: 0 0 22px 0;
   }
 
-  .about__item-description {
+  .about-project__item-description {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .about__scheme-row {
+  .about-project__scheme-row {
     grid-template-columns: 21% 79%;
   }
 
-  .about__scheme-item {
+  .about-project__scheme-item {
     font-size: 14px;
     padding: 14px 0 0 0;
   }
 
-  .about__scheme-item_primary-colored {
+  .about-project__scheme-item_primary-colored {
     padding: 9px 10px;
   }
 
-  .about__scheme-item_colored {
+  .about-project__scheme-item_colored {
     padding: 9px 10px;
   }
 }
@@ -145,35 +145,35 @@
   .about-project {
     padding: 110px 70px 110px 70px;
   }
-  .about__title {
+  .about-project__title {
     font-size: 22px;
     letter-spacing: -0.88px;
     margin: 0 0 23px 0;
   }
 
-  .about__separator {
+  .about-project__separator {
     margin: 0 0 70px 0;
   }
 
-  .about__list {
+  .about-project__list {
     gap: 40px;
     margin: 0 0 110px 0;
   }
 
-  .about__item-title {
+  .about-project__item-title {
     margin: 0 0 26px 0;
   }
 
-  .about__item-description {
+  .about-project__item-description {
     font-size: 14px;
     line-height: 20px;
   }
 
-  .about__scheme-row {
+  .about-project__scheme-row {
     grid-template-columns: 20% 80%;
   }
 
-  .about__scheme-item {
+  .about-project__scheme-item {
     font-size: 14px;
   }
 }

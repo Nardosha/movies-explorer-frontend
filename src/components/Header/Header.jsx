@@ -26,7 +26,7 @@ export const Header = ({ isLogged }) => {
             }
             onClick={onMenuClick}
           >
-            <span className="header_burger-el"></span>
+            <span className="header__burger-el"></span>
           </div>
         )}
 
@@ -78,7 +78,7 @@ export const Header = ({ isLogged }) => {
             </ul>
 
             <NavigationLink
-                title="Аккаунт"
+              title="Аккаунт"
               to="me"
               className="header__profile-button"
             />
