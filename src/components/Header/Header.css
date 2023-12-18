@@ -62,6 +62,12 @@
   bottom: 0;
 }
 
+.header__burger_active {
+  position: fixed;
+  top: 19px;
+  right: 19px;
+}
+
 .header__burger_active:before {
   top: 50%;
   height: 3px;
@@ -177,6 +183,7 @@
 
   .header__list {
     padding: 159px 0 46px 0;
+    gap: 29px;
   }
 
   .header__profile-button {
@@ -191,9 +198,9 @@
     font-size: 12px;
   }
 
-  .header__burger {
-    width: 28px;
-    height: 23px;
+  .header__burger_active {
+    top: 28px;
+    right: 38px;
   }
 }
 
