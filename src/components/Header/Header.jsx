@@ -11,7 +11,7 @@ export const Header = ({ isLogged }) => {
   };
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__body">
         <NavLink to="/" className="header__logo">
           <Logo />
@@ -94,6 +94,6 @@ export const Header = ({ isLogged }) => {
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 };
