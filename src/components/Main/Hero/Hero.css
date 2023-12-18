@@ -65,6 +65,7 @@
     font-size: 50px;
     line-height: 58px;
     letter-spacing: -2px;
-    padding: 0 235px;
+    max-width: 730px;
+    margin: 0 auto;
   }
 }

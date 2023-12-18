@@ -15,6 +15,7 @@ import { Footer } from "../Footer/Footer";
 function App() {
   const isLogged = useRef(true);
   const [movies, setMovies] = useState(MOVIES);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
   const validRoutesForHeader = ["/movies", "/saved-movies", "/me", "/"];
@@ -32,8 +33,12 @@ function App() {
   }, [isShowSavedMovies]);
 
   return (
-    <div className="app">
-      {isShowHeader && <Header isLogged={isLogged} />}
+    <div className={isMenuOpen ? 'app app_menu-active' : 'app'}>
+      {isShowHeader && <Header
+          isLogged={isLogged}
+          isMenuOpen={isMenuOpen}
+          onMenuToggle={setIsMenuOpen}
+      />}
 
       <Routes>
         <Route path="/signin" element={<SignIn />} />
