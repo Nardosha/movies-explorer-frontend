@@ -110,6 +110,19 @@
 }
 
 .header__profile-button {
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  border-style: none;
+  border-radius: 20px;
+  background-color: var(--shadowed-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  min-height: 32px;
+  padding: 8px;
   margin: 0 0 46px 0;
 }
 
@@ -237,19 +250,6 @@
   }
 
   .header__profile-button {
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    border-style: none;
-    border-radius: 20px;
-    background-color: var(--shadowed-background-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 100px;
-    min-height: 32px;
-    padding: 8px;
     margin: 0;
   }
 

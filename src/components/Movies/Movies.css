@@ -32,11 +32,11 @@
 
 @media (min-width: 321px) {
   .movies {
-    padding: 154px 30px 20px 30px;
+    padding: 80px 30px 20px 30px;
   }
 
   .movies__search-form {
-    padding: 0 30px;
+    padding: 0;
     margin: 0 0 41px 0;
   }
 
