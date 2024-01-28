@@ -1,8 +1,8 @@
 import { Separator } from "../../Separator/Separator";
 
-export const Techs = () => {
+export const Techs = ({id}) => {
   return (
-    <section className="techs">
+    <section id={id} className="techs">
       <h2 className="techs__title">Технологии</h2>
       <Separator className="techs__separator" />
       <h2 className="techs__caption">7 технологий</h2>

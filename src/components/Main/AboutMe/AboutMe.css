@@ -79,10 +79,17 @@
   padding: 0;
   margin: 0;
 }
-.about-me__list-item:not(:last-child) {
+
+.about-me__list-item {
   list-style: none;
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 19px;
   padding: 0;
+}
+.about-me__list-item:not(:last-child) {
   margin: 0 0 19px 0;
 }
 .about-me__portfolio-link {
@@ -107,10 +114,6 @@
   font-size: 18px;
   line-height: 28px;
   transform: translate(0, -50%);
-}
-
-.about-me__link-separator {
-  margin: 0 0 20px 0;
 }
 
 @media (min-width: 321px) {

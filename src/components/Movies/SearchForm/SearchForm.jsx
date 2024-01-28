@@ -9,7 +9,7 @@ export const SearchForm = ({ className }) => {
         placeholder="Фильм"
       />
 
-      <button className="search-form__button" />
+      <button className="search-form__button" type="submit" />
     </div>
   );
 };

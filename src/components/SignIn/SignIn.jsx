@@ -9,12 +9,12 @@ export const SignIn = () => {
   const [formErrorText, setFormErrorText] = useState("");
 
   return (
-    <div className="sign-in">
+    <main className="sign-in">
       <Logo className="sign-in__logo" />
 
       <h1 className="sign-in__title">Рады видеть!</h1>
 
-      <form action="" className="sign-in__form">
+      <form action="#" className="sign-in__form">
         <div className="sign-in__form-inputs">
           <FormInput
             label="E-mail"
@@ -38,7 +38,7 @@ export const SignIn = () => {
             required
           />
 
-          <div className="sign-up__error-message">{formErrorText}</div>
+          <div className="sign-in__error-message">{formErrorText}</div>
         </div>
 
         <SubmitButton text="Войти" className="sign-in__submit-button" />
@@ -50,6 +50,6 @@ export const SignIn = () => {
           Регистрация
         </NavLink>
       </div>
-    </div>
+    </main>
   );
 };

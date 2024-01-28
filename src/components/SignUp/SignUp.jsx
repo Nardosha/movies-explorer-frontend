@@ -9,12 +9,12 @@ export const SignUp = () => {
   const [formErrorText, setFormErrorText] = useState("");
 
   return (
-    <div className="sign-up">
+    <main className="sign-up">
       <Logo className="sign-up__logo" />
 
       <h1 className="sign-up__title">Добро пожаловать!</h1>
 
-      <form action="" className="sign-up__form">
+      <form action="#" className="sign-up__form">
         <div className="sign-up__form-inputs">
           <FormInput
             hasError={false}
@@ -63,6 +63,6 @@ export const SignUp = () => {
           Войти
         </NavLink>
       </div>
-    </div>
+    </main>
   );
 };

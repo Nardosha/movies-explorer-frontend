@@ -7,9 +7,9 @@ export const Promo = () => {
   return (
     <div className="promo">
       <Hero />
-      <AboutProject className="promo__about-project"/>
-      <Techs />
-      <AboutMe />
+      <AboutProject id="about-project" className="promo__about-project"/>
+      <Techs id="techs"/>
+      <AboutMe id="about-me"/>
     </div>
   );
 };

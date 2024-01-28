@@ -52,7 +52,7 @@
   margin: 0 0 10px 0;
 }
 
-.sign-up__error-message {
+.sign-in__error-message {
   color: var(--text-red-color);
   font-size: 10px;
 }
@@ -110,4 +110,7 @@
     min-height: 12px;
   }
 
+  .sign-in__sign-up-link {
+    font-size: 12px;
+  }
 }

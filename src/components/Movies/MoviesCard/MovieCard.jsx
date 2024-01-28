@@ -6,16 +6,17 @@ export const MovieCard = ({ movie, showSavedMovies }) => {
   return (
     <div className="movie-card">
       {showSavedMovies && (
-        <button className="movie-card__button movie-card__delete-button" />
+        <button className="movie-card__button movie-card__delete-button" type="button" />
       )}
 
       {!showSavedMovies &&
         (movie.isSaved ? (
-          <button className="movie-card__button movie-card__saved-button" />
+          <button className="movie-card__button movie-card__saved-button" type="button" />
         ) : (
           <RoundedButton
             title="Сохранить"
             className="movie-card__button movie-card__save-button"
+            type="submit"
           />
         ))}
 

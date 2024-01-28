@@ -11,14 +11,17 @@ import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
 import { SignIn } from "../SignIn/SignIn";
 import { SignUp } from "../SignUp/SignUp";
 import { Footer } from "../Footer/Footer";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+import { UserContext } from "../../contexts/UserContext";
 
 function App() {
   const isLogged = useRef(true);
+
   const [movies, setMovies] = useState(MOVIES);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
-  const validRoutesForHeader = ["/movies", "/saved-movies", "/me", "/"];
+  const validRoutesForHeader = ["/movies", "/saved-movies", "/profile", "/"];
   const validRoutesForFooter = ["/movies", "/saved-movies", "/"];
   const isShowHeader = validRoutesForHeader.includes(location.pathname);
   const isShowFooter = validRoutesForFooter.includes(location.pathname);
@@ -33,28 +36,54 @@ function App() {
   }, [isShowSavedMovies]);
 
   return (
-    <div className={isMenuOpen ? 'app app_menu-active' : 'app'}>
-      {isShowHeader && <Header
-          isLogged={isLogged}
-          isMenuOpen={isMenuOpen}
-          onMenuToggle={setIsMenuOpen}
-      />}
+    <UserContext.Provider value={isLogged}>
+      <div className={isMenuOpen ? "app app_menu-active" : "app"}>
+        {isShowHeader && (
+          <Header
+            isLogged={isLogged}
+            isMenuOpen={isMenuOpen}
+            onMenuToggle={setIsMenuOpen}
+          />
+        )}
 
-      <Routes>
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/movies" element={<Movies movies={movies} />} />
-        <Route
-          path="/saved-movies"
-          element={<SavedMovies movies={movies} showSavedMovies={true} />}
-        />
-        <Route path="/me" element={<Profile />} />
-        <Route path="/" element={<Main />} />
-        <Route path="/*" element={<NotFoundPage />} />
-      </Routes>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
 
-      {isShowFooter && <Footer />}
-    </div>
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute
+                element={Movies}
+                isLogged={isLogged}
+                movies={movies}
+              />
+            }
+          />
+
+          <Route
+            path="/saved-movies"
+            element={
+              <ProtectedRoute
+                element={SavedMovies}
+                movies={movies}
+                showSavedMovies={true}
+              />
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={<ProtectedRoute element={Profile} />}
+          />
+
+          <Route path="/" element={<Main />} />
+          <Route path="/*" element={<NotFoundPage />} />
+        </Routes>
+
+        {isShowFooter && <Footer />}
+      </div>
+    </UserContext.Provider>
   );
 }
 
