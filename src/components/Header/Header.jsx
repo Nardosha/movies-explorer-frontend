@@ -1,17 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 import { Logo } from "../Logo/Logo";
 import { LoginButton } from "../LoginButton/LoginButton";
 import { NavigationLink } from "../NavigationLink/NavigationLink";
-export const Header = ({ isLogged }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
   const onMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
+    onMenuToggle(!isMenuOpen);
   };
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__body">
         <NavLink to="/" className="header__logo">
           <Logo />
@@ -26,7 +24,7 @@ export const Header = ({ isLogged }) => {
             }
             onClick={onMenuClick}
           >
-            <span className="header_burger-el"></span>
+            <span className="header__burger-el"></span>
           </div>
         )}
 
@@ -78,7 +76,7 @@ export const Header = ({ isLogged }) => {
             </ul>
 
             <NavigationLink
-                title="Аккаунт"
+              title="Аккаунт"
               to="me"
               className="header__profile-button"
             />
@@ -94,6 +92,6 @@ export const Header = ({ isLogged }) => {
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 };

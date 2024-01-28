@@ -97,6 +97,7 @@
 
 @media (min-width: 769px) {
     .footer {
+        /*padding: 140px 70px 20px 70px;*/
         padding: 79px 70px 20px 70px;
     }
 }

@@ -1,11 +1,7 @@
 .header {
   background-color: var(--primary-background-color);
-  position: fixed;
-  top: 0;
-  left: 0;
   min-height: 74px;
   width: 100%;
-  z-index: 10;
 }
 
 .header__body {
@@ -28,14 +24,15 @@
 }
 
 .header__burger {
+  cursor: pointer;
   display: block;
   position: relative;
   width: 22px;
-  height: 20.5px;
+  height: 21px;
   z-index: 10;
 }
 
-.header_burger-el,
+.header__burger-el,
 .header__burger::before,
 .header__burger::after {
   background-color: var(--main-text-color);
@@ -46,12 +43,12 @@
   transition: all 0.4s ease 0s;
 }
 
-.header_burger-el {
+.header__burger-el {
   top: 50%;
   transform: scale(1) translate(0px, -50%);
 }
 
-.header__burger_active .header_burger-el {
+.header__burger_active .header__burger-el {
   transform: scale(0) translate(0px, -50%);
 }
 
@@ -63,6 +60,12 @@
 .header__burger::after {
   content: "";
   bottom: 0;
+}
+
+.header__burger_active {
+  position: fixed;
+  top: 19px;
+  right: 19px;
 }
 
 .header__burger_active:before {
@@ -83,14 +86,13 @@
   right: -100%;
   width: 100%;
   height: 100%;
-  background-color: #5d5d5d;
+  background-color: #202020;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.4s ease 0s;
   flex-direction: column;
 }
-/*todo: switch background color*/
 
 .header__menu_active {
   right: 0;
@@ -108,6 +110,19 @@
 }
 
 .header__profile-button {
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  border-style: none;
+  border-radius: 20px;
+  background-color: var(--shadowed-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  min-height: 32px;
+  padding: 8px;
   margin: 0 0 46px 0;
 }
 
@@ -181,6 +196,7 @@
 
   .header__list {
     padding: 159px 0 46px 0;
+    gap: 29px;
   }
 
   .header__profile-button {
@@ -195,9 +211,9 @@
     font-size: 12px;
   }
 
-  .header__burger {
-    width: 28px;
-    height: 23px;
+  .header__burger_active {
+    top: 28px;
+    right: 38px;
   }
 }
 
@@ -234,19 +250,6 @@
   }
 
   .header__profile-button {
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 16px;
-    border-style: none;
-    border-radius: 20px;
-    background-color: var(--shadowed-background-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 100px;
-    min-height: 32px;
-    padding: 8px;
     margin: 0;
   }
 

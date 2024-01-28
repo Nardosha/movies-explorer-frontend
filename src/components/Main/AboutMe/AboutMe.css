@@ -10,29 +10,34 @@
 .about-me__title {
   font-size: 18px;
   letter-spacing: -0.72px;
-  margin: 0 0 28px 0;
+  margin: 0 0 31px 0;
 }
 .about-me__separator {
   margin: 0 0 60px 0;
 }
 
 .about-me__container-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-areas:
+    "photo"
+    "info";
+  gap: 40px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr min-content;
 }
 
 .about-me__photo {
-  order: -1;
+  border-radius: 14px;
+  grid-area: photo;
   object-fit: contain;
   object-position: center;
   width: 100%;
   height: 100%;
-  margin: 0 0 40px 0;
+  max-width: 352px;
 }
 
 .about-me__info {
+  grid-area: info;
   font-size: 11px;
   line-height: 16px;
 }
@@ -119,22 +124,20 @@
     margin: 0 0 23px 0;
   }
   .about-me__separator {
-    background-color: #DADADA;
+    background-color: #dadada;
     margin: 0 0 66px 0;
   }
 
   .about-me__container-info {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 49px;
-    align-items: flex-start;
+    grid-template-rows: 1fr;
+    grid-auto-flow: row;
+    justify-items: center;
     margin: 0 0 90px 0;
   }
 
   .about-me__photo {
-    flex: 0 1 41%;
     order: unset;
-    min-width: 255px;
+    max-width: 255px;
     margin: 0;
   }
 
@@ -146,7 +149,6 @@
   }
 
   .about-me__info {
-    flex: 1 1 59%;
     font-size: 12px;
     line-height: 18px;
   }
@@ -180,6 +182,15 @@
   }
 }
 
+@media (min-width: 500px) {
+  .about-me__container-info {
+    grid-template-areas: "info photo";
+    margin: 0 0 90px 0;
+    grid-template-rows: 1fr;
+    grid-auto-flow: row;
+  }
+}
+
 @media (min-width: 769px) {
   .about-me {
     padding: 110px 70px 125px 70px;
@@ -188,14 +199,13 @@
   .about-me__container-info {
     flex-direction: row;
     justify-content: space-between;
-    gap: 270px;
     align-items: flex-start;
+    justify-items: unset;
     margin: 0 0 101px 0;
   }
 
   .about-me__photo {
-    flex: 0 1 26%;
-    min-width: 270px;
+    max-width: 352px;
   }
 
   .about-me__info {
@@ -218,6 +228,7 @@
   .about-me__description {
     font-size: 14px;
     line-height: 22px;
+    max-width: 600px;
     margin: 0 0 99px 0;
   }
 

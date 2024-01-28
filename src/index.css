@@ -6,6 +6,7 @@
 @import "./components/LoginButton/LoginButton.css";
 @import "./components/NavigationLink/NavigationLink.css";
 @import "./components/Separator/Separator.css";
+@import "./components/RoundedButton/RoundedButton.css";
 
 @import "./components/App/App.css";
 @import "./components/Main/Main.css";
@@ -26,7 +27,6 @@
 @import "./components/Movies/Movies.css";
 @import "./components/SavedMovies/SavedMovies.css";
 
-@import "./components/RoundedButton/RoundedButton.css";
 @import "./components/Profile/Profile.css";
 
 @import "./components/SignUp/SignUp.css";
@@ -35,3 +35,6 @@
 
 @import "./components/NotFoundPage/NotFoundPage.css";
 @import "./components/Preloader/Preloader.css";
+
+
+/** { outline: 1px solid red; }*/
