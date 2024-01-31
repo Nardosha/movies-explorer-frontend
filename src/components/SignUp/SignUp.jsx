@@ -17,7 +17,6 @@ export const SignUp = () => {
       <form action="#" className="sign-up__form">
         <div className="sign-up__form-inputs">
           <FormInput
-            hasError={false}
             label="Имя"
             id="name"
             name="name"
@@ -29,7 +28,6 @@ export const SignUp = () => {
           />
 
           <FormInput
-            hasError={false}
             label="E-mail"
             id="email"
             name="email"
@@ -40,7 +38,6 @@ export const SignUp = () => {
           />
 
           <FormInput
-            hasError={false}
             label="Пароль"
             id="password"
             name="password"

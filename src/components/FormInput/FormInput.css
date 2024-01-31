@@ -21,7 +21,8 @@
   line-height: normal;
   background-color: #2f2f2f;
   border-radius: 8px;
-  border: none;
+  border: 1px solid transparent;
+  outline: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +30,10 @@
   padding: 15px;
 }
 
-.form-input__input_error {
-  color: var(--text-red-color);
+.form-input__input:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-input__input:focus {
+  border-color: var(--gray-text-color);
 }

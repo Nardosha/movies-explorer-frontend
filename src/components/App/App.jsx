@@ -15,7 +15,7 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { UserContext } from "../../contexts/UserContext";
 
 function App() {
-  const isLogged = useRef(false);
+  const isLogged = useRef(true);
 
   const [movies, setMovies] = useState(MOVIES);
   const [isMenuOpen, setIsMenuOpen] = useState(false);

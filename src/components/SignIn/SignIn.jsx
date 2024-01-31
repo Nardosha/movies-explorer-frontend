@@ -23,7 +23,6 @@ export const SignIn = () => {
             name="email"
             placeholder="Введите e-mail"
             className="sign-in__email-input"
-            hasError={false}
             required
           />
 
@@ -34,7 +33,6 @@ export const SignIn = () => {
             name="password"
             placeholder="Введите пароль"
             className="sign-in__password-input"
-            hasError={false}
             minLength="2"
             maxLength="30"
             required
