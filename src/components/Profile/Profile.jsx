@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import { Separator } from "../Separator/Separator";
 
 export const Profile = () => {
+  const onChange = (e) => {
+    console.log('onChange', e)
+  }
   return (
     <main className="profile">
       <h1 className="profile__title">Привет, Виталий!</h1>
@@ -9,10 +12,24 @@ export const Profile = () => {
       <ul className="profile__info-list">
         <li className="profile__separated-list-item">
           <div className="profile__info-item">
-            <p className="profile__info-label profile__info-label_name">Имя</p>
-            <p className="profile__info-value profile__info-value_name">
-              Виталий
-            </p>
+            <label
+              htmlFor="user-name"
+              className="profile__info-label profile__info-label_name"
+            >
+              Имя
+            </label>
+            <input
+              id="user-name"
+              className="profile__info-value profile__info-value_name"
+              placeholder="Имя"
+              value="Виталий"
+              type="text"
+              name="name"
+              minLength="2"
+              maxLength="30"
+              required
+              onChange={onChange}
+            />
           </div>
 
           <Separator />

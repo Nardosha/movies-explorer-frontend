@@ -35,6 +35,8 @@ export const SignIn = () => {
             placeholder="Введите пароль"
             className="sign-in__password-input"
             hasError={false}
+            minLength="2"
+            maxLength="30"
             required
           />
 

@@ -15,7 +15,7 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { UserContext } from "../../contexts/UserContext";
 
 function App() {
-  const isLogged = useRef(true);
+  const isLogged = useRef(false);
 
   const [movies, setMovies] = useState(MOVIES);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +36,7 @@ function App() {
   }, [isShowSavedMovies]);
 
   return (
-    <UserContext.Provider value={isLogged}>
+    <UserContext.Provider value={{ isLogged }}>
       <div className={isMenuOpen ? "app app_menu-active" : "app"}>
         {isShowHeader && (
           <Header

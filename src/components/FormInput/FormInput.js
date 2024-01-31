@@ -5,6 +5,8 @@ export const FormInput = ({
   placeholder,
   required,
   className,
+  minLength = undefined,
+  maxLength = undefined,
   hasError,
 }) => {
   return (
@@ -22,6 +24,8 @@ export const FormInput = ({
         name={name}
         placeholder={placeholder}
         required={required}
+        minLength={minLength}
+        maxLength={maxLength}
       />
     </div>
   );

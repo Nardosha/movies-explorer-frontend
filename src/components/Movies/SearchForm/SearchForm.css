@@ -1,9 +1,13 @@
 .search-form {
   box-sizing: border-box;
-  position: relative;
   font-family: var(--font-family);
   font-size: 14px;
   line-height: normal;
+  width: 100%;
+}
+
+.search-form__form {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,10 +47,11 @@
   min-height: 44px;
   padding: 0;
   margin: 0;
+  cursor: pointer;
 }
 
 @media (min-width: 321px) {
   .search-form__input {
     min-height: 50px;
   }
-  }
+}

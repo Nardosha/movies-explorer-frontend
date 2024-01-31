@@ -24,6 +24,8 @@ export const SignUp = () => {
             placeholder="Введите имя"
             required
             className="sign-up__name-input"
+            minLength="2"
+            maxLength="30"
           />
 
           <FormInput
@@ -45,6 +47,8 @@ export const SignUp = () => {
             type="password"
             placeholder="Введите пароль"
             className="sign-up__password-input"
+            minLength="2"
+            maxLength="30"
             required
           />
 
