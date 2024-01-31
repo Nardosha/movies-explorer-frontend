@@ -37,6 +37,7 @@ export const Profile = () => {
             minLength="2"
             maxLength="30"
             required
+            disabled={!isEdit}
             onChange={onChange}
           />
         </div>
@@ -57,6 +58,7 @@ export const Profile = () => {
             type="email"
             name="email"
             required
+            disabled={!isEdit}
             onChange={onChange}
           />
         </div>

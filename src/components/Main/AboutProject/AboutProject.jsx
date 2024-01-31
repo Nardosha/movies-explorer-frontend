@@ -30,16 +30,16 @@ export const AboutProject = ({id, className}) => {
 
       <ul className="about-project__scheme">
         <li className="about-project__scheme-row">
-          <div className="about-project__scheme-item about-project__scheme-item_primary-colored">
+          <p className="about-project__scheme-item about-project__scheme-item_primary-colored">
             1 неделя
-          </div>
-          <div className="about-project__scheme-item about-project__scheme-item_colored">
+          </p>
+          <p className="about-project__scheme-item about-project__scheme-item_colored">
             4 недели
-          </div>
+          </p>
         </li>
         <li className="about-project__scheme-row">
-          <div className="about-project__scheme-item">Back-end</div>
-          <div className="about-project__scheme-item">Front-end</div>
+          <p className="about-project__scheme-item">Back-end</p>
+          <p className="about-project__scheme-item">Front-end</p>
         </li>
       </ul>
     </div>

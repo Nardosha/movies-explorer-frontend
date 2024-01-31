@@ -7,6 +7,15 @@
 }
 
 .search-form__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 46px;
+}
+
+.search-form__search {
+  border: none;
   position: relative;
   display: flex;
   align-items: center;
@@ -50,8 +59,21 @@
   cursor: pointer;
 }
 
+.search-form__checkbox {
+
+}
+
 @media (min-width: 321px) {
+  .search-form__form {
+    gap: 40px;
+  }
   .search-form__input {
     min-height: 50px;
+  }
+}
+
+@media (min-width: 769px) {
+  .search-form__form {
+    gap: 28px;
   }
 }
