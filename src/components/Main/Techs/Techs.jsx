@@ -1,11 +1,10 @@
-import { Separator } from "../../Separator/Separator";
-
 export const Techs = ({id}) => {
   return (
     <section id={id} className="techs">
       <h2 className="techs__title">Технологии</h2>
-      <Separator className="techs__separator" />
+
       <h2 className="techs__caption">7 технологий</h2>
+
       <h2 className="techs__description">
         На курсе веб-разработки мы освоили технологии, которые применили в
         дипломном проекте.

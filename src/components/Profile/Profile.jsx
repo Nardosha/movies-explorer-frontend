@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { Separator } from "../Separator/Separator";
 import { SubmitButton } from "../SubmitButton/SubmitButton";
 import { useState } from "react";
 
@@ -42,8 +41,6 @@ export const Profile = () => {
           />
         </div>
 
-        <Separator />
-
         <div className="profile__form-item">
           <label
             htmlFor="user-name"
@@ -62,11 +59,13 @@ export const Profile = () => {
             onChange={onChange}
           />
         </div>
-      </form>
 
       {isEdit && (
         <SubmitButton text="Сохранить" className="profile__submit-button"/>
       )}
+
+      </form>
+
 
       {!isEdit && (
         <ul className="profile__action-list">

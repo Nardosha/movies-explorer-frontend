@@ -1,5 +1,4 @@
 import { SearchForm } from "./SearchForm/SearchForm";
-import { Separator } from "../Separator/Separator";
 import { MovieCardList } from "./MoviesCardList/MovieCardList";
 import { MoreButton } from "../MoreButton/MoreButton";
 
@@ -7,8 +6,6 @@ export const Movies = ({ movies }) => {
   return (
     <main className="movies">
       <SearchForm className="movies__search-form" />
-
-      <Separator className="movies__separator" />
 
       <MovieCardList className="movies__list" movies={movies} />
 

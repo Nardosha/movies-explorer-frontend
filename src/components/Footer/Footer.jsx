@@ -1,4 +1,3 @@
-import { Separator } from "../Separator/Separator";
 import { NavigationLink } from "../NavigationLink/NavigationLink";
 import { Links } from "../../utils/constants";
 
@@ -8,7 +7,6 @@ export const Footer = () => {
       <p className="footer__description">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
-      <Separator className="footer__separator" />
 
       <div className="footer__list-info">
         <ul className="footer__link-list">

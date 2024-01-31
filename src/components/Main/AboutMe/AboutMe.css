@@ -10,10 +10,9 @@
 .about-me__title {
   font-size: 18px;
   letter-spacing: -0.72px;
-  margin: 0 0 31px 0;
-}
-.about-me__separator {
+  padding: 0 0 28px 0;
   margin: 0 0 60px 0;
+  border-bottom: 1px solid #DADADA;
 }
 
 .about-me__container-info {
@@ -87,11 +86,14 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 19px;
-  padding: 0;
+  padding: 0 0 19px 0;
+  border-bottom: 1px solid #E6E6E6;;
 }
+
 .about-me__list-item:not(:last-child) {
   margin: 0 0 19px 0;
 }
+
 .about-me__portfolio-link {
   position: relative;
   text-decoration: none;
@@ -124,13 +126,9 @@
   .about-me__title {
     font-size: 22px;
     letter-spacing: -0.88px;
-    margin: 0 0 23px 0;
-  }
-  .about-me__separator {
-    background-color: #dadada;
+    padding: 0 0 23px 0;
     margin: 0 0 66px 0;
   }
-
   .about-me__container-info {
     grid-template-rows: 1fr;
     grid-auto-flow: row;

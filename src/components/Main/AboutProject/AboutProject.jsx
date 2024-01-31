@@ -1,10 +1,7 @@
-import { Separator } from "../../Separator/Separator";
-
 export const AboutProject = ({id, className}) => {
   return (
     <div id={id} className={`about-project ${className}`}>
       <h2 className="about-project__title">О проекте</h2>
-      <Separator className="about-project__separator" />
 
       <ul className="about-project__list">
         <li className="about-project__list-item">

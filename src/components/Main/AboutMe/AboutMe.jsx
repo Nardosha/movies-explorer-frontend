@@ -1,4 +1,3 @@
-import { Separator } from "../../Separator/Separator";
 import { NavigationLink } from "../../NavigationLink/NavigationLink";
 import { Links } from "../../../utils/constants";
 
@@ -6,8 +5,6 @@ export const AboutMe = ({ id }) => {
   return (
     <section id={id} className="about-me">
       <h2 className="about-me__title">Студент</h2>
-
-      <Separator className="about-me__separator" />
 
       <div className="about-me__container-info">
         <div className="about-me__info">
@@ -47,7 +44,6 @@ export const AboutMe = ({ id }) => {
             className="about-me__portfolio-link"
           />
 
-          <Separator />
         </li>
 
         <li className="about-me__list-item">
@@ -58,7 +54,6 @@ export const AboutMe = ({ id }) => {
             className="about-me__portfolio-link"
           />
 
-          <Separator />
         </li>
 
         <li className="about-me__list-item">
