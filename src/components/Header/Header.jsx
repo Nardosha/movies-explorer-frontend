@@ -82,12 +82,13 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
         )}
 
         {!isLogged.current && (
-          <div className="header__actions">
+          <nav className="header__actions">
             <NavLink to="/signup" className="header__action-button">
               Регистрация
             </NavLink>
+
             <LoginButton />
-          </div>
+          </nav>
         )}
       </div>
     </header>

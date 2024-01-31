@@ -21,7 +21,7 @@ export const Profile = () => {
         <div className="profile__form-item">
           <label
             htmlFor="user-name"
-            className="profile__info-label profile__info-label_name"
+            className="profile__form-label profile__info-label_name"
           >
             Имя
           </label>
@@ -44,10 +44,11 @@ export const Profile = () => {
         <div className="profile__form-item">
           <label
             htmlFor="user-name"
-            className="profile__info-label profile__info-label_name"
+            className="profile__form-label profile__info-label_name"
           >
             E-mail
           </label>
+
           <input
             id="user-email"
             className="profile__form-input profile__form-input_email"
@@ -60,12 +61,10 @@ export const Profile = () => {
           />
         </div>
 
-      {isEdit && (
-        <SubmitButton text="Сохранить" className="profile__submit-button"/>
-      )}
-
+        {isEdit && (
+          <SubmitButton text="Сохранить" className="profile__submit-button" />
+        )}
       </form>
-
 
       {!isEdit && (
         <ul className="profile__action-list">
