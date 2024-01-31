@@ -11,9 +11,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
   return (
     <header className="header">
       <div className="header__body">
-        <NavLink to="/" className="header__logo">
-          <Logo />
-        </NavLink>
+        <Logo className="header__logo" />
 
         {isLogged.current && (
           <div
