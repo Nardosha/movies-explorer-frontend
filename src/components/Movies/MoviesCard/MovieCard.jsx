@@ -27,7 +27,7 @@ export const MovieCard = ({ movie, showSavedMovies }) => {
           alt="Постер фильма"
         />
         <ul className="movie-card__info-list">
-          <li className="movie-card__title">{movie.title}</li>
+          <h2 className="movie-card__title">{movie.title}</h2>
           <li className="movie-card__duration">{movie.duration}</li>
         </ul>
       </div>
