@@ -11,9 +11,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
   return (
     <header className="header">
       <div className="header__body">
-        <NavLink to="/" className="header__logo">
-          <Logo />
-        </NavLink>
+        <Logo className="header__logo" />
 
         {isLogged.current && (
           <div
@@ -77,19 +75,20 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
 
             <NavigationLink
               title="Аккаунт"
-              to="me"
+              to="profile"
               className="header__profile-button"
             />
           </nav>
         )}
 
         {!isLogged.current && (
-          <div className="header__actions">
+          <nav className="header__actions">
             <NavLink to="/signup" className="header__action-button">
               Регистрация
             </NavLink>
+
             <LoginButton />
-          </div>
+          </nav>
         )}
       </div>
     </header>

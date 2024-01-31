@@ -5,7 +5,8 @@ export const FormInput = ({
   placeholder,
   required,
   className,
-  hasError,
+  minLength = undefined,
+  maxLength = undefined,
 }) => {
   return (
     <div className={`form-input ${className}`}>
@@ -15,13 +16,13 @@ export const FormInput = ({
 
       <input
         type={type}
-        className={`form-input__input ${
-          hasError ? "form-input__input_error" : ""
-        }`}
+        className="form-input__input"
         id={name}
         name={name}
         placeholder={placeholder}
         required={required}
+        minLength={minLength}
+        maxLength={maxLength}
       />
     </div>
   );

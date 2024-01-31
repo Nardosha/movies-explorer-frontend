@@ -1,4 +1,5 @@
 .profile {
+  flex: 1 1 auto;
   box-sizing: border-box;
   position: relative;
   color: var(--main-text-color);
@@ -9,8 +10,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
-  padding: 144px 30px 40px 30px;
+  padding: 70px 30px 40px 30px;
   margin: 0;
 }
 
@@ -22,7 +22,7 @@
   margin: 0 0 80px 0;
 }
 
-.profile__info-list {
+.profile__form {
   list-style: none;
   flex: 1 1 auto;
   display: flex;
@@ -34,26 +34,43 @@
   margin: 0;
 }
 
-.profile__info-item {
-  list-style: none;
-  position: relative;
-  font-size: 11px;
-  font-weight: 500;
+.profile__form-item {
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   width: 100%;
-  padding: 0;
-  margin: 0;
 }
 
-.profile__info-list-separator {
-  width: 100%;
-  height: 1px;
-  background-color: #424242;
+.profile__form-item:first-of-type{
+  border-bottom: 1px solid #424242;
+  padding: 0 0 16px 0;
 }
 
-.profile__info-label {
+.profile__form-input {
+  box-sizing: border-box;
+  font-size: 13px;
+  color: var(--main-text-color);
+  background-color: transparent;
+  text-align: end;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+}
+
+.profile__form-input:not(:disabled):hover {
+  opacity: 0.7;
+}
+
+.profile__form-label {
+  font-size: 11px;
+  font-weight: 500;
+  min-width: 50px;
   padding: 0;
   margin: 0;
 }
@@ -102,17 +119,21 @@
   color: var(--text-red-color);
 }
 
+.profile__submit-button {
+  margin: auto 0 0 0;
+  width: 100%;
+}
+
 @media (min-width: 321px) {
   .profile {
-    padding: 310px 30px 60px;
+    padding: 236px 30px 60px;
   }
   .profile__title {
     margin: 0 0 98px 0;
   }
 
-  .profile__info-list {
+  .profile__form {
     max-width: 410px;
-    flex: unset;
   }
   .profile__action-list {
     margin: auto;
@@ -125,14 +146,13 @@
 
 @media (min-width: 769px) {
   .profile {
-    padding: 148px 70px 70px;
+    padding: 74px 70px 70px;
   }
   .profile__title {
     margin: 0 0 123px 0;
   }
 
-  .profile__info-list {
-    max-width: 410px;
+  .profile__form {
     flex: 1 1 auto;
   }
   .profile__action-list {

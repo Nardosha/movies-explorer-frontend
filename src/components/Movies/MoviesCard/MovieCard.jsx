@@ -6,16 +6,17 @@ export const MovieCard = ({ movie, showSavedMovies }) => {
   return (
     <div className="movie-card">
       {showSavedMovies && (
-        <button className="movie-card__button movie-card__delete-button" />
+        <button className="movie-card__button movie-card__delete-button" type="button" />
       )}
 
       {!showSavedMovies &&
         (movie.isSaved ? (
-          <button className="movie-card__button movie-card__saved-button" />
+          <button className="movie-card__button movie-card__saved-button" type="button" />
         ) : (
           <RoundedButton
             title="Сохранить"
             className="movie-card__button movie-card__save-button"
+            type="submit"
           />
         ))}
 
@@ -26,7 +27,7 @@ export const MovieCard = ({ movie, showSavedMovies }) => {
           alt="Постер фильма"
         />
         <ul className="movie-card__info-list">
-          <li className="movie-card__title">{movie.title}</li>
+          <h2 className="movie-card__title">{movie.title}</h2>
           <li className="movie-card__duration">{movie.duration}</li>
         </ul>
       </div>

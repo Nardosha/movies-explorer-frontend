@@ -1,13 +1,10 @@
-import { Separator } from "../../Separator/Separator";
 import { NavigationLink } from "../../NavigationLink/NavigationLink";
 import { Links } from "../../../utils/constants";
 
-export const AboutMe = () => {
+export const AboutMe = ({ id }) => {
   return (
-    <section className="about-me">
+    <section id={id} className="about-me">
       <h2 className="about-me__title">Студент</h2>
-
-      <Separator className="about-me__separator" />
 
       <div className="about-me__container-info">
         <div className="about-me__info">
@@ -22,8 +19,8 @@ export const AboutMe = () => {
           </p>
 
           <NavigationLink
-            title={Links.GITHUB}
-            to="https://github.com/Nardosha"
+            title={Links.GITHUB.TITLE}
+            to={Links.GITHUB.LINK}
             target="_blank"
             className="about-me__link"
           />
@@ -41,28 +38,28 @@ export const AboutMe = () => {
       <ul className="about-me__portfolio-list">
         <li className="about-me__list-item">
           <NavigationLink
-            title={Links.STATIC_WEBSITE}
-            to="#"
+            title={Links.STATIC_WEBSITE.TITLE}
+            to={Links.STATIC_WEBSITE.LINK}
             target="_blank"
             className="about-me__portfolio-link"
           />
+
         </li>
-        <Separator className="about-me__link-separator" />
 
         <li className="about-me__list-item">
           <NavigationLink
-            title={Links.ADAPTIVE_WEBSITE}
-            to="#"
+            title={Links.ADAPTIVE_WEBSITE.TITLE}
+            to={Links.ADAPTIVE_WEBSITE.LINK}
             target="_blank"
             className="about-me__portfolio-link"
           />
+
         </li>
-        <Separator className="about-me__link-separator" />
 
         <li className="about-me__list-item">
           <NavigationLink
-            title={Links.SPA}
-            to="#"
+            title={Links.SPA.TITLE}
+            to={Links.SPA.LINK}
             target="_blank"
             className="about-me__portfolio-link"
           />

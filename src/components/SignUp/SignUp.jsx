@@ -9,25 +9,25 @@ export const SignUp = () => {
   const [formErrorText, setFormErrorText] = useState("");
 
   return (
-    <div className="sign-up">
+    <main className="sign-up">
       <Logo className="sign-up__logo" />
 
       <h1 className="sign-up__title">Добро пожаловать!</h1>
 
-      <form action="" className="sign-up__form">
+      <form action="#" className="sign-up__form">
         <div className="sign-up__form-inputs">
           <FormInput
-            hasError={false}
             label="Имя"
             id="name"
             name="name"
             placeholder="Введите имя"
             required
             className="sign-up__name-input"
+            minLength="2"
+            maxLength="30"
           />
 
           <FormInput
-            hasError={false}
             label="E-mail"
             id="email"
             name="email"
@@ -38,13 +38,14 @@ export const SignUp = () => {
           />
 
           <FormInput
-            hasError={false}
             label="Пароль"
             id="password"
             name="password"
             type="password"
             placeholder="Введите пароль"
             className="sign-up__password-input"
+            minLength="2"
+            maxLength="30"
             required
           />
 
@@ -63,6 +64,6 @@ export const SignUp = () => {
           Войти
         </NavLink>
       </div>
-    </div>
+    </main>
   );
 };

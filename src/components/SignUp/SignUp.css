@@ -71,12 +71,13 @@
   font-weight: 400;
   line-height: normal;
   display: flex;
+  align-items: center;
   gap: 7px;
 }
 
 .sign-up__sign-in-link {
   text-decoration: none;
-  color: #4285F4;
+  color: #4285f4;
   font-size: 12px;
 }
 
@@ -111,6 +112,10 @@
   }
 
   .sign-up__navigation {
+    font-size: 14px;
+  }
+
+  .sign-up__sign-in-link {
     font-size: 14px;
   }
 }
