@@ -22,8 +22,8 @@ export const AboutMe = ({ id }) => {
           </p>
 
           <NavigationLink
-            title={Links.GITHUB}
-            to="https://github.com/Nardosha"
+            title={Links.GITHUB.TITLE}
+            to={Links.GITHUB.LINK}
             target="_blank"
             className="about-me__link"
           />
@@ -41,8 +41,8 @@ export const AboutMe = ({ id }) => {
       <ul className="about-me__portfolio-list">
         <li className="about-me__list-item">
           <NavigationLink
-            title={Links.STATIC_WEBSITE}
-            to="#"
+            title={Links.STATIC_WEBSITE.TITLE}
+            to={Links.STATIC_WEBSITE.LINK}
             target="_blank"
             className="about-me__portfolio-link"
           />
@@ -52,8 +52,8 @@ export const AboutMe = ({ id }) => {
 
         <li className="about-me__list-item">
           <NavigationLink
-            title={Links.ADAPTIVE_WEBSITE}
-            to="#"
+            title={Links.ADAPTIVE_WEBSITE.TITLE}
+            to={Links.ADAPTIVE_WEBSITE.LINK}
             target="_blank"
             className="about-me__portfolio-link"
           />
@@ -63,8 +63,8 @@ export const AboutMe = ({ id }) => {
 
         <li className="about-me__list-item">
           <NavigationLink
-            title={Links.SPA}
-            to="#"
+            title={Links.SPA.TITLE}
+            to={Links.SPA.LINK}
             target="_blank"
             className="about-me__portfolio-link"
           />

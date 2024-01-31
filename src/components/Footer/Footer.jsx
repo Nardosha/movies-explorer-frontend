@@ -1,5 +1,6 @@
 import { Separator } from "../Separator/Separator";
 import { NavigationLink } from "../NavigationLink/NavigationLink";
+import { Links } from "../../utils/constants";
 
 export const Footer = () => {
   return (
@@ -13,18 +14,18 @@ export const Footer = () => {
         <ul className="footer__link-list">
           <li className="footer__list-item">
             <NavigationLink
-              title="Яндекс.Практикум"
+              title={Links.YANDEX_PRACTICUM.TITLE}
               target="_blank"
-              to="https://practicum.yandex.ru/profile/frontend-developer/"
+              to={Links.YANDEX_PRACTICUM.LINK}
               className="footer__link"
             />
           </li>
 
           <li className="footer__list-item">
             <NavigationLink
-              to="https://github.com/Nardosha"
+              to={Links.GITHUB.LINK}
               className="footer__link"
-              title="Github"
+              title={Links.GITHUB.TITLE}
               target="_blank"
             />
           </li>
