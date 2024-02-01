@@ -1,0 +1,39 @@
+:root {
+  /*fonts*/
+  --font-family: Inter, Arial, sans-serif;
+  --basic-font-weight: 400;
+
+
+  /*********MOBILE STYLES********/
+
+  /* title */
+  /*--title-font-size: 29px;*/
+  /*--title-line-height: 37px;*/
+  --mobile-button-font-size: 10px;
+  --mobile-line-height: 16px;
+
+
+  /*********TABLET STYLES********/
+
+  /* title */
+  --tablet-button-font-size: 12px;
+
+
+  --main-text-color: #fff;
+  --text-red-color: #EE3465;
+  --black-text-color: #000;
+  --gray-text-color: #8B8B8B;
+  --primary-background-color: #202020;
+  --secodary-background-color: #272727;
+  --shadowed-background-color: #313131;
+  --light-shodowed-background-color: #303030;
+
+  --primary-green-color: #3ddc84;
+
+
+
+  /*****QUERIES*****/
+  --mobile-query: 320px;
+  --tablet-query: 768px;
+  --desctop-query: 1280px;
+}

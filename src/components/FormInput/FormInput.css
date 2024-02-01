@@ -1,0 +1,40 @@
+.form-input {
+  box-sizing: border-box;
+  position: relative;
+  font-family: var(--font-family);
+  width: 100%;
+}
+
+.form-input__label {
+  display: block;
+  color: var(--gray-text-color);
+  font-size: 10px;
+  text-align: left;
+  margin: 0 0 10px 0;
+}
+
+.form-input__input {
+  box-sizing: border-box;
+  font-size: 13px;
+  color: var(--main-text-color);
+  font-family: var(--font-family);
+  line-height: normal;
+  background-color: #2f2f2f;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+  transition: all 0.2s ease-in;
+}
+
+.form-input__input:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-input__input:focus {
+  border-color: var(--gray-text-color);
+}

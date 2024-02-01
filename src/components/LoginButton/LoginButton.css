@@ -1,0 +1,34 @@
+.login-button {
+  box-sizing: border-box;
+  font-family: Inter, Aria, sans-serif;
+  font-size: 10px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+  color: var(--black-text-color);
+  text-decoration: none;
+  border-radius: 3px;
+  background-color: var(--primary-green-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  min-height: 26px;
+  padding: 5px 12px;
+  margin: 0;
+}
+
+.login-button:hover{
+  opacity: 0.8;
+}
+
+@media (min-width: 320px) {
+  .login-button {
+    font-size: 12px;
+    line-height: 133%;
+    min-width: 54px;
+    min-height: 26px;
+    padding: 8px 20px;
+  }
+}

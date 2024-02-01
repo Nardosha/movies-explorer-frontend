@@ -1,0 +1,26 @@
+.rounded-button {
+  box-sizing: border-box;
+  font-family: Inter, Aria, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 114%;
+  color: var(--main-text-color);
+  text-decoration: none;
+  border-style: none;
+  border-radius: 20px;
+  background-color: var(--shadowed-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 32px;
+  padding: 8px;
+  margin: 0;
+}
+
+.rounded-button:hover {
+  opacity: 0.8;
+}
+
