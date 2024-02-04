@@ -23,10 +23,6 @@
   border-bottom: 1px solid #DADADA;
 }
 
-.techs__separator {
-  background-color: #dadada;
-  margin: 0 0 60px 0;
-}
 .techs__caption {
   font-family: inherit;
   font-size: 30px;
