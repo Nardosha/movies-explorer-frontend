@@ -1,6 +1,6 @@
-import { SearchForm } from "./SearchForm/SearchForm";
 import { MovieCardList } from "./MoviesCardList/MovieCardList";
 import { MoreButton } from "../MoreButton/MoreButton";
+import {SearchForm} from "../SearchForm/SearchForm";
 
 export const Movies = ({ movies }) => {
   return (

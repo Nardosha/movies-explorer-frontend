@@ -1,4 +1,4 @@
-import { SearchForm } from "../Movies/SearchForm/SearchForm";
+import { SearchForm } from "../SearchForm/SearchForm";
 import { MovieCardList } from "../Movies/MoviesCardList/MovieCardList";
 import { MoreButton } from "../MoreButton/MoreButton";
 

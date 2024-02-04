@@ -12,7 +12,7 @@
   cursor: pointer;
   font-size: 11px;
   line-height: 18px;
-  padding: 0;
+  padding: 0 0 0 45px;
 }
 
 .switcher__label:hover {
@@ -20,13 +20,21 @@
 }
 
 .switcher__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: none;
 }
 
 .switcher__slider {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
   cursor: pointer;
   border-radius: 34px;
-  position: relative;
   background-color: #ccc;
   width: 34px;
   height: 14px;

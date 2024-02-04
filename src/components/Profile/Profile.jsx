@@ -32,7 +32,7 @@ export const Profile = () => {
             placeholder="Имя"
             value="Виталий"
             type="text"
-            name="name"
+            name="username"
             minLength="2"
             maxLength="30"
             required
@@ -43,8 +43,8 @@ export const Profile = () => {
 
         <div className="profile__form-item">
           <label
-            htmlFor="user-name"
-            className="profile__form-label profile__info-label_name"
+            htmlFor="user-email"
+            className="profile__form-label profile__info-label_email"
           >
             E-mail
           </label>
