@@ -1,7 +1,10 @@
 import { MovieCard } from "../MoviesCard/MovieCard";
 
-export const MovieCardList = ({ movies, showSavedMovies = false, className }) => {
-  console.log("showSavedMovies", showSavedMovies);
+export const MovieCardList = ({
+  movies,
+  showSavedMovies = false,
+  className,
+}) => {
 
   return (
     <div className={`movie-card-list ${className}`}>

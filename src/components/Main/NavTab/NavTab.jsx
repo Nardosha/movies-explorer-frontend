@@ -1,8 +1,4 @@
 export const NavTab = () => {
-  const onClick = (e) => {
-    console.log('onCLick', e)
-  }
-
   return (
     <nav className="nav-tab">
       <ul className="nav-tab__list">

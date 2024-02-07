@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ValidationErrorText } from "../../utils/validation";
-import {Switcher} from "../Switcher/Switcher";
+import { Switcher } from "../Switcher/Switcher";
 
 export const SearchForm = ({ className }) => {
   const [searchText, setSearchText] = useState("");
@@ -13,8 +13,9 @@ export const SearchForm = ({ className }) => {
   };
 
   const onToggle = () => {
-    setIsToggled(!isToggled)
-  }
+    setIsToggled(!isToggled);
+  };
+
 
   const toggleError = (value) => {
     setIsShowError(value);
@@ -32,7 +33,6 @@ export const SearchForm = ({ className }) => {
       isToggled,
     };
 
-    console.log("onSearchSubmit", res);
     return res;
   };
 

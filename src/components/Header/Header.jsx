@@ -37,7 +37,6 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
                 <NavLink
                   to="/"
                   className={(state) => {
-                    console.log(state, state.isActive);
                     return state.isActive
                       ? "header__link header__link_active"
                       : "header__link";

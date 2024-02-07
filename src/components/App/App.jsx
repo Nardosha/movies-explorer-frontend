@@ -13,9 +13,13 @@ import { SignUp } from "../SignUp/SignUp";
 import { Footer } from "../Footer/Footer";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { UserContext } from "../../contexts/UserContext";
+import { UseWindowSize } from "../../utils/UseWindowSize";
+import { UseLoaderConfig } from "../../utils/UseLoaderConfig";
 
 function App() {
   const isLogged = useRef(true);
+  const screenWidth = UseWindowSize();
+  const loaderConfig = UseLoaderConfig(screenWidth);
 
   const [movies, setMovies] = useState(MOVIES);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +34,6 @@ function App() {
 
   useEffect(() => {
     if (isShowSavedMovies) {
-      console.log(isShowSavedMovies);
       setMovies(movies.filter((movie) => movie.isSaved));
     }
   }, [isShowSavedMovies]);
@@ -57,8 +60,12 @@ function App() {
                 element={Movies}
                 isLogged={isLogged}
                 movies={movies}
+                loaderConfig={loaderConfig}
+                onShowMore={onShowMore}
               />
             }
+                // filters={filters}
+                // onFiltersChanged={onFiltersChanged}
           />
 
           <Route

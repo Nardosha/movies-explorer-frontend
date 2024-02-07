@@ -1,8 +1,6 @@
 import {RoundedButton} from "../../RoundedButton/RoundedButton";
 
 export const MovieCard = ({ movie, showSavedMovies }) => {
-  console.log("MovieCard", showSavedMovies);
-
   return (
     <div className="movie-card">
       {showSavedMovies && (

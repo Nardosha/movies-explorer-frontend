@@ -5,11 +5,9 @@ import { useState } from "react";
 export const Profile = () => {
   const [isEdit, setIsEdit] = useState(false);
   const onChange = (e) => {
-    console.log("onChange", e);
   };
 
   const onEditButtonClick = (e) => {
-    console.log("onEditButtonClick");
     setIsEdit(() => !isEdit);
   };
 
