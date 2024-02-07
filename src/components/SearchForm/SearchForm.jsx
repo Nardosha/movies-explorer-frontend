@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ValidationErrorText } from "../../utils/validation";
 import { Switcher } from "../Switcher/Switcher";
 
-export const SearchForm = ({ className }) => {
-  const [searchText, setSearchText] = useState("");
+export const SearchForm = ({
+  filters: { search, isShowShortMovies },
+  onFiltersChanged,
+  className,
+}) => {
+  const [searchText, setSearchText] = useState(search);
   const [isShowError, setIsShowError] = useState(false);
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(isShowShortMovies);
 
   const onInputChange = (e) => {
     toggleError(false);
@@ -16,6 +20,9 @@ export const SearchForm = ({ className }) => {
     setIsToggled(!isToggled);
   };
 
+  useEffect(() => {
+    onFiltersChanged({ search: searchText, isShowShortMovies: isToggled });
+  }, [searchText, isToggled]);
 
   const toggleError = (value) => {
     setIsShowError(value);

@@ -30,7 +30,17 @@ function App() {
   const isShowHeader = validRoutesForHeader.includes(location.pathname);
   const isShowFooter = validRoutesForFooter.includes(location.pathname);
 
-  console.log(Routes);
+  const [filters, setFilters] = useState({
+    search: "",
+    isShowShortMovies: false,
+  });
+
+  const onFiltersChanged = (newFilters) => {
+    setFilters({ ...newFilters });
+  };
+
+  const onShowMore = () => {
+  };
 
   useEffect(() => {
     if (isShowSavedMovies) {
@@ -62,10 +72,10 @@ function App() {
                 movies={movies}
                 loaderConfig={loaderConfig}
                 onShowMore={onShowMore}
+                filters={filters}
+                onFiltersChanged={onFiltersChanged}
               />
             }
-                // filters={filters}
-                // onFiltersChanged={onFiltersChanged}
           />
 
           <Route
@@ -75,6 +85,8 @@ function App() {
                 element={SavedMovies}
                 movies={movies}
                 showSavedMovies={true}
+                filters={filters}
+                onFiltersChanged={onFiltersChanged}
               />
             }
           />
