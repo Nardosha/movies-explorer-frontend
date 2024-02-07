@@ -14,11 +14,11 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { UserContext } from "../../contexts/UserContext";
 import { UseWindowSize } from "../../utils/UseWindowSize";
 import { UseLoaderConfig } from "../../utils/UseLoaderConfig";
-import { LocalStorageKeys } from "../../utils/constants";
 import {
   getFromLocalStorage,
   setToLocalStorage,
 } from "../../helpers/localStorage.helper";
+import {LocalStorageKeys} from "../../constants/movies";
 
 function App() {
   const isLogged = useRef(true);

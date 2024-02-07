@@ -16,3 +16,18 @@ export const useMoviesApi = async ({ search, isShowShortMovies }) => {
     console.log(e);
   }
 };
+
+export const filterMovies = async (initialMovies, { search, isShowShortMovies }) => {
+  try {
+    return initialMovies
+      .filter((movie) => movie.nameRU.includes(search))
+      .filter((movie) => {
+        if (isShowShortMovies) {
+          return movie.duration < 40;
+        }
+        return movie;
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};

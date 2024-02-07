@@ -1,5 +1,5 @@
 import { NavigationLink } from "../NavigationLink/NavigationLink";
-import { Links } from "../../utils/constants";
+import {Links} from "../../constants/movies";
 
 export const Footer = () => {
   return (
