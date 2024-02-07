@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Profile } from "../Profile/Profile";
-import { MOVIES } from "../Movies/MoviesCard/MovieCard.helper";
 import { SignIn } from "../SignIn/SignIn";
 import { SignUp } from "../SignUp/SignUp";
 import { Footer } from "../Footer/Footer";
@@ -15,13 +14,17 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { UserContext } from "../../contexts/UserContext";
 import { UseWindowSize } from "../../utils/UseWindowSize";
 import { UseLoaderConfig } from "../../utils/UseLoaderConfig";
+import { LocalStorageKeys } from "../../utils/constants";
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+} from "../../helpers/localStorage.helper";
 
 function App() {
   const isLogged = useRef(true);
   const screenWidth = UseWindowSize();
   const loaderConfig = UseLoaderConfig(screenWidth);
-
-  const [movies, setMovies] = useState(MOVIES);
+  const [movies, setMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
@@ -29,24 +32,41 @@ function App() {
   const validRoutesForFooter = ["/movies", "/saved-movies", "/"];
   const isShowHeader = validRoutesForHeader.includes(location.pathname);
   const isShowFooter = validRoutesForFooter.includes(location.pathname);
+  const [search, setSearch] = useState("");
+  const [isShowShortMovies, setIsShowShortMovies] = useState(false);
 
-  const [filters, setFilters] = useState({
-    search: "",
-    isShowShortMovies: false,
-  });
-
-  const onFiltersChanged = (newFilters) => {
-    setFilters({ ...newFilters });
+  const onSearch = (newSearch) => {
+    setSearch(newSearch);
+    setToLocalStorage(LocalStorageKeys.SEARCH, newSearch);
   };
 
-  const onShowMore = () => {
+  const onSwitcherToggle = (newValue) => {
+    setIsShowShortMovies(newValue);
+    setToLocalStorage(LocalStorageKeys.IS_SHOW_SHORT_MOVIES, newValue);
   };
+
+  const onShowMore = () => {};
 
   useEffect(() => {
     if (isShowSavedMovies) {
       setMovies(movies.filter((movie) => movie.isSaved));
     }
   }, [isShowSavedMovies]);
+
+  useEffect(() => {
+    const prevSearch = getFromLocalStorage(LocalStorageKeys.SEARCH);
+    const prevSwitcherState = getFromLocalStorage(
+      LocalStorageKeys.IS_SHOW_SHORT_MOVIES,
+    );
+
+    if (prevSearch) {
+      setSearch(prevSearch);
+    }
+
+    if (prevSwitcherState) {
+      setToLocalStorage(prevSwitcherState);
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={{ isLogged }}>
@@ -72,8 +92,10 @@ function App() {
                 movies={movies}
                 loaderConfig={loaderConfig}
                 onShowMore={onShowMore}
-                filters={filters}
-                onFiltersChanged={onFiltersChanged}
+                search={search}
+                toggled={isShowShortMovies}
+                onSearch={onSearch}
+                onToggle={onSwitcherToggle}
               />
             }
           />
@@ -85,8 +107,10 @@ function App() {
                 element={SavedMovies}
                 movies={movies}
                 showSavedMovies={true}
-                filters={filters}
-                onFiltersChanged={onFiltersChanged}
+                search={search}
+                toggled={isShowShortMovies}
+                onSearch={onSearch}
+                onToggle={onSwitcherToggle}
               />
             }
           />

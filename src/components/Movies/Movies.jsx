@@ -5,8 +5,10 @@ import { SearchForm } from "../SearchForm/SearchForm";
 export const Movies = ({
   movies,
   loaderConfig,
-  filters,
-  onFiltersChanged,
+  search,
+  toggled,
+  onSearch,
+  onToggle,
   onShowMore,
 }) => {
   const filteredMovies = movies.slice(0, loaderConfig.defaultCardsNumber);
@@ -14,8 +16,10 @@ export const Movies = ({
   return (
     <main className="movies">
       <SearchForm
-        filters={filters}
-        onFiltersChanged={onFiltersChanged}
+        search={search}
+        toggled={toggled}
+        onSearch={onSearch}
+        onToggle={onToggle}
         className="movies__search-form"
       />
 

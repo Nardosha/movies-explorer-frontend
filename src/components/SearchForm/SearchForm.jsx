@@ -3,26 +3,28 @@ import { ValidationErrorText } from "../../utils/validation";
 import { Switcher } from "../Switcher/Switcher";
 
 export const SearchForm = ({
-  filters: { search, isShowShortMovies },
-  onFiltersChanged,
+  search,
+  toggled,
+  onSearch,
+  onToggle,
   className,
 }) => {
   const [searchText, setSearchText] = useState(search);
   const [isShowError, setIsShowError] = useState(false);
-  const [isToggled, setIsToggled] = useState(isShowShortMovies);
+  const [isToggled, setIsToggled] = useState(toggled);
 
   const onInputChange = (e) => {
     toggleError(false);
     setSearchText(e.target.value);
   };
 
-  const onToggle = () => {
+  const onToggleSwitch = () => {
     setIsToggled(!isToggled);
   };
 
   useEffect(() => {
-    onFiltersChanged({ search: searchText, isShowShortMovies: isToggled });
-  }, [searchText, isToggled]);
+    onToggle(isToggled);
+  }, [isToggled]);
 
   const toggleError = (value) => {
     setIsShowError(value);
@@ -35,12 +37,8 @@ export const SearchForm = ({
       toggleError(true);
       return;
     }
-    const res = {
-      search: searchText,
-      isToggled,
-    };
 
-    return res;
+    onSearch(searchText);
   };
 
   return (
@@ -74,7 +72,7 @@ export const SearchForm = ({
           className="search-form__checkbox"
           title="Короткометражки"
           isToggled={isToggled}
-          onToggle={onToggle}
+          onToggle={onToggleSwitch}
         />
       </form>
     </div>

@@ -51,3 +51,8 @@ export const CardConfig = {
     loadingCardsNumber: 2,
   },
 };
+
+export const LocalStorageKeys = {
+  SEARCH: "search",
+  IS_SHOW_SHORT_MOVIES: "isShowShortMovies",
+};

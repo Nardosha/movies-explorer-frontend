@@ -3,8 +3,10 @@ import { MovieCardList } from "../Movies/MoviesCardList/MovieCardList";
 
 export const SavedMovies = ({
   movies,
-  filters,
-  onFiltersChanged,
+  search,
+  toggled,
+  onSearch,
+  onToggle,
   showSavedMovies,
 }) => {
   const savedMovies = movies.filter((movie) => movie.isSaved);
@@ -12,8 +14,10 @@ export const SavedMovies = ({
   return (
     <main className="saved-movies">
       <SearchForm
-        filters={filters}
-        onFiltersChanged={onFiltersChanged}
+        search={search}
+        toggled={toggled}
+        onSearch={onSearch}
+        onToggle={onToggle}
         className="saved-movies__search-form"
       />
 
