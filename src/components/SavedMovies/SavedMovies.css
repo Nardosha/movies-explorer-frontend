@@ -22,10 +22,6 @@
   margin: 0 0 50px 0;
 }
 
-.saved-movies__more-button {
-  padding: 0 10px;
-}
-
 @media (min-width: 321px) {
   .saved-movies {
     padding: 80px 0 20px 0;
@@ -37,10 +33,6 @@
   }
 
   .saved-movies__list {
-    padding: 0 30px;
-  }
-
-  .saved-movies__more-button {
     padding: 0 30px;
   }
 }
@@ -56,10 +48,6 @@
   }
 
   .saved-movies__list {
-    padding: 0 70px;
-  }
-
-  .saved-movies__more-button {
     padding: 0 70px;
   }
 }
