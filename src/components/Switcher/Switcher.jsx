@@ -1,12 +1,4 @@
-import { useState } from "react";
-
 export const Switcher = ({ isToggled, onToggle, className, title }) => {
-  const onChange = (e) => {
-    console.log("onChange", e);
-
-    onToggle();
-  };
-
   return (
     <div className={`switcher ${className}`}>
       <div
@@ -24,7 +16,7 @@ export const Switcher = ({ isToggled, onToggle, className, title }) => {
         id="switcher"
         className="switcher__input"
         checked={isToggled}
-        onChange={onChange}
+        onChange={() => onToggle()}
       />
     </div>
   );
