@@ -1,4 +1,5 @@
 const MOVIE_API = "https://api.nomoreparties.co/beatfilm-movies";
+export const BASE_API = "https://api.nomoreparties.co";
 
 const checkResponse = (res) => {
   if (res.ok) return res.json();
@@ -9,7 +10,7 @@ const checkResponse = (res) => {
 /** Получение всех фильмов
  *  @returns массив с фильмами
  */
-export const getMovies = async () => {
+export const loadMovies = async () => {
   return await fetch(MOVIE_API).then(checkResponse);
 };
 

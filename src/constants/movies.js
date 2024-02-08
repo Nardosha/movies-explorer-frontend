@@ -56,5 +56,5 @@ export const CardConfig = {
 
 export const LocalStorageKeys = {
   SEARCH: "search",
-  IS_SHOW_SHORT_MOVIES: "isShowShortMovies",
+  IS_SHOW_SHORT_MOVIES: "isToggled",
 };
