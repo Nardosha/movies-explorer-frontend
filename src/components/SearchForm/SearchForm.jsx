@@ -11,20 +11,11 @@ export const SearchForm = ({
 }) => {
   const [searchText, setSearchText] = useState(search);
   const [isShowError, setIsShowError] = useState(false);
-  const [isToggled, setIsToggled] = useState(toggled);
 
   const onInputChange = (e) => {
     toggleError(false);
     setSearchText(e.target.value);
   };
-
-  const onToggleSwitch = () => {
-    setIsToggled(!isToggled);
-  };
-
-  useEffect(() => {
-    onToggle(isToggled);
-  }, [isToggled]);
 
   const toggleError = (value) => {
     setIsShowError(value);
@@ -41,6 +32,10 @@ export const SearchForm = ({
     onSearch(searchText);
   };
 
+  useEffect(() => {
+    setSearchText(search);
+  }, [search]);
+
   return (
     <div className={`search-form ${className}`}>
       <form
@@ -56,6 +51,7 @@ export const SearchForm = ({
             id="search-input"
             className="search-form__input"
             placeholder="Фильм"
+            value={searchText}
             onChange={onInputChange}
           />
 
@@ -71,8 +67,8 @@ export const SearchForm = ({
         <Switcher
           className="search-form__checkbox"
           title="Короткометражки"
-          isToggled={isToggled}
-          onToggle={onToggleSwitch}
+          isToggled={toggled}
+          onToggle={() => onToggle(!toggled)}
         />
       </form>
     </div>
