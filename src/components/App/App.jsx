@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
 import { useEffect, useRef, useState } from "react";
@@ -18,42 +18,42 @@ import {
   getFromLocalStorage,
   setToLocalStorage,
 } from "../../helpers/localStorage.helper";
-import {LocalStorageKeys} from "../../constants/movies";
+import { LocalStorageKeys } from "../../constants/movies";
+import { getMovies } from "../../hooks/useMoviesApi";
+import { useLocationHook } from "../../hooks/useLocationHook";
+import { filterMovies } from "../../helpers/movie.helper";
 
 function App() {
   const isLogged = useRef(true);
   const screenWidth = UseWindowSize();
   const loaderConfig = UseLoaderConfig(screenWidth);
-  const [movies, setMovies] = useState([]);
+  const [initialMovies, setInitialMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-  const [isShowSavedMovies, setIsShowSavedMovies] = useState(false);
-  const validRoutesForHeader = ["/movies", "/saved-movies", "/profile", "/"];
-  const validRoutesForFooter = ["/movies", "/saved-movies", "/"];
-  const isShowHeader = validRoutesForHeader.includes(location.pathname);
-  const isShowFooter = validRoutesForFooter.includes(location.pathname);
+  const { isShowHeader, isShowFooter } = useLocationHook();
   const [search, setSearch] = useState("");
-  const [isShowShortMovies, setIsShowShortMovies] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
 
   const onSearch = (newSearch) => {
+    console.log("onSearch", newSearch);
     setSearch(newSearch);
     setToLocalStorage(LocalStorageKeys.SEARCH, newSearch);
+    setFilteredMovies(filterMovies(initialMovies, { search, isToggled }));
   };
 
   const onSwitcherToggle = (newValue) => {
-    setIsShowShortMovies(newValue);
+    setIsToggled(newValue);
+
     setToLocalStorage(LocalStorageKeys.IS_SHOW_SHORT_MOVIES, newValue);
+
+    setFilteredMovies(
+      filterMovies(initialMovies, { search, setIsToggled: newValue }),
+    );
   };
 
   const onShowMore = () => {};
 
-  useEffect(() => {
-    if (isShowSavedMovies) {
-      setMovies(movies.filter((movie) => movie.isSaved));
-    }
-  }, [isShowSavedMovies]);
-
-  useEffect(() => {
+  const setFiltersFromLocalStorage = () => {
     const prevSearch = getFromLocalStorage(LocalStorageKeys.SEARCH);
     const prevSwitcherState = getFromLocalStorage(
       LocalStorageKeys.IS_SHOW_SHORT_MOVIES,
@@ -63,9 +63,29 @@ function App() {
       setSearch(prevSearch);
     }
 
-    if (prevSwitcherState) {
-      setToLocalStorage(prevSwitcherState);
-    }
+    setIsToggled(prevSwitcherState);
+  };
+
+  useEffect(() => {
+    if (!initialMovies.length) return;
+
+    const filteredMovies = filterMovies(initialMovies, {
+      search,
+      isToggled,
+    });
+
+    setFilteredMovies([...filteredMovies]);
+  }, [initialMovies]);
+
+  useEffect(() => {
+    setFiltersFromLocalStorage();
+
+    getMovies()
+      .then((movies) => {
+        setInitialMovies(movies);
+        return filterMovies(movies, { search, isToggled });
+      })
+      .then((filteredMovies) => setFilteredMovies([...filteredMovies]));
   }, []);
 
   return (
@@ -89,11 +109,11 @@ function App() {
               <ProtectedRoute
                 element={Movies}
                 isLogged={isLogged}
-                movies={movies}
+                movies={filteredMovies}
                 loaderConfig={loaderConfig}
                 onShowMore={onShowMore}
                 search={search}
-                toggled={isShowShortMovies}
+                toggled={isToggled}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
               />
@@ -105,10 +125,10 @@ function App() {
             element={
               <ProtectedRoute
                 element={SavedMovies}
-                movies={movies}
+                movies={filteredMovies}
                 showSavedMovies={true}
                 search={search}
-                toggled={isShowShortMovies}
+                toggled={isToggled}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
               />
