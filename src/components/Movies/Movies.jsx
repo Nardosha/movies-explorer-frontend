@@ -1,7 +1,7 @@
 import { MovieCardList } from "./MoviesCardList/MovieCardList";
 import { MoreButton } from "../MoreButton/MoreButton";
 import { SearchForm } from "../SearchForm/SearchForm";
-import { useMovieLoader } from "../../hooks/useMoviesApi";
+import { useMovieLoader } from "../../hooks/useMoviesLoader";
 
 export const Movies = ({
   movies,
