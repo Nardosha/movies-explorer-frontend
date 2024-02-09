@@ -1,6 +1,7 @@
 import { MovieCardList } from "./MoviesCardList/MovieCardList";
 import { MoreButton } from "../MoreButton/MoreButton";
 import { SearchForm } from "../SearchForm/SearchForm";
+import { useMovieLoader } from "../../hooks/useMoviesApi";
 
 export const Movies = ({
   movies,
@@ -9,9 +10,9 @@ export const Movies = ({
   toggled,
   onSearch,
   onToggle,
-  onShowMore,
 }) => {
-  const filteredMovies = movies.slice(0, loaderConfig.defaultCardsNumber);
+  const { slicedMovies, showMore } = useMovieLoader(movies, loaderConfig);
+  const isShowMoreButton = movies.length > slicedMovies.length;
 
   return (
     <main className="movies">
@@ -23,13 +24,18 @@ export const Movies = ({
         className="movies__search-form"
       />
 
-      <MovieCardList
-        className="movies__list"
-        movies={filteredMovies}
-        loaderConfig={loaderConfig}
-      />
+      {!!movies.length && (
+        <>
+          <MovieCardList className="movies__list" movies={slicedMovies} />
 
-      <MoreButton className="movies__more-button" onClick={onShowMore} />
+          {isShowMoreButton && (
+            <MoreButton
+              className="movies__more-button"
+              onClick={() => showMore()}
+            />
+          )}
+        </>
+      )}
     </main>
   );
 };
