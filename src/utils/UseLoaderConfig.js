@@ -1,4 +1,4 @@
-import {AdaptiveBorders, CardConfig} from "../constants/movies";
+import { AdaptiveBorders, CardConfig } from "../constants/movies";
 
 export const UseLoaderConfig = ({ screenWidth }) => {
   if (screenWidth >= AdaptiveBorders.TABLET) {
