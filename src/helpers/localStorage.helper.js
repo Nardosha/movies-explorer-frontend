@@ -13,3 +13,7 @@ export const getFromLocalStorage = (key) => {
     console.log(e);
   }
 };
+
+export const clearLocalStorage = () => {
+  localStorage.clear();
+};
