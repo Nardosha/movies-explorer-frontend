@@ -1,7 +1,7 @@
 import { SubmitButton } from "../SubmitButton/SubmitButton";
 import { useState } from "react";
 
-export const Profile = ({onSignOut}) => {
+export const Profile = ({ onSignOut }) => {
   const [isEdit, setIsEdit] = useState(false);
   const onChange = (e) => {
   };
@@ -76,7 +76,11 @@ export const Profile = ({onSignOut}) => {
           </li>
 
           <li className="profile__action-button">
-            <button type="submit" className="profile__button profile__button_type_signout" onClick={onSignOut}>
+            <button
+              type="submit"
+              className="profile__button profile__button_type_signout"
+              onClick={onSignOut}
+            >
               Выйти из аккаунта
             </button>
           </li>

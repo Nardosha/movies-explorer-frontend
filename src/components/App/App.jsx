@@ -15,6 +15,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { UseWindowSize } from "../../utils/UseWindowSize";
 import { UseLoaderConfig } from "../../utils/UseLoaderConfig";
 import {
+  clearLocalStorage,
   getFromLocalStorage,
   setToLocalStorage,
 } from "../../helpers/localStorage.helper";
@@ -22,12 +23,13 @@ import { LocalStorageKeys } from "../../constants/movies";
 import { useLocationHook } from "../../hooks/useLocationHook";
 import { filterMovies } from "../../helpers/movie.helper";
 import { getMovies } from "../../hooks/useMoviesLoader";
-import {getUserInfo, signIn, signOut} from "../../utils/MainApi";
+import { getUserInfo, signIn, signOut, signup } from "../../utils/MainApi";
 
 function App() {
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -85,6 +87,27 @@ function App() {
     setIsToggled(prevSwitcherState);
   };
 
+  const handleSignUp = async ({ name, email, password }) => {
+    console.log("handleSignUp", { name, email, password });
+    setIsLoading(true);
+
+    try {
+      const newUser = await signup({ name, email, password });
+
+      if (!newUser) return;
+
+      const user = signIn({ email, password });
+
+      setCurrentUser(user);
+      setIsLogged(true);
+      navigate("/movies", { replace: true });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSignOut = async () => {
     console.log("handleSignOut");
     setIsLoading(true);
@@ -93,6 +116,8 @@ function App() {
       await signOut();
       setIsLogged(false);
       setCurrentUser(null);
+      setSavedMovies([]);
+      clearLocalStorage();
       navigate("/signin", { replace: true });
     } catch (err) {
       console.log(err);
@@ -172,7 +197,7 @@ function App() {
 
         <Routes>
           <Route path="/signin" element={<SignIn onSubmit={handleSignIn} />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp onSubmit={handleSignUp} />} />
 
           <Route
             path="/movies"
@@ -207,7 +232,9 @@ function App() {
 
           <Route
             path="/profile"
-            element={<ProtectedRoute element={Profile} onSignOut={handleSignOut}/>}
+            element={
+              <ProtectedRoute element={Profile} onSignOut={handleSignOut} />
+            }
           />
 
           <Route path="/" element={<Main />} />
