@@ -1,9 +1,7 @@
 import { RoundedButton } from "../../RoundedButton/RoundedButton";
 
-export const MovieCard = ({ movie, showSavedMovies }) => {
-  const imageSrc = movie.image.url;
-
-  const imageAlt = movie.image.alternativeText;
+export const MovieCard = ({ movie, showSavedMovies, onSaveMovie }) => {
+  console.log(movie);
   return (
     <div className="movie-card">
       {showSavedMovies && (
@@ -24,11 +22,19 @@ export const MovieCard = ({ movie, showSavedMovies }) => {
             title="Сохранить"
             className="movie-card__button movie-card__save-button"
             type="submit"
+            onClick={() => onSaveMovie(movie)}
           />
         ))}
 
       <div className="movie-card__container">
-        <img className="movie-card__image" src={imageSrc} alt={imageAlt} />
+        <a href={movie.trailerLink} target="_blank" className="movie-card__link">
+        <img
+          className="movie-card__image"
+          src={movie.url}
+          alt={movie.image.alternativeText}
+        />
+        </a>
+
         <ul className="movie-card__info-list">
           <h2 className="movie-card__title">{movie.nameRU}</h2>
           <li className="movie-card__duration">{movie.humanDuration}</li>
