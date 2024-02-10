@@ -3,7 +3,7 @@ import { Header } from "../Header/Header";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Profile } from "../Profile/Profile";
@@ -23,7 +23,13 @@ import { LocalStorageKeys } from "../../constants/movies";
 import { useLocationHook } from "../../hooks/useLocationHook";
 import { filterMovies } from "../../helpers/movie.helper";
 import { getMovies } from "../../hooks/useMoviesLoader";
-import { getUserInfo, signIn, signOut, signup } from "../../utils/MainApi";
+import {
+  getSavedMovies,
+  getUserInfo,
+  signIn,
+  signOut,
+  signup,
+} from "../../utils/MainApi";
 
 function App() {
   const navigate = useNavigate();
@@ -158,6 +164,28 @@ function App() {
       setIsLoading(false);
     }
   };
+
+  const loadUserMovies = useCallback(async () => {
+    setIsLoading(true);
+    console.log("getUserMovies");
+
+    try {
+      const { data: movies } = await getSavedMovies();
+      console.log(movies);
+      if (!movies) return;
+
+      setSavedMovies(movies);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (!isLogged) return;
+      await loadUserMovies();
+    })();
+  }, [isLogged, loadUserMovies]);
 
   useEffect(() => {
     if (!initialMovies.length) return;

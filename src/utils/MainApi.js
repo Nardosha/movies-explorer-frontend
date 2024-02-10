@@ -24,3 +24,10 @@ export const signOut = async () => {
 
   return makeRequest("signout", "delete", true);
 };
+
+export const getSavedMovies = async () => {
+  console.log("getSavedMovies");
+
+  return makeRequest("movies", "GET", true);
+};
+
