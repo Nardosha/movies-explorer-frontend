@@ -13,7 +13,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
       <div className="header__body">
         <Logo className="header__logo" />
 
-        {isLogged.current && (
+        {isLogged && (
           <div
             className={
               isMenuOpen
@@ -26,7 +26,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
           </div>
         )}
 
-        {isLogged.current && (
+        {isLogged && (
           <nav
             className={
               isMenuOpen ? "header__menu header__menu_active" : "header__menu"
@@ -80,7 +80,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
           </nav>
         )}
 
-        {!isLogged.current && (
+        {!isLogged && (
           <nav className="header__actions">
             <NavLink to="/signup" className="header__action-button">
               Регистрация

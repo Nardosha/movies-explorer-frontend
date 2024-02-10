@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { BASE_API, loadMovies } from "../utils/MoviesApi";
+import { loadMovies } from "../utils/MoviesApi";
 import { formatDurationToHuman } from "../helpers/dates.helper";
+import { BASE_MOVIES_API } from "../constants/api";
 
 export const getMovies = async () => {
   try {
@@ -45,7 +46,7 @@ export const formatMovies = async (initialMovies) => {
     return {
       ...movie,
       humanDuration: formatDurationToHuman(movie.duration),
-      image: { ...movie.image, url: BASE_API + movie.image.url },
+      image: { ...movie.image, url: BASE_MOVIES_API + movie.image.url },
     };
   });
 };

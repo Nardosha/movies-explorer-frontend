@@ -1,7 +1,9 @@
+import {SHORT_MOVIE_DURATION} from "../constants/movies";
+
 const filterBy = (isFilter, initialMovies) => {
   return initialMovies.filter((movie) => {
     if (isFilter) {
-      return movie.duration < 40;
+      return movie.duration < SHORT_MOVIE_DURATION;
     }
     return movie;
   });
@@ -9,7 +11,7 @@ const filterBy = (isFilter, initialMovies) => {
 
 export const filterMovies = (initialMovies, { search = "", isToggled }) => {
   if (!search.length) {
-    return filterBy(isToggled, filteredBySearch);
+    return filterBy(isToggled, initialMovies);
   }
 
   const filteredBySearch = initialMovies.filter((movie) => {

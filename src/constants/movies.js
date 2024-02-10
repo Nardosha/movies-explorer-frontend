@@ -58,3 +58,5 @@ export const LocalStorageKeys = {
   SEARCH: "search",
   IS_SHOW_SHORT_MOVIES: "isToggled",
 };
+
+export const SHORT_MOVIE_DURATION = 40;
