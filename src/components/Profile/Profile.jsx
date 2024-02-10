@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
 import { SubmitButton } from "../SubmitButton/SubmitButton";
 import { useState } from "react";
 
-export const Profile = () => {
+export const Profile = ({onSignOut}) => {
   const [isEdit, setIsEdit] = useState(false);
   const onChange = (e) => {
   };
@@ -77,9 +76,9 @@ export const Profile = () => {
           </li>
 
           <li className="profile__action-button">
-            <NavLink to="/" className="profile__link">
+            <button type="submit" className="profile__button profile__button_type_signout" onClick={onSignOut}>
               Выйти из аккаунта
-            </NavLink>
+            </button>
           </li>
         </ul>
       )}

@@ -11,3 +11,10 @@ export const getUserInfo = async () => {
 
   return makeRequest("users/me", "GET", true);
 };
+
+
+export const signOut = async () => {
+  console.log("logout");
+
+  return makeRequest("signout", "delete", true);
+};

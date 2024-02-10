@@ -22,12 +22,12 @@ import { LocalStorageKeys } from "../../constants/movies";
 import { useLocationHook } from "../../hooks/useLocationHook";
 import { filterMovies } from "../../helpers/movie.helper";
 import { getMovies } from "../../hooks/useMoviesLoader";
-import { getUserInfo, signIn } from "../../utils/MainApi";
+import {getUserInfo, signIn, signOut} from "../../utils/MainApi";
 
 function App() {
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
 
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -83,6 +83,22 @@ function App() {
     }
 
     setIsToggled(prevSwitcherState);
+  };
+
+  const handleSignOut = async () => {
+    console.log("handleSignOut");
+    setIsLoading(true);
+
+    try {
+      await signOut();
+      setIsLogged(false);
+      setCurrentUser(null);
+      navigate("/signin", { replace: true });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleTokenCheck = async () => {
@@ -191,7 +207,7 @@ function App() {
 
           <Route
             path="/profile"
-            element={<ProtectedRoute element={Profile} />}
+            element={<ProtectedRoute element={Profile} onSignOut={handleSignOut}/>}
           />
 
           <Route path="/" element={<Main />} />

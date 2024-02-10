@@ -114,7 +114,7 @@
   margin: 0;
 }
 
-.profile__link {
+.profile__button_type_signout {
   text-decoration: none;
   color: var(--text-red-color);
 }
