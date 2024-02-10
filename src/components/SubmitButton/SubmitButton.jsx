@@ -1,6 +1,10 @@
-export const SubmitButton = ({ text, className }) => {
+export const SubmitButton = ({ text, className, disabled }) => {
   return (
-    <button type="submit" className={`submit-button ${className}`}>
+    <button
+      type="submit"
+      className={`submit-button ${className}`}
+      disabled={disabled}
+    >
       {text}
     </button>
   );
