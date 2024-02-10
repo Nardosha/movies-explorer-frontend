@@ -1,9 +1,9 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Profile } from "../Profile/Profile";
@@ -21,15 +21,20 @@ import {
 import { LocalStorageKeys } from "../../constants/movies";
 import { useLocationHook } from "../../hooks/useLocationHook";
 import { filterMovies } from "../../helpers/movie.helper";
-import {getMovies} from "../../hooks/useMoviesLoader";
+import { getMovies } from "../../hooks/useMoviesLoader";
+import { getUserInfo, signIn } from "../../utils/MainApi";
 
 function App() {
-  const isLogged = useRef(true);
+  const navigate = useNavigate();
+  const [isLogged, setIsLogged] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [isToggled, setIsToggled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const screenWidth = UseWindowSize();
   const loaderConfig = UseLoaderConfig(screenWidth);
@@ -80,6 +85,39 @@ function App() {
     setIsToggled(prevSwitcherState);
   };
 
+  const handleTokenCheck = async () => {
+    console.log("handleTokenCheck");
+    setIsLoading(true);
+
+    try {
+      const { data } = await getUserInfo();
+      console.log(data);
+      setIsLogged(true);
+      setCurrentUser(data);
+      navigate("/", { replace: true });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSignIn = async ({ email, password }) => {
+    setIsLoading(true);
+    console.log("handleSignIn");
+    try {
+      const { data } = await signIn({ email, password });
+      console.log(data);
+
+      setIsLogged(true);
+      navigate("/", { replace: true });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!initialMovies.length) return;
 
@@ -99,7 +137,9 @@ function App() {
 
   // ПЕРВАЯ ЗАГРУЗКА
   useEffect(() => {
+    console.log(" ПЕРВАЯ ЗАГРУЗКА");
     setFiltersFromLocalStorage();
+    (async () => handleTokenCheck())();
     handleLoadMovies();
   }, []);
 
@@ -115,7 +155,7 @@ function App() {
         )}
 
         <Routes>
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn onSubmit={handleSignIn} />} />
           <Route path="/signup" element={<SignUp />} />
 
           <Route
