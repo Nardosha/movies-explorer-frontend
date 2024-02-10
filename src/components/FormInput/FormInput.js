@@ -7,6 +7,8 @@ export const FormInput = ({
   className,
   minLength = undefined,
   maxLength = undefined,
+  value,
+  onChange,
 }) => {
   return (
     <div className={`form-input ${className}`}>
@@ -15,14 +17,16 @@ export const FormInput = ({
       </label>
 
       <input
-        type={type}
-        className="form-input__input"
         id={name}
         name={name}
+        value={value}
+        type={type}
         placeholder={placeholder}
         required={required}
         minLength={minLength}
         maxLength={maxLength}
+        onChange={onChange}
+        className="form-input__input"
       />
     </div>
   );

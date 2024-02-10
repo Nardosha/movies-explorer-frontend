@@ -108,6 +108,7 @@
 
   .sign-in__error-message {
     min-height: 12px;
+    color: #ff0000;
   }
 
   .sign-in__sign-up-link {
