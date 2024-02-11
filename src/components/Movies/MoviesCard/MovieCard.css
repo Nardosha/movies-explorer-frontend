@@ -24,6 +24,7 @@
 }
 
 .movie-card__saved-button {
+  z-index: 10;
   background-image: url("../../../images/icons/saved-movie-icon.svg");
   width: 21px;
   height: 21px;

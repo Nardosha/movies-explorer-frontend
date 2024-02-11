@@ -22,10 +22,17 @@ import {
 import { LocalStorageKeys } from "../../constants/movies";
 import { useLocationHook } from "../../hooks/useLocationHook";
 import { filterMovies } from "../../helpers/movie.helper";
-import { getMovies } from "../../hooks/useMoviesLoader";
+import {
+  checkIsMovieSaved,
+  formatMovie,
+  formatMovies,
+  getMovies,
+  handleSavedMovie,
+} from "../../hooks/useMoviesLoader";
 import {
   getSavedMovies,
   getUserInfo,
+  saveMovie,
   signIn,
   signOut,
   signup,
@@ -67,17 +74,22 @@ function App() {
     ]);
   };
 
-  const handleLoadMovies = () => {
-    getMovies(loaderConfig)
-      .then((movies) => {
-        setInitialMovies(movies);
-        return filterMovies(movies, { search, isToggled });
-      })
-      .then((filteredMovies) => {
-        // if (!search) return;
+  const handleLoadMovies = async () => {
+    console.log("handleLoadMovies");
+    setIsLoading(true);
+    try {
+      const movies = await getMovies(loaderConfig);
 
-        setFilteredMovies([...filteredMovies]);
-      });
+      setInitialMovies(movies);
+      const filteredMovies = filterMovies(movies, { search, isToggled });
+      // if (!search) return;
+
+      setFilteredMovies([...filteredMovies]);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const setFiltersFromLocalStorage = () => {
@@ -167,22 +179,39 @@ function App() {
 
   const loadUserMovies = useCallback(async () => {
     setIsLoading(true);
-    console.log("getUserMovies");
+    console.log("getUserMovies", initialMovies);
 
     try {
-      const { data: movies } = await getSavedMovies();
-      console.log(movies);
-      if (!movies) return;
+      const { data: userSavedMovies } = await getSavedMovies();
 
-      setSavedMovies(movies);
+      if (!userSavedMovies) return;
+
+      await setSavedMovies(userSavedMovies);
+      setSavedMovies(userSavedMovies);
     } catch (err) {
       console.log(err);
     }
   }, []);
 
+  const handleSaveMovie = async (data) => {
+    console.log("handleSaveMovie", data);
+    try {
+      const { data: movie } = await saveMovie(data);
+
+      if (!movie) return;
+
+      const { data: userSavedMovies } = await getSavedMovies();
+
+      setSavedMovies([...userSavedMovies]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLogged) return;
+
       await loadUserMovies();
     })();
   }, [isLogged, loadUserMovies]);
@@ -195,6 +224,7 @@ function App() {
       isToggled,
     });
 
+    console.log(1111)
     setFilteredMovies([...filteredMovies]);
   }, [initialMovies]);
 
@@ -209,7 +239,7 @@ function App() {
     console.log(" ПЕРВАЯ ЗАГРУЗКА");
     setFiltersFromLocalStorage();
     (async () => handleTokenCheck())();
-    handleLoadMovies();
+    (async () => handleLoadMovies())();
   }, []);
 
   return (
@@ -234,11 +264,13 @@ function App() {
                 element={Movies}
                 isLogged={isLogged}
                 movies={filteredMovies}
+                savedMovies={savedMovies}
                 loaderConfig={loaderConfig}
                 search={search}
                 toggled={isToggled}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
+                onSaveMovie={handleSaveMovie}
               />
             }
           />
@@ -248,7 +280,7 @@ function App() {
             element={
               <ProtectedRoute
                 element={SavedMovies}
-                movies={filteredMovies}
+                movies={savedMovies}
                 showSavedMovies={true}
                 search={search}
                 toggled={isToggled}

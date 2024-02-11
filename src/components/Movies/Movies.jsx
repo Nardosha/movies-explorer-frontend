@@ -5,11 +5,13 @@ import { useMovieLoader } from "../../hooks/useMoviesLoader";
 
 export const Movies = ({
   movies,
+  savedMovies,
   loaderConfig,
   search,
   toggled,
   onSearch,
   onToggle,
+  onSaveMovie,
 }) => {
   const { slicedMovies, showMore } = useMovieLoader(movies, loaderConfig);
   const isShowMoreButton = movies.length > slicedMovies.length;
@@ -26,7 +28,12 @@ export const Movies = ({
 
       {!!movies.length && (
         <>
-          <MovieCardList className="movies__list" movies={slicedMovies} />
+          <MovieCardList
+            className="movies__list"
+            movies={slicedMovies}
+            savedMovies={savedMovies}
+            onSaveMovie={onSaveMovie}
+          />
 
           {isShowMoreButton && (
             <MoreButton

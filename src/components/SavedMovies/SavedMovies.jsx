@@ -9,7 +9,6 @@ export const SavedMovies = ({
   onToggle,
   showSavedMovies,
 }) => {
-  const savedMovies = movies.filter((movie) => movie.isSaved);
 
   return (
     <main className="saved-movies">
@@ -22,7 +21,7 @@ export const SavedMovies = ({
       />
 
       <MovieCardList
-        movies={savedMovies}
+        movies={movies}
         showSavedMovies={showSavedMovies}
         className="saved-movies__list"
       />

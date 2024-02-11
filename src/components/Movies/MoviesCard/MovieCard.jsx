@@ -1,7 +1,10 @@
 import { RoundedButton } from "../../RoundedButton/RoundedButton";
+import { createMovie } from "../../../hooks/useMoviesLoader";
 
-export const MovieCard = ({ movie, showSavedMovies, onSaveMovie }) => {
-  console.log(movie);
+export const MovieCard = ({ movie, showSavedMovies, isSaved, onSaveMovie }) => {
+  const saveMovie = () => {
+    onSaveMovie(createMovie(movie));
+  };
   return (
     <div className="movie-card">
       {showSavedMovies && (
@@ -12,7 +15,7 @@ export const MovieCard = ({ movie, showSavedMovies, onSaveMovie }) => {
       )}
 
       {!showSavedMovies &&
-        (movie.isSaved ? (
+        (isSaved ? (
           <button
             className="movie-card__button movie-card__saved-button"
             type="button"
@@ -22,17 +25,21 @@ export const MovieCard = ({ movie, showSavedMovies, onSaveMovie }) => {
             title="Сохранить"
             className="movie-card__button movie-card__save-button"
             type="submit"
-            onClick={() => onSaveMovie(movie)}
+            onClick={saveMovie}
           />
         ))}
 
       <div className="movie-card__container">
-        <a href={movie.trailerLink} target="_blank" className="movie-card__link">
-        <img
-          className="movie-card__image"
-          src={movie.url}
-          alt={movie.image.alternativeText}
-        />
+        <a
+          href={movie.trailerLink}
+          target="_blank"
+          className="movie-card__link"
+        >
+          <img
+            className="movie-card__image"
+            src={movie.image}
+            alt={movie.alternativeText}
+          />
         </a>
 
         <ul className="movie-card__info-list">
