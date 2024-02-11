@@ -11,6 +11,7 @@ const Form = ({
   btnClassName,
   formError,
   className,
+  isEdit = true,
 }) => {
   return (
     <form
@@ -25,11 +26,14 @@ const Form = ({
 
         <div className="form__error">{formError}</div>
       </fieldset>
-      <SubmitButton
-        text={buttonText}
-        className="form__submit-button"
-        disabled={!isValid || btnDisabled}
-      />
+
+      {isEdit && (
+        <SubmitButton
+          text={buttonText}
+          className="form__submit-button"
+          disabled={!isValid || btnDisabled}
+        />
+      )}
     </form>
   );
 };

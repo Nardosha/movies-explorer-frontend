@@ -18,7 +18,11 @@ export const SignIn = ({ onSubmit }) => {
   return (
     <main className="sign-in">
       <section className="sign-in__wrapper">
-        <FormHeader className="sign-in__header" title="Рады видеть!" />
+        <FormHeader
+          title="Рады видеть!"
+          showLogo={true}
+          className="sign-in__header"
+        />
 
         <Form
           title={"Вход"}

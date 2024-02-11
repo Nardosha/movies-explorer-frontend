@@ -9,13 +9,18 @@ export const SignUp = ({ onSubmit }) => {
   const { name, email, password } = values;
 
   const handleSubmit = (e) => {
+    console.log("handleSubmit", e);
     e.preventDefault();
     onSubmit(values);
   };
   return (
     <main className="sign-up">
       <section className="sign-up__wrapper">
-        <FormHeader className="sign-up__header" title="Добро пожаловать!" />
+        <FormHeader
+          title="Добро пожаловать!"
+          showLogo={true}
+          className="sign-up__header"
+        />
 
         <Form
           buttonText={"Зарегистрироваться"}

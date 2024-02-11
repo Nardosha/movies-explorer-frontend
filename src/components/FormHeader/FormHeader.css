@@ -3,9 +3,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   padding: 0;
   margin: 0;
-  width: 100%;
 }
 
 .form-header__logo {
@@ -22,7 +22,7 @@
   font-weight: 500;
   line-height: normal;
   padding: 0;
-  margin: 0 auto 80px auto;
+  margin: 0;
 }
 
 @media (min-width: 321px) {
@@ -42,9 +42,6 @@
   }
 
   .form-header__title {
-    max-width: 396px;
-
     align-self: flex-start;
-    margin: 0 0 40px 0;
   }
 }

@@ -22,6 +22,13 @@
   margin: 0;
 }
 
+.sign-up__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 80px 0;
+}
+
 .sign-up__form {
   margin: 0 0 14px 0;
 }
@@ -65,6 +72,11 @@
 
   .sign-up__wrapper {
     padding: 0 15px;
+  }
+
+  .sign-up__header {
+    justify-content: flex-start;
+    margin: 0 0 40px 0;
   }
 
   .sign-up__navigation {
