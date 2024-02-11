@@ -31,28 +31,30 @@ export const SignIn = ({ onSubmit }) => {
           onSubmit={onFormSubmit}
         >
           <FormInput
-            label="E-mail"
-            type="email"
             id="email"
+            errorText={errors.email}
+            value={email || ""}
+            required
             name="email"
+            type="email"
+            label="E-mail"
             placeholder="Введите e-mail"
             className="form__input sign-in__email-input"
-            required
-            value={email || ""}
             onChange={(e) => handleChange(e)}
           />
 
           <FormInput
-            label="Пароль"
-            type="password"
             id="password"
+            value={password || ""}
+            errorText={errors.password}
+            required
             name="password"
-            placeholder="Введите пароль"
-            className="form__input sign-in__password-input"
+            type="password"
+            label="Пароль"
             minLength="2"
             maxLength="30"
-            required
-            value={password || ""}
+            placeholder="Введите пароль"
+            className="form__input sign-in__password-input"
             onChange={(e) => handleChange(e)}
           />
         </Form>
