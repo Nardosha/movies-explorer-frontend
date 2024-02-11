@@ -31,6 +31,7 @@ import {
   signOut,
   signup,
   deleteMovie,
+  updateUserInfo,
 } from "../../utils/MainApi";
 
 function App() {
@@ -160,11 +161,26 @@ function App() {
     setIsLoading(true);
     console.log("handleSignIn");
     try {
-      const { data } = await signIn({ email, password });
-      console.log(data);
+      const { data: user } = await signIn({ email, password });
 
+      setCurrentUser({ ...user });
       setIsLogged(true);
       navigate("/", { replace: true });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleUpdateUserInfo = async ({ name, email }) => {
+    setIsLoading(true);
+    console.log("handleUpdateUserInfo", { name, email });
+    try {
+      const { data: user } = await updateUserInfo({ name, email });
+
+      console.log(user);
+      setCurrentUser({ ...user });
     } catch (err) {
       console.log(err);
     } finally {
@@ -253,7 +269,7 @@ function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={{ isLogged }}>
+    <UserContext.Provider value={{ isLogged, currentUser }}>
       <div className={isMenuOpen ? "app app_menu-active" : "app"}>
         {isShowHeader && (
           <Header
@@ -304,7 +320,11 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute element={Profile} onSignOut={handleSignOut} />
+              <ProtectedRoute
+                element={Profile}
+                onSignOut={handleSignOut}
+                onUpdateUser={handleUpdateUserInfo}
+              />
             }
           />
 

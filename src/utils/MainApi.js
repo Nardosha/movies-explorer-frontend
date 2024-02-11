@@ -19,6 +19,12 @@ export const getUserInfo = async () => {
   return makeRequest("users/me", "GET", true);
 };
 
+export const updateUserInfo = async ({ name, email }) => {
+  console.log("updateUserInfo");
+
+  return makeRequest("users/me", "PATCH", true, { name, email });
+};
+
 export const signOut = async () => {
   console.log("logout");
 
