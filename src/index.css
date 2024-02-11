@@ -6,6 +6,7 @@
 @import "./components/LoginButton/LoginButton.css";
 @import "./components/NavigationLink/NavigationLink.css";
 @import "./components/RoundedButton/RoundedButton.css";
+@import "./components/Form/Form.css";
 
 @import "./components/App/App.css";
 @import "./components/Main/Main.css";
@@ -34,6 +35,3 @@
 
 @import "./components/NotFoundPage/NotFoundPage.css";
 @import "./components/Preloader/Preloader.css";
-
-
-/** { outline: 1px solid red; }*/

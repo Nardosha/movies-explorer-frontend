@@ -61,7 +61,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
 
           <input
             id="user-name"
-            value={name}
+            value={name || ''}
             type="text"
             disabled={!isEdit}
             required
@@ -84,7 +84,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
 
           <input
             id="user-email"
-            value={email}
+            value={email || ''}
             disabled={!isEdit}
             required
             placeholder="E-mail"

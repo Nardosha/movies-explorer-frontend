@@ -10,6 +10,7 @@
   color: var(--gray-text-color);
   font-size: 10px;
   text-align: left;
+  line-height: 12px;
   margin: 0 0 10px 0;
 }
 

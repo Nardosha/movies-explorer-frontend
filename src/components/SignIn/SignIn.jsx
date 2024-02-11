@@ -2,8 +2,8 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Logo } from "../Logo/Logo";
 import { FormInput } from "../FormInput/FormInput";
-import { SubmitButton } from "../SubmitButton/SubmitButton";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import Form from "../Form/Form";
 
 export const SignIn = ({ onSubmit }) => {
   const [formErrorText, setFormErrorText] = useState("");
@@ -19,19 +19,25 @@ export const SignIn = ({ onSubmit }) => {
 
   return (
     <main className="sign-in">
-      <Logo className="sign-in__logo" />
+      <section className="sign-in__wrapper">
+        <Logo className="sign-in__logo" />
 
-      <h1 className="sign-in__title">Рады видеть!</h1>
+        <h1 className="sign-in__title">Рады видеть!</h1>
 
-      <form action="#" className="sign-in__form" onSubmit={onFormSubmit}>
-        <div className="sign-in__form-inputs">
+        <Form
+          title={"Вход"}
+          buttonText={"Войти"}
+          isValid={isValid}
+          className="sign-in__form"
+          onSubmit={onFormSubmit}
+        >
           <FormInput
             label="E-mail"
             type="email"
             id="email"
             name="email"
             placeholder="Введите e-mail"
-            className="sign-in__email-input"
+            className="form__input sign-in__email-input"
             required
             value={email || ""}
             onChange={(e) => handleChange(e)}
@@ -43,7 +49,7 @@ export const SignIn = ({ onSubmit }) => {
             id="password"
             name="password"
             placeholder="Введите пароль"
-            className="sign-in__password-input"
+            className="form__input sign-in__password-input"
             minLength="2"
             maxLength="30"
             required
@@ -51,24 +57,18 @@ export const SignIn = ({ onSubmit }) => {
             onChange={(e) => handleChange(e)}
           />
 
-          <div className="sign-in__error-message form__input-error">
+          <div className="form__input-error sign-in__error-message">
             {errors.password}
           </div>
+        </Form>
+
+        <div className="sign-in__navigation">
+          <span>Ещё не зарегистрированы?</span>
+          <NavLink className="sign-in__sign-up-link" to="/signup">
+            Регистрация
+          </NavLink>
         </div>
-
-        <SubmitButton
-          text="Войти"
-          className="sign-in__submit-button"
-          disabled={!isValid}
-        />
-      </form>
-
-      <div className="sign-in__navigation">
-        <span>Ещё не зарегистрированы?</span>
-        <NavLink className="sign-in__sign-up-link" to="/signup">
-          Регистрация
-        </NavLink>
-      </div>
+      </section>
     </main>
   );
 };
