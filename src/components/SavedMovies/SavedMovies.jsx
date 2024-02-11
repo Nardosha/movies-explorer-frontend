@@ -8,8 +8,8 @@ export const SavedMovies = ({
   onSearch,
   onToggle,
   showSavedMovies,
+  onDeleteMovie,
 }) => {
-
   return (
     <main className="saved-movies">
       <SearchForm
@@ -23,6 +23,7 @@ export const SavedMovies = ({
       <MovieCardList
         movies={movies}
         showSavedMovies={showSavedMovies}
+        onDeleteMovie={onDeleteMovie}
         className="saved-movies__list"
       />
     </main>

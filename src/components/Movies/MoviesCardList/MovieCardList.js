@@ -8,6 +8,7 @@ export const MovieCardList = ({
   showSavedMovies = false,
   className,
   onSaveMovie,
+  onDeleteMovie,
 }) => {
   const location = useLocation();
   const isMoviesLocation = location.pathname === "/movies";
@@ -16,7 +17,10 @@ export const MovieCardList = ({
     <div className={`movie-card-list ${className}`}>
       <ul className="movie-card-list__list">
         {movies?.map((movie) => (
-          <li key={movie.movieId || movie.id} className="movie-card-list__list-item">
+          <li
+            key={movie.movieId || movie.id}
+            className="movie-card-list__list-item"
+          >
             <MovieCard
               movie={movie}
               showSavedMovies={showSavedMovies}
@@ -24,6 +28,7 @@ export const MovieCardList = ({
                 isMoviesLocation && checkIsMovieSaved(movie, savedMovies)
               }
               onSaveMovie={onSaveMovie}
+              onDeleteMovie={onDeleteMovie}
             />
           </li>
         ))}

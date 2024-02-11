@@ -30,6 +30,7 @@ import {
   signIn,
   signOut,
   signup,
+  deleteMovie,
 } from "../../utils/MainApi";
 
 function App() {
@@ -199,6 +200,25 @@ function App() {
     }
   };
 
+  const handleDeleteMovie = async (movie) => {
+    console.log("handleDeleteMovie", movie, savedMovies);
+    try {
+      const deletedMovie = savedMovies.find(
+        (savedMovie) => savedMovie.movieId === movie.movieId,
+      );
+
+      if (!deletedMovie) return;
+
+      const { data } = await deleteMovie(deletedMovie._id);
+
+      if (!data) return;
+
+      await loadUserMovies();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLogged) return;
@@ -276,6 +296,7 @@ function App() {
                 toggled={isToggled}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
+                onDeleteMovie={handleDeleteMovie}
               />
             }
           />

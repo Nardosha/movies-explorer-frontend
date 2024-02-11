@@ -37,3 +37,9 @@ export const saveMovie = async (data) => {
 
   return makeRequest("movies", "POST", true, movie);
 };
+
+export const deleteMovie = async (id) => {
+  console.log("deleteMovie", id);
+
+  return makeRequest(`movies/${id}`, "delete", true);
+};

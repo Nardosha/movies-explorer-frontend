@@ -1,5 +1,4 @@
 import { RoundedButton } from "../../RoundedButton/RoundedButton";
-import { createMovie } from "../../../hooks/useMoviesLoader";
 import { formatDurationToHuman } from "../../../helpers/dates.helper";
 import { useLocation } from "react-router-dom";
 import { BASE_MOVIES_API } from "../../../constants/api";
@@ -9,6 +8,7 @@ export const MovieCard = ({
   showSavedMovies,
   isSaved,
   onSaveMovie,
+  onDeleteMovie,
 }) => {
   const location = useLocation();
   const isMoviesLocation = location.pathname === "/movies";
@@ -23,12 +23,18 @@ export const MovieCard = ({
   const saveMovie = () => {
     onSaveMovie(initialMovie);
   };
+
+  const deleteMovie = () => {
+    onDeleteMovie(initialMovie);
+  };
+
   return (
     <div className="movie-card">
       {showSavedMovies && (
         <button
           className="movie-card__button movie-card__delete-button"
           type="button"
+          onClick={deleteMovie}
         />
       )}
 
