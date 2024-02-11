@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Logo } from "../Logo/Logo";
 import { FormInput } from "../FormInput/FormInput";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import Form from "../Form/Form";
+import { FormHeader } from "../FormHeader/FormHeader";
 
 export const SignIn = ({ onSubmit }) => {
   const { values, isValid, handleChange, errors } = useFormWithValidation();
@@ -18,9 +18,7 @@ export const SignIn = ({ onSubmit }) => {
   return (
     <main className="sign-in">
       <section className="sign-in__wrapper">
-        <Logo className="sign-in__logo" />
-
-        <h1 className="sign-in__title">Рады видеть!</h1>
+        <FormHeader className="sign-in__header" title="Рады видеть!" />
 
         <Form
           title={"Вход"}
@@ -28,6 +26,7 @@ export const SignIn = ({ onSubmit }) => {
           isValid={isValid}
           className="sign-in__form"
           formError={""}
+          btnDisabled={!isValid}
           onSubmit={onFormSubmit}
         >
           <FormInput

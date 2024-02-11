@@ -22,28 +22,8 @@
   margin: 0;
 }
 
-.sign-up__logo {
-  display: block;
-  margin: 0 auto 50px auto;
-}
-
-.sign-up__title {
-  color: var(--main-text-color);
-  font-family: var(--font-family);
-  font-size: 24px;
-  font-weight: 500;
-  line-height: normal;
-  padding: 0;
-  margin: 0 auto 80px auto;
-}
-
 .sign-up__form {
   margin: 0 0 14px 0;
-}
-
-.sign-up__form-inputs {
-  height: 100%;
-  width: 100%;
 }
 
 .sign-up__name-input {
@@ -53,6 +33,7 @@
 .sign-up__email-input {
   margin: 0 0 20px 0;
 }
+
 .sign-up__password-input {
   margin: 0 0 10px 0;
 }
@@ -84,31 +65,6 @@
 
   .sign-up__wrapper {
     padding: 0 15px;
-  }
-
-  .sign-up__logo {
-    max-width: 396px;
-    align-self: flex-start;
-    margin: 0 0 40px 0;
-  }
-
-  .sign-up__title {
-    max-width: 396px;
-
-    align-self: flex-start;
-    margin: 0 0 40px 0;
-  }
-
-  .sign-up__form {
-    /*gap: 160px;*/
-  }
-
-  .sign-up__error-message {
-    min-height: 12px;
-  }
-
-  .sign-up__form-inputs {
-    margin: 0 0 69px 0;
   }
 
   .sign-up__navigation {
