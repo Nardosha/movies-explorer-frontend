@@ -8,6 +8,7 @@ export const FormInput = ({
   minLength = undefined,
   maxLength = undefined,
   value,
+  errorText,
   onChange,
 }) => {
   return (
@@ -28,6 +29,15 @@ export const FormInput = ({
         onChange={onChange}
         className="form-input__input"
       />
+
+      {errorText && (
+        <span
+          id="input-name-error"
+          className="form__input-title-error form__input-error"
+        >
+          {errorText}
+        </span>
+      )}
     </div>
   );
 };

@@ -6,8 +6,6 @@ import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import Form from "../Form/Form";
 
 export const SignIn = ({ onSubmit }) => {
-  const [formErrorText, setFormErrorText] = useState("");
-
   const { values, isValid, handleChange, errors } = useFormWithValidation();
   const { email, password } = values;
 
@@ -29,6 +27,7 @@ export const SignIn = ({ onSubmit }) => {
           buttonText={"Войти"}
           isValid={isValid}
           className="sign-in__form"
+          formError={""}
           onSubmit={onFormSubmit}
         >
           <FormInput
@@ -56,10 +55,6 @@ export const SignIn = ({ onSubmit }) => {
             value={password || ""}
             onChange={(e) => handleChange(e)}
           />
-
-          <div className="form__input-error sign-in__error-message">
-            {errors.password}
-          </div>
         </Form>
 
         <div className="sign-in__navigation">

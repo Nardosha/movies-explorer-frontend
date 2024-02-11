@@ -46,6 +46,12 @@
   color: #ff0000;
 }
 
+.form__error {
+  color: var(--text-red-color);
+  font-size: 10px;
+  margin: 10px 0 0 0;
+}
+
 .form__btn-submit {
   margin: auto 0 0 0;
 }
@@ -57,7 +63,11 @@
   }
 
   .form__inputs {
-    margin: 0 0 167px 0;
+    margin: 0 0 160px 0;
+  }
+
+  .form__error {
+    font-size: 12px;
   }
 
   .form__input-error {

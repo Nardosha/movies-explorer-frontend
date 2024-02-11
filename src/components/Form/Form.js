@@ -10,6 +10,7 @@ const Form = ({
   buttonText,
   btnDisabled,
   btnClassName,
+  formError,
   className,
 }) => {
   return (
@@ -21,14 +22,17 @@ const Form = ({
       name={name}
       noValidate
     >
-      <fieldset className="form__inputs">{children}</fieldset>
+      <fieldset className="form__inputs">
+        {children}
+
+        <div className="form__error">{formError}</div>
+      </fieldset>
       <SubmitButton
         text={buttonText}
         className="form__submit-button"
         disabled={!isValid || btnDisabled}
       />
     </form>
-    // </div>
   );
 };
 
