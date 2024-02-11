@@ -11,6 +11,7 @@
   line-height: normal;
   height: 100%;
   width: 100%;
+  gap: 69px;
   flex: 1 1 auto;
 }
 
@@ -42,7 +43,6 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-
   color: #ff0000;
 }
 
@@ -58,12 +58,8 @@
 
 @media (min-width: 321px) {
   .form {
-    flex: unset;
+    justify-content: unset;
     max-width: 396px;
-  }
-
-  .form__inputs {
-    margin: 0 0 160px 0;
   }
 
   .form__error {

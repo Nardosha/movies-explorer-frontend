@@ -2,7 +2,6 @@ import React from "react";
 import { SubmitButton } from "../SubmitButton/SubmitButton";
 
 const Form = ({
-  title,
   onSubmit,
   name,
   children,
@@ -14,7 +13,6 @@ const Form = ({
   className,
 }) => {
   return (
-    // <div className="form__container">
     <form
       onSubmit={onSubmit}
       action="#"

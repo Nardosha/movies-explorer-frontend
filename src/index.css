@@ -7,6 +7,7 @@
 @import "./components/NavigationLink/NavigationLink.css";
 @import "./components/RoundedButton/RoundedButton.css";
 @import "./components/Form/Form.css";
+@import "./components/FormHeader/FormHeader.css";
 
 @import "./components/App/App.css";
 @import "./components/Main/Main.css";
