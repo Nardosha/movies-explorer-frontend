@@ -1,4 +1,5 @@
 import {SHORT_MOVIE_DURATION} from "../constants/movies";
+import {BASE_MOVIES_API, MOVIES_API_URL} from "../constants/api";
 
 const filterBy = (isFilter, initialMovies) => {
   return initialMovies.filter((movie) => {
@@ -25,4 +26,20 @@ export const filterMovies = (initialMovies, { search = "", isToggled }) => {
   });
 
   return filterBy(isToggled, filteredBySearch);
+};
+
+export const createMovie = (data) => {
+  return {
+    country: data.country,
+    director: data.director,
+    duration: data.duration,
+    year: data.year,
+    description: data.description,
+    image: `${BASE_MOVIES_API}${data.image.url}`,
+    trailerLink: data.trailerLink,
+    thumbnail: `${MOVIES_API_URL}${data.image.formats.thumbnail.url}`,
+    movieId: data.id,
+    nameRU: data.nameRU,
+    nameEN: data.nameEN,
+  };
 };

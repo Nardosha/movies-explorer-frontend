@@ -1,9 +1,27 @@
 import { RoundedButton } from "../../RoundedButton/RoundedButton";
 import { createMovie } from "../../../hooks/useMoviesLoader";
+import { formatDurationToHuman } from "../../../helpers/dates.helper";
+import { useLocation } from "react-router-dom";
+import { BASE_MOVIES_API } from "../../../constants/api";
 
-export const MovieCard = ({ movie, showSavedMovies, isSaved, onSaveMovie }) => {
+export const MovieCard = ({
+  movie: initialMovie,
+  showSavedMovies,
+  isSaved,
+  onSaveMovie,
+}) => {
+  const location = useLocation();
+  const isMoviesLocation = location.pathname === "/movies";
+
+  const movie = {
+    ...initialMovie,
+    duration: formatDurationToHuman(initialMovie.duration),
+    image: isMoviesLocation
+      ? `${BASE_MOVIES_API}${initialMovie.image.url}`
+      : initialMovie.image,
+  };
   const saveMovie = () => {
-    onSaveMovie(createMovie(movie));
+    onSaveMovie(initialMovie);
   };
   return (
     <div className="movie-card">
@@ -38,13 +56,13 @@ export const MovieCard = ({ movie, showSavedMovies, isSaved, onSaveMovie }) => {
           <img
             className="movie-card__image"
             src={movie.image}
-            alt={movie.alternativeText}
+            alt={movie.image.alternativeText}
           />
         </a>
 
         <ul className="movie-card__info-list">
           <h2 className="movie-card__title">{movie.nameRU}</h2>
-          <li className="movie-card__duration">{movie.humanDuration}</li>
+          <li className="movie-card__duration">{movie.duration}</li>
         </ul>
       </div>
     </div>

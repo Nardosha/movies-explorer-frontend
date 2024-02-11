@@ -22,15 +22,9 @@ import {
 import { LocalStorageKeys } from "../../constants/movies";
 import { useLocationHook } from "../../hooks/useLocationHook";
 import { filterMovies } from "../../helpers/movie.helper";
+import { getMovies } from "../../hooks/useMoviesLoader";
 import {
-  checkIsMovieSaved,
-  formatMovie,
-  formatMovies,
-  getMovies,
-  handleSavedMovie,
-} from "../../hooks/useMoviesLoader";
-import {
-  getSavedMovies,
+  loadSavedMovies,
   getUserInfo,
   saveMovie,
   signIn,
@@ -182,11 +176,10 @@ function App() {
     console.log("getUserMovies", initialMovies);
 
     try {
-      const { data: userSavedMovies } = await getSavedMovies();
+      const { data: userSavedMovies } = await loadSavedMovies();
 
       if (!userSavedMovies) return;
 
-      await setSavedMovies(userSavedMovies);
       setSavedMovies(userSavedMovies);
     } catch (err) {
       console.log(err);
@@ -200,9 +193,7 @@ function App() {
 
       if (!movie) return;
 
-      const { data: userSavedMovies } = await getSavedMovies();
-
-      setSavedMovies([...userSavedMovies]);
+      await loadUserMovies();
     } catch (err) {
       console.log(err);
     }
@@ -224,7 +215,6 @@ function App() {
       isToggled,
     });
 
-    console.log(1111)
     setFilteredMovies([...filteredMovies]);
   }, [initialMovies]);
 

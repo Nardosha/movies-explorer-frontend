@@ -16,7 +16,7 @@ export const MovieCardList = ({
     <div className={`movie-card-list ${className}`}>
       <ul className="movie-card-list__list">
         {movies?.map((movie) => (
-          <li key={movie.movieId} className="movie-card-list__list-item">
+          <li key={movie.movieId || movie.id} className="movie-card-list__list-item">
             <MovieCard
               movie={movie}
               showSavedMovies={showSavedMovies}

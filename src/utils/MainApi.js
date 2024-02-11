@@ -1,5 +1,5 @@
 import { makeRequest } from "../helpers/api.helper";
-import { MOVIES_API_URL } from "../constants/api";
+import { createMovie } from "../helpers/movie.helper";
 
 export const signup = async ({ name, email, password }) => {
   console.log("signup", { name, email, password });
@@ -25,13 +25,15 @@ export const signOut = async () => {
   return makeRequest("signout", "delete", true);
 };
 
-export const getSavedMovies = async () => {
-  console.log("getSavedMovies");
+export const loadSavedMovies = async () => {
+  console.log("loadSavedMovies");
 
   return makeRequest("movies", "GET", true);
 };
 
 export const saveMovie = async (data) => {
-  console.log("saveMovie");
-  return makeRequest("movies", "POST", true, data);
+  const movie = createMovie(data);
+  console.log("saveMovie", data, movie);
+
+  return makeRequest("movies", "POST", true, movie);
 };
