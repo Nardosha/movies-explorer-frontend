@@ -59,8 +59,14 @@ export const CardConfig = {
 };
 
 export const LocalStorageKeys = {
-  SEARCH: "search",
-  IS_SHOW_SHORT_MOVIES: "isToggled",
+  SEARCH: {
+    MOVIES: "MOVIES_SEARCH",
+    SAVED_MOVIES: "SAVED_MOVIES_SEARCH",
+  },
+  TOGGLE: {
+    IS_SHOW_SHORT_MOVIES: "IS_SHOW_SHORT_MOVIES",
+    IS_SHOW_SHORT_SAVED_MOVIES: "IS_SHOW_SHORT_SAVED_MOVIES",
+  },
 };
 
 export const SHORT_MOVIE_DURATION = 40;
