@@ -3,14 +3,15 @@ import { FormInput } from "../FormInput/FormInput";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import Form from "../Form/Form";
 import { FormHeader } from "../FormHeader/FormHeader";
+import {USER_NAME_VALIDATION} from "../../constants/validation";
 
-export const SignUp = ({ onSubmit }) => {
+export const SignUp = ({ errorText, onSubmit }) => {
   const { values, isValid, handleChange, errors } = useFormWithValidation();
   const { name, email, password } = values;
 
   const handleSubmit = (e) => {
-    console.log("handleSubmit", e);
     e.preventDefault();
+
     onSubmit(values);
   };
   return (
@@ -28,6 +29,7 @@ export const SignUp = ({ onSubmit }) => {
           className="sign-up__form"
           formError={""}
           btnDisabled={!isValid}
+          errorText={errorText}
           onSubmit={handleSubmit}
         >
           <FormInput
@@ -35,6 +37,7 @@ export const SignUp = ({ onSubmit }) => {
             value={name || ""}
             errorText={errors.name}
             required
+            pattern={USER_NAME_VALIDATION}
             name="name"
             label="Имя"
             minLength="2"

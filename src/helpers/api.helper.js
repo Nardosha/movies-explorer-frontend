@@ -1,9 +1,8 @@
 import { MAIN_API_URL } from "../constants/api";
 
 export const checkResponse = (res) => {
-  console.log("checkResponse");
   if (res.ok) return res.json();
-  return Promise.reject(`${res.status}`);
+  return Promise.reject(`${res.message}`);
 };
 
 export const makeRequest = (endpoint, method, isCredentialsInclude, data) => {

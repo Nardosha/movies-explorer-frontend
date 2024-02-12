@@ -1,17 +1,6 @@
 import { useEffect, useState } from "react";
-import { loadMovies } from "../utils/MoviesApi";
-
-export const getMovies = async () => {
-  try {
-    return await loadMovies();
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 export const useMovieLoader = (initialMovies, loaderConfig) => {
-  console.log("useMovieLoader", loaderConfig);
-
   const sliceMovies = (initialMovies, count) => {
     return initialMovies.slice(0, count);
   };

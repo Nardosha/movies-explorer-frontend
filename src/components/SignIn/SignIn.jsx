@@ -1,17 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { Logo } from "../Logo/Logo";
 import { FormInput } from "../FormInput/FormInput";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import Form from "../Form/Form";
 import { FormHeader } from "../FormHeader/FormHeader";
 
-export const SignIn = ({ onSubmit }) => {
+export const SignIn = ({ errorText, onSubmit }) => {
   const { values, isValid, handleChange, errors } = useFormWithValidation();
   const { email, password } = values;
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
+
     await onSubmit(values);
   };
 
@@ -31,6 +30,7 @@ export const SignIn = ({ onSubmit }) => {
           className="sign-in__form"
           formError={""}
           btnDisabled={!isValid}
+          errorText={errorText}
           onSubmit={onFormSubmit}
         >
           <FormInput
