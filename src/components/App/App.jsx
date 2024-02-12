@@ -22,7 +22,6 @@ import {
 import { LocalStorageKeys } from "../../constants/movies";
 import { useLocationHook } from "../../hooks/useLocationHook";
 import { filterMovies } from "../../helpers/movie.helper";
-import { getMovies } from "../../hooks/useMoviesLoader";
 import {
   loadSavedMovies,
   getUserInfo,
@@ -33,8 +32,12 @@ import {
   deleteMovie,
   updateUserInfo,
 } from "../../utils/MainApi";
-import { MOVIES_REQUEST_ERROR_TEXT } from "../../constants/validation";
+import {
+  MOVIES_REQUEST_ERROR_TEXT,
+  SERVER_ERROR,
+} from "../../constants/validation";
 import { PRELOADER_TIMOUT } from "../../constants/adaptive";
+import { loadMovies } from "../../utils/MoviesApi";
 
 function App() {
   const navigate = useNavigate();
@@ -48,6 +51,7 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loadMovesErrorText, setLoadMovesErrorText] = useState("");
+  const [authError, setAuthError] = useState("");
 
   const [search, setSearch] = useState("");
   const [savedMoviesSearch, setSavedMoviesSearch] = useState("");
@@ -127,7 +131,7 @@ function App() {
     setLoadMovesErrorText("");
 
     try {
-      const movies = await getMovies(loaderConfig);
+      const movies = await loadMovies();
 
       setInitialMovies([...movies]);
       const filteredMovies = filterMovies(movies, { search, isToggled });
@@ -137,10 +141,9 @@ function App() {
       setFilteredMovies([...filteredMovies]);
     } catch (err) {
       console.log(err);
-      // setLoadMovesErrorText(MOVIES_REQUEST_ERROR_TEXT);
+      setLoadMovesErrorText(MOVIES_REQUEST_ERROR_TEXT);
     } finally {
       hidePreloader();
-      setLoadMovesErrorText(MOVIES_REQUEST_ERROR_TEXT);
     }
   }, []);
 
@@ -180,7 +183,6 @@ function App() {
       ]);
     }
 
-    console.log(888, prevSavedMoviesSearch);
     if (prevSavedMoviesSearch?.length) {
       setFilteredSavedMovies([
         ...filterMovies(savedMovies, {
@@ -194,19 +196,17 @@ function App() {
   const handleSignUp = async ({ name, email, password }) => {
     console.log("handleSignUp", { name, email, password });
     setIsLoading(true);
+    setAuthError("");
 
     try {
       const newUser = await signup({ name, email, password });
 
       if (!newUser) return;
 
-      const user = signIn({ email, password });
-
-      setCurrentUser(user);
-      setIsLogged(true);
-      navigate("/movies", { replace: true });
+      await handleSignIn({ email, password });
     } catch (err) {
       console.log(err);
+      setAuthError(err ?? SERVER_ERROR);
     } finally {
       hidePreloader();
     }
@@ -215,6 +215,7 @@ function App() {
   const handleSignOut = async () => {
     console.log("handleSignOut");
     setIsLoading(true);
+    setAuthError("");
 
     try {
       await signOut();
@@ -222,23 +223,25 @@ function App() {
       setCurrentUser(null);
       setSavedMovies([]);
       clearLocalStorage();
-      navigate("/signin", { replace: true });
+      navigate("/", { replace: true });
     } catch (err) {
       console.log(err);
+      setAuthError(err ?? SERVER_ERROR);
     } finally {
       hidePreloader();
     }
   };
 
   const handleTokenCheck = useCallback(async () => {
-    console.log("handleTokenCheck");
     setIsLoading(true);
+    setAuthError("");
+
     try {
-      const { data } = await getUserInfo();
-      console.log(data);
+      const { data: user } = await getUserInfo();
+      console.log("handleTokenCheck", user);
+
       setIsLogged(true);
-      setCurrentUser(data);
-      navigate("/", { replace: true });
+      setCurrentUser({ ...user });
     } catch (err) {
       console.log(err);
     } finally {
@@ -247,31 +250,36 @@ function App() {
   }, []);
 
   const handleSignIn = async ({ email, password }) => {
+    console.log("handleSignIn", { email, password });
     setIsLoading(true);
-    console.log("handleSignIn");
+    setAuthError("");
+
     try {
       const { data: user } = await signIn({ email, password });
 
-      setCurrentUser({ ...user });
       setIsLogged(true);
-      navigate("/", { replace: true });
+      navigate("/movies", { replace: true });
     } catch (err) {
       console.log(err);
+      setAuthError(err || SERVER_ERROR);
     } finally {
       hidePreloader();
     }
   };
 
   const handleUpdateUserInfo = async ({ name, email }) => {
-    setIsLoading(true);
     console.log("handleUpdateUserInfo", { name, email });
+    setIsLoading(true);
+    setAuthError("");
+
     try {
       const { data: user } = await updateUserInfo({ name, email });
 
       console.log(user);
-      setCurrentUser({ ...user });
+      setCurrentUser(user);
     } catch (err) {
       console.log(err);
+      setAuthError(err || SERVER_ERROR);
     } finally {
       hidePreloader();
     }
@@ -336,10 +344,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(screenWidth);
-  }, [screenWidth]);
-
-  useEffect(() => {
     (async () => {
       if (!isLogged) return;
 
@@ -390,6 +394,10 @@ function App() {
     ]);
   }, [savedMoviesSearch, isSavedMoviesToggled]);
 
+  useEffect(() => {
+    (async () => handleTokenCheck())();
+  }, [isLogged, handleTokenCheck]);
+
   // ПЕРВАЯ ЗАГРУЗКА
   useEffect(() => {
     setIsLoading(true);
@@ -397,12 +405,11 @@ function App() {
 
     restoreDataFromLocalStorage();
 
-    (async () => handleTokenCheck())();
     (async () => handleLoadMovies())();
   }, []);
 
   return (
-    <UserContext.Provider value={{ isLogged, currentUser }}>
+    <UserContext.Provider value={currentUser}>
       <div className={isMenuOpen ? "app app_menu-active" : "app"}>
         {isShowHeader && (
           <Header
@@ -413,8 +420,7 @@ function App() {
         )}
 
         <Routes>
-          <Route path="/signin" element={<SignIn onSubmit={handleSignIn} />} />
-          <Route path="/signup" element={<SignUp onSubmit={handleSignUp} />} />
+          <Route path="/" element={<Main />} />
 
           <Route
             path="/movies"
@@ -440,6 +446,7 @@ function App() {
             path="/saved-movies"
             element={
               <ProtectedRoute
+                isLogged={isLogged}
                 element={SavedMovies}
                 movies={filteredSavedMovies}
                 showSavedMovies={true}
@@ -458,14 +465,25 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute
+                isLogged={isLogged}
                 element={Profile}
+                errorText={authError}
                 onSignOut={handleSignOut}
                 onUpdateUser={handleUpdateUserInfo}
               />
             }
           />
 
-          <Route path="/" element={<Main />} />
+          <Route
+            path="/signin"
+            element={<SignIn errorText={authError} onSubmit={handleSignIn} />}
+          />
+
+          <Route
+            path="/signup"
+            element={<SignUp errorText={authError} onSubmit={handleSignUp} />}
+          />
+
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
 
