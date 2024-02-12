@@ -22,21 +22,26 @@ export const Movies = ({
   const [emptyResultText, setEmptyResultText] = useState("");
 
   const isShowMoreButton =
-    movies.length > slicedMovies.length && !loadErrorText && !emptyResultText;
+    movies.length > slicedMovies.length &&
+    !loadErrorText.length &&
+    !emptyResultText.length &&
+    !isLoading;
 
   const handleSearch = (newSearch) => {
+    setEmptyResultText("");
     onSearch(newSearch, LocalStorageKeys.SEARCH.MOVIES);
   };
 
   const handleToggle = (newValue) => {
+    setEmptyResultText("");
     onToggle(newValue, LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES);
   };
 
   useEffect(() => {
-    if (search.length && !movies.length) {
+    if (search.length && !slicedMovies.length) {
       setEmptyResultText(NOT_FOUND_MOVIES_MESSAGE);
     }
-  }, [movies, search]);
+  }, [movies, search, isLoading]);
 
   return (
     <main className="movies">
