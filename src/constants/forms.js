@@ -1,1 +1,1 @@
-export const USER_NAME_REG_EXP = "^[A-Za-zА-Яа-яЁё\\-\\s]+$";
+export const USER_NAME_VALIDATION = "^[A-Za-zА-Яа-яЁё\\-\\s]+$";

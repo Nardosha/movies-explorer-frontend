@@ -43,13 +43,20 @@ function App() {
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [search, setSearch] = useState("");
   const [isToggled, setIsToggled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const screenWidth = UseWindowSize();
-  const loaderConfig = UseLoaderConfig(screenWidth);
+  const { deviceType, loaderConfig } = UseLoaderConfig(screenWidth);
   const { isShowHeader, isShowFooter } = useLocationHook();
+
+  const handleOpenMenu = (value) => {
+    if (deviceType === "LAPTOP") return;
+
+    setIsMenuOpen(value);
+  };
 
   const onSearch = (newSearch) => {
     console.log("onSearch", newSearch);
@@ -268,6 +275,10 @@ function App() {
     (async () => handleLoadMovies())();
   }, []);
 
+  useEffect(() => {
+    console.log(" ПЕРВАЯ ЗАГРУЗКА");
+  }, [screenWidth]);
+
   return (
     <UserContext.Provider value={{ isLogged, currentUser }}>
       <div className={isMenuOpen ? "app app_menu-active" : "app"}>
@@ -275,7 +286,7 @@ function App() {
           <Header
             isLogged={isLogged}
             isMenuOpen={isMenuOpen}
-            onMenuToggle={setIsMenuOpen}
+            onMenuToggle={handleOpenMenu}
           />
         )}
 

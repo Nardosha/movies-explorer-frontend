@@ -25,10 +25,16 @@ export const Links = {
 // Ширина 768px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
 // Ширина от 320px до 480px — 5 карточек по 1 в ряд. Кнопка «Ещё» загружает по 2 карточки.
 
+export const DeviceTypes = {
+  LAPTOP: "LAPTOP",
+  TABLET: "TABLET",
+  MOBILE: "MOBILE",
+};
+
 export const AdaptiveBorders = {
-  LAPTOP: 1280,
-  TABLET: 768,
-  MOBILE: 480,
+  [DeviceTypes.LAPTOP]: 1280,
+  [DeviceTypes.TABLET]: 768,
+  [DeviceTypes.MOBILE]: 480,
 };
 
 export const CardConfig = {
@@ -51,8 +57,6 @@ export const CardConfig = {
     loadingCardsNumber: 2,
   },
 };
-
-
 
 export const LocalStorageKeys = {
   SEARCH: "search",

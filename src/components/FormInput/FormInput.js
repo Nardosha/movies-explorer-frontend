@@ -9,6 +9,7 @@ export const FormInput = ({
   maxLength = undefined,
   value,
   errorText,
+  pattern,
   onChange,
 }) => {
   return (
@@ -27,6 +28,7 @@ export const FormInput = ({
         minLength={minLength}
         maxLength={maxLength}
         onChange={onChange}
+        pattern={pattern}
         className="form-input__input"
       />
 
