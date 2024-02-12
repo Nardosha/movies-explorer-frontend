@@ -8,5 +8,7 @@ export const CUSTOM_USER_EMAIL_VALIDATION_TEXT =
 
 export const NOT_FOUND_MOVIES_MESSAGE = "Ничего не найдено";
 
+export const SERVER_ERROR = "Что-то пошло не так.";
+
 export const MOVIES_REQUEST_ERROR_TEXT =
   "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.";
