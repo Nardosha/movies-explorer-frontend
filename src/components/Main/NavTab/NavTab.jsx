@@ -1,12 +1,8 @@
 export const NavTab = () => {
-  const onClick = (e) => {
-    console.log("on tab Click");
-  };
-
   return (
     <nav className="nav-tab">
       <ul className="nav-tab__list">
-        <li className="nav-tab__list-item" onClick={onClick}>
+        <li className="nav-tab__list-item">
           <a href="#about-project" className="nav-tab__link">
             О проекте
           </a>

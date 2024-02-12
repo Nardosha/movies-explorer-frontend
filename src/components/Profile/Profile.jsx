@@ -15,39 +15,33 @@ export const Profile = ({ errorText, onSignOut, onUpdateUser }) => {
   const [isDirtyForm, setIsDirtyForm] = useState(false);
 
   const onEditButtonClick = () => {
-    console.log("onEditButtonClick", isEdit);
     setIsEdit(true);
     setIsDirtyForm(() => isValuesChanged());
   };
 
   const isValuesChanged = () => {
-    const res = Object.keys(values).some(
+   return  Object.keys(values).some(
       (key) => values[key].trim() !== currentUser[key],
     );
-    console.log("isValuesChanged", res);
-
-    return res;
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("onSubmit");
+
     if (!isValuesChanged()) return;
 
     onUpdateUser(values);
     setIsEdit(false);
   };
 
-  console.log("CURRENT USER", "");
   useEffect(() => {
-    console.log(isValuesChanged());
     setIsDirtyForm(() => isValuesChanged());
   }, [values]);
 
   useEffect(() => {
     resetForm();
+
     setValues({ name: currentUser.name, email: currentUser.email });
-    console.log(currentUser);
   }, [currentUser, setValues, resetForm]);
 
   return (

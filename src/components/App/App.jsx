@@ -67,7 +67,6 @@ function App() {
   };
 
   const onSearch = (newSearch, key) => {
-    console.log("onSearch", newSearch);
     setIsLoading(true);
     setToLocalStorage(key, newSearch);
 
@@ -96,11 +95,9 @@ function App() {
   };
 
   const onSwitcherToggle = (newValue, key) => {
-    console.log("onSwitcherToggle", newValue, key);
     setToLocalStorage(key, newValue);
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES) {
-      console.log(99999);
       setIsToggled(newValue);
 
       setFilteredMovies([
@@ -123,7 +120,6 @@ function App() {
   };
 
   const handleLoadMovies = useCallback(async () => {
-    console.log("handleLoadMovies");
     setIsLoading(true);
     setLoadMovesErrorText("");
 
@@ -191,7 +187,6 @@ function App() {
   };
 
   const handleSignUp = async ({ name, email, password }) => {
-    console.log("handleSignUp", { name, email, password });
     setIsLoading(true);
     setAuthError(null);
 
@@ -210,7 +205,6 @@ function App() {
   };
 
   const handleSignOut = async () => {
-    console.log("handleSignOut");
     setIsLoading(true);
     setAuthError(null);
 
@@ -235,7 +229,6 @@ function App() {
 
     try {
       const { data: user } = await getUserInfo();
-      console.log("handleTokenCheck", user);
 
       setIsLogged(true);
       setCurrentUser({ ...user });
@@ -247,7 +240,6 @@ function App() {
   }, []);
 
   const handleSignIn = async ({ email, password }) => {
-    console.log("handleSignIn", { email, password });
     setIsLoading(true);
     setAuthError(null);
 
@@ -265,14 +257,12 @@ function App() {
   };
 
   const handleUpdateUserInfo = async ({ name, email }) => {
-    console.log("handleUpdateUserInfo", { name, email });
     setIsLoading(true);
     setAuthError(null);
 
     try {
       const { data: user } = await updateUserInfo({ name, email });
 
-      console.log(user);
       setCurrentUser(user);
     } catch (err) {
       console.log(err);
@@ -283,11 +273,8 @@ function App() {
   };
 
   const loadUserMovies = useCallback(async () => {
-    console.log("getUserMovies", initialMovies);
-
     try {
       const { data: userSavedMovies } = await loadSavedMovies();
-      console.log("userSavedMovies", userSavedMovies);
       if (!userSavedMovies) return;
 
       setSavedMovies([...userSavedMovies]);
@@ -297,7 +284,6 @@ function App() {
   }, []);
 
   const handleSaveMovie = async (data) => {
-    console.log("handleSaveMovie", data);
     try {
       const { data: movie } = await saveMovie(data);
 
@@ -310,7 +296,6 @@ function App() {
   };
 
   const handleDeleteMovie = async (movie) => {
-    console.log("handleDeleteMovie", movie, savedMovies);
     try {
       const deletedMovie = savedMovies.find(
         (savedMovie) => savedMovie.movieId === movie.movieId,
@@ -360,10 +345,6 @@ function App() {
   }, [initialMovies]);
 
   useEffect(() => {
-    console.log("APP. USE EFFECT: IS LOADING", isLoading);
-  }, [isLoading]);
-
-  useEffect(() => {
     setIsLoading(true);
 
     if (!search.length) return;
@@ -395,14 +376,16 @@ function App() {
     (async () => handleTokenCheck())();
   }, [isLogged, handleTokenCheck]);
 
+  useEffect(() => {
+    if (!isLogged) return;
+
+    (async () => handleLoadMovies())();
+  }, [isLogged, handleTokenCheck]);
+
   // ПЕРВАЯ ЗАГРУЗКА
   useEffect(() => {
     setIsLoading(true);
-    console.log(" ПЕРВАЯ ЗАГРУЗКА");
-
     restoreDataFromLocalStorage();
-
-    (async () => handleLoadMovies())();
   }, []);
 
   return (
