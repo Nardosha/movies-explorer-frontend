@@ -2,17 +2,14 @@ import { NavLink } from "react-router-dom";
 import { Logo } from "../Logo/Logo";
 import { LoginButton } from "../LoginButton/LoginButton";
 import { NavigationLink } from "../NavigationLink/NavigationLink";
-import {useState} from "react";
+import { useState } from "react";
 
 export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
-  const [hasBurger, setHasBurger] = useState()
   const onMenuClick = () => {
-    console.log("onMenuClick", isMenuOpen);
     onMenuToggle(!isMenuOpen);
   };
 
   const closeMenu = () => {
-    console.log("closeMenu", isMenuOpen);
     onMenuToggle(!isMenuOpen);
   };
 
@@ -49,6 +46,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
                       ? "header__link header__link_active"
                       : "header__link";
                   }}
+                  onClick={onMenuClick}
                 >
                   Главная
                 </NavLink>

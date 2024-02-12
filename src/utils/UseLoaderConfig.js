@@ -7,7 +7,7 @@ export const UseLoaderConfig = ({ screenWidth }) => {
   const [loaderConfig, setLoaderConfig] = useState(null);
 
   const onScreenWidthChange = () => {
-    if (screenWidth >= AdaptiveBorders.TABLET) {
+    if (screenWidth > AdaptiveBorders.TABLET) {
       setDeviceType(DeviceTypes.LAPTOP);
       return CardConfig[AdaptiveBorders.LAPTOP];
     }
