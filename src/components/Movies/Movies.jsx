@@ -12,6 +12,7 @@ export const Movies = ({
   search,
   toggled,
   onSearch,
+  isLoading,
   onToggle,
   onSaveMovie,
 }) => {
@@ -29,7 +30,7 @@ export const Movies = ({
 
   useEffect(() => {
     setIsShowEmptyResult(!!(search.length && !movies.length));
-  }, []);
+  }, [movies, search]);
 
   console.log(search, toggled);
 
@@ -38,9 +39,10 @@ export const Movies = ({
       <SearchForm
         search={search}
         toggled={toggled}
+        validateSearch={true}
+        className="movies__search-form"
         onSearch={handleSearch}
         onToggle={handleToggle}
-        className="movies__search-form"
       />
 
       <>
@@ -48,6 +50,7 @@ export const Movies = ({
           className="movies__list"
           movies={slicedMovies}
           showEmptyText={isShowEmptyResult}
+          isLoading={isLoading}
           savedMovies={savedMovies}
           onSaveMovie={onSaveMovie}
         />

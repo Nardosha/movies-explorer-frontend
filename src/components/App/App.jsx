@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
 import { useCallback, useEffect, useState } from "react";
@@ -36,11 +36,12 @@ import {
 
 function App() {
   const navigate = useNavigate();
+
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
-
+  const [preloaderTimeout, setPreloaderTimeout] = useState(null);
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,6 +64,7 @@ function App() {
 
   const onSearch = (newSearch, key) => {
     console.log("onSearch", newSearch);
+    setIsLoading(true);
     setToLocalStorage(key, newSearch);
 
     if (key === LocalStorageKeys.SEARCH.MOVIES) {
@@ -75,8 +77,6 @@ function App() {
 
       setToLocalStorage(LocalStorageKeys.LOADED_MOVIES, filteredMovies);
       setFilteredMovies([...filteredMovies]);
-
-      return;
     }
 
     if (key === LocalStorageKeys.SEARCH.SAVED_MOVIES) {
@@ -87,6 +87,8 @@ function App() {
       });
       setFilteredSavedMovies([...filteredSavedMovies]);
     }
+
+    hidePreloader();
   };
 
   const onSwitcherToggle = (newValue, key) => {
@@ -171,6 +173,7 @@ function App() {
       ]);
     }
 
+    console.log(888, prevSavedMoviesSearch);
     if (prevSavedMoviesSearch?.length) {
       setFilteredSavedMovies([
         ...filterMovies(savedMovies, {
@@ -269,15 +272,14 @@ function App() {
   };
 
   const loadUserMovies = useCallback(async () => {
-    setIsLoading(true);
     console.log("getUserMovies", initialMovies);
 
     try {
       const { data: userSavedMovies } = await loadSavedMovies();
-
+      console.log("userSavedMovies", userSavedMovies);
       if (!userSavedMovies) return;
 
-      setSavedMovies(userSavedMovies);
+      setSavedMovies([...userSavedMovies]);
     } catch (err) {
       console.log(err);
     }
@@ -315,8 +317,21 @@ function App() {
     }
   };
 
+  const hidePreloader = () => {
+    if (preloaderTimeout) {
+      clearTimeout(preloaderTimeout);
+    }
+
+    setPreloaderTimeout(
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 0),
+    );
+  };
+
   useEffect(() => {
     (async () => {
+      console.log(43424242424242424, isLogged);
       if (!isLogged) return;
 
       await loadUserMovies();
@@ -335,10 +350,27 @@ function App() {
   }, [initialMovies]);
 
   useEffect(() => {
+    console.log("APP. USE EFFECT: IS LOADING", isLoading);
+  }, [isLoading]);
+
+  useEffect(() => {
+    setIsLoading(true);
+
     if (!search.length) return;
 
     setFilteredMovies([...filterMovies(initialMovies, { search, isToggled })]);
+
+    hidePreloader();
   }, [search, isToggled]);
+
+  useEffect(() => {
+    setFilteredSavedMovies([
+      ...filterMovies(savedMovies, {
+        search: savedMoviesSearch,
+        isToggled: isSavedMoviesToggled,
+      }),
+    ]);
+  }, [savedMovies]);
 
   useEffect(() => {
     setFilteredSavedMovies([
@@ -385,6 +417,7 @@ function App() {
                 loaderConfig={loaderConfig}
                 search={search}
                 toggled={isToggled}
+                isLoading={isLoading}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onSaveMovie={handleSaveMovie}
@@ -401,6 +434,7 @@ function App() {
                 showSavedMovies={true}
                 search={savedMoviesSearch}
                 toggled={isSavedMoviesToggled}
+                isLoading={isLoading}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onDeleteMovie={handleDeleteMovie}

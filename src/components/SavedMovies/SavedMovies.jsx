@@ -6,6 +6,7 @@ export const SavedMovies = ({
   movies,
   search,
   toggled,
+  isLoading,
   onSearch,
   onToggle,
   showSavedMovies,
@@ -19,8 +20,6 @@ export const SavedMovies = ({
     onToggle(newValue, LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_SAVED_MOVIES);
   };
 
-    console.log('SAVED MOVIES', search, toggled)
-
   return (
     <main className="saved-movies">
       <SearchForm
@@ -33,6 +32,7 @@ export const SavedMovies = ({
 
       <MovieCardList
         movies={movies}
+        isLoading={isLoading}
         showSavedMovies={showSavedMovies}
         onDeleteMovie={onDeleteMovie}
         className="saved-movies__list"
