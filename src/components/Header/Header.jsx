@@ -5,6 +5,12 @@ import { NavigationLink } from "../NavigationLink/NavigationLink";
 
 export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
   const onMenuClick = () => {
+    console.log("onMenuClick", isMenuOpen);
+    onMenuToggle(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    console.log("closeMenu", isMenuOpen);
     onMenuToggle(!isMenuOpen);
   };
 
@@ -53,6 +59,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
                       ? "header__link header__link_active"
                       : "header__link"
                   }
+                  onClick={closeMenu}
                 >
                   Фильмы
                 </NavLink>
@@ -66,6 +73,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
                       ? "header__link header__link_active"
                       : "header__link"
                   }
+                  onClick={closeMenu}
                 >
                   Сохранённые фильмы
                 </NavLink>
@@ -76,6 +84,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
               title="Аккаунт"
               to="profile"
               className="header__profile-button"
+              closeMenu={closeMenu}
             />
           </nav>
         )}
