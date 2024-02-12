@@ -37,6 +37,16 @@
   margin: 0 0 64px 0;
 }
 
+.profile__form-item-wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
 .profile__form-item {
   box-sizing: border-box;
   display: flex;
