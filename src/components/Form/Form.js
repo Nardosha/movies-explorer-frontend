@@ -9,7 +9,7 @@ const Form = ({
   buttonText,
   btnDisabled,
   btnClassName,
-  formError,
+  errorText,
   className,
   isEdit = true,
 }) => {
@@ -24,7 +24,7 @@ const Form = ({
       <fieldset className="form__inputs">
         {children}
 
-        <div className="form__error">formError</div>
+        {errorText && <div className="form__error">{errorText}</div>}
       </fieldset>
 
       {isEdit && (
