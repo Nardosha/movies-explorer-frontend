@@ -67,6 +67,8 @@ export const LocalStorageKeys = {
     IS_SHOW_SHORT_MOVIES: "IS_SHOW_SHORT_MOVIES",
     IS_SHOW_SHORT_SAVED_MOVIES: "IS_SHOW_SHORT_SAVED_MOVIES",
   },
+  LOADED_MOVIES: "LOADED_MOVIES",
 };
 
 export const SHORT_MOVIE_DURATION = 40;
+export const NOT_FOUND_MOVIES_MESSAGE = "Ничего не найдено";

@@ -3,7 +3,6 @@ import { MAIN_API_URL } from "../constants/api";
 export const checkResponse = (res) => {
   console.log("checkResponse");
   if (res.ok) return res.json();
-  console.log(res);
   return Promise.reject(`${res.status}`);
 };
 
@@ -22,8 +21,6 @@ export const makeRequest = (endpoint, method, isCredentialsInclude, data) => {
   };
 
   const url = `${BASE_URL}/${endpoint}`;
-
-  console.log("makeRequest", url, options);
 
   return fetch(url, options).then(checkResponse);
 };

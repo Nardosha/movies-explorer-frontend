@@ -24,10 +24,10 @@ export const SearchForm = ({
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // if (!searchText.trim()) {
-    //   toggleError(true);
-      // return;
-    // }
+    if (!searchText.trim()) {
+      toggleError(true);
+      return;
+    }
 
     onSearch(searchText);
   };
@@ -51,7 +51,7 @@ export const SearchForm = ({
             id="search-input"
             className="search-form__input"
             placeholder="Фильм"
-            value={searchText}
+            value={searchText || ""}
             onChange={onInputChange}
           />
 

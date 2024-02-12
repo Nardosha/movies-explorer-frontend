@@ -2,6 +2,8 @@ import { MovieCardList } from "./MoviesCardList/MovieCardList";
 import { MoreButton } from "../MoreButton/MoreButton";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { useMovieLoader } from "../../hooks/useMoviesLoader";
+import { LocalStorageKeys } from "../../constants/movies";
+import { useEffect, useState } from "react";
 
 export const Movies = ({
   movies,
@@ -15,34 +17,48 @@ export const Movies = ({
 }) => {
   const { slicedMovies, showMore } = useMovieLoader(movies, loaderConfig);
   const isShowMoreButton = movies.length > slicedMovies.length;
+  const [isShowEmptyResult, setIsShowEmptyResult] = useState(false);
+
+  const handleSearch = (newSearch) => {
+    onSearch(newSearch, LocalStorageKeys.SEARCH.MOVIES);
+  };
+
+  const handleToggle = (newValue) => {
+    onToggle(newValue, LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES);
+  };
+
+  useEffect(() => {
+    setIsShowEmptyResult(!!(search.length && !movies.length));
+  }, []);
+
+  console.log(search, toggled);
 
   return (
     <main className="movies">
       <SearchForm
         search={search}
         toggled={toggled}
-        onSearch={onSearch}
-        onToggle={onToggle}
+        onSearch={handleSearch}
+        onToggle={handleToggle}
         className="movies__search-form"
       />
 
-      {!!movies.length && (
-        <>
-          <MovieCardList
-            className="movies__list"
-            movies={slicedMovies}
-            savedMovies={savedMovies}
-            onSaveMovie={onSaveMovie}
-          />
+      <>
+        <MovieCardList
+          className="movies__list"
+          movies={slicedMovies}
+          showEmptyText={isShowEmptyResult}
+          savedMovies={savedMovies}
+          onSaveMovie={onSaveMovie}
+        />
 
-          {isShowMoreButton && (
-            <MoreButton
-              className="movies__more-button"
-              onClick={() => showMore()}
-            />
-          )}
-        </>
-      )}
+        {isShowMoreButton && (
+          <MoreButton
+            className="movies__more-button"
+            onClick={() => showMore()}
+          />
+        )}
+      </>
     </main>
   );
 };

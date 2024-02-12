@@ -39,13 +39,16 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
 
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [search, setSearch] = useState("");
+  const [savedMoviesSearch, setSavedMoviesSearch] = useState("");
   const [isToggled, setIsToggled] = useState(false);
+  const [isSavedMoviesToggled, setIsSavedMoviesToggled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const screenWidth = UseWindowSize();
@@ -58,26 +61,62 @@ function App() {
     setIsMenuOpen(value);
   };
 
-  const onSearch = (newSearch) => {
+  const onSearch = (newSearch, key) => {
     console.log("onSearch", newSearch);
-    setSearch(newSearch);
-    setToLocalStorage(LocalStorageKeys.SEARCH, newSearch);
-    setFilteredMovies([
-      ...filterMovies(initialMovies, { search: newSearch, isToggled }),
-    ]);
+    setToLocalStorage(key, newSearch);
+
+    if (key === LocalStorageKeys.SEARCH.MOVIES) {
+      setSearch(newSearch);
+
+      const filteredMovies = filterMovies(initialMovies, {
+        search: newSearch,
+        isToggled,
+      });
+
+      setToLocalStorage(LocalStorageKeys.LOADED_MOVIES, filteredMovies);
+      setFilteredMovies([...filteredMovies]);
+
+      return;
+    }
+
+    if (key === LocalStorageKeys.SEARCH.SAVED_MOVIES) {
+      setSavedMoviesSearch(newSearch);
+      const filteredSavedMovies = filterMovies(savedMovies, {
+        search: newSearch,
+        isToggled: isSavedMoviesToggled,
+      });
+      setFilteredSavedMovies([...filteredSavedMovies]);
+    }
   };
 
-  const onSwitcherToggle = (newValue) => {
-    setIsToggled(newValue);
+  const onSwitcherToggle = (newValue, key) => {
+    console.log("onSwitcherToggle", newValue, key);
+    setToLocalStorage(key, newValue);
 
-    setToLocalStorage(LocalStorageKeys.IS_SHOW_SHORT_MOVIES, newValue);
+    if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES) {
+      console.log(99999);
+      setIsToggled(newValue);
 
-    setFilteredMovies([
-      ...filterMovies(initialMovies, { search, setIsToggled: newValue }),
-    ]);
+      setFilteredMovies([
+        ...filterMovies(initialMovies, { search, isToggled: newValue }),
+      ]);
+
+      return;
+    }
+
+    if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_SAVED_MOVIES) {
+      setIsSavedMoviesToggled(newValue);
+
+      setFilteredSavedMovies([
+        ...filterMovies(savedMovies, {
+          search: savedMoviesSearch,
+          isToggled: newValue,
+        }),
+      ]);
+    }
   };
 
-  const handleLoadMovies = async () => {
+  const handleLoadMovies = useCallback(async () => {
     console.log("handleLoadMovies");
     setIsLoading(true);
     try {
@@ -85,7 +124,8 @@ function App() {
 
       setInitialMovies(movies);
       const filteredMovies = filterMovies(movies, { search, isToggled });
-      // if (!search) return;
+
+      if (!search.length) return;
 
       setFilteredMovies([...filteredMovies]);
     } catch (err) {
@@ -93,19 +133,52 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const setFiltersFromLocalStorage = () => {
-    const prevSearch = getFromLocalStorage(LocalStorageKeys.SEARCH);
-    const prevSwitcherState = getFromLocalStorage(
-      LocalStorageKeys.IS_SHOW_SHORT_MOVIES,
+  const restoreDataFromLocalStorage = () => {
+    const prevMoviesSearch = getFromLocalStorage(
+      LocalStorageKeys.SEARCH.MOVIES,
+    );
+    const prevSavedMoviesSearch = getFromLocalStorage(
+      LocalStorageKeys.SEARCH.SAVED_MOVIES,
+    );
+    const prevMoviesSwitcherState = !!getFromLocalStorage(
+      LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES,
     );
 
-    if (prevSearch) {
-      setSearch(prevSearch);
+    const prevSavedMoviesSwitcherState = !!getFromLocalStorage(
+      LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_SAVED_MOVIES,
+    );
+
+    const prevLoadedMovies = getFromLocalStorage(
+      LocalStorageKeys.LOADED_MOVIES,
+    );
+
+    prevMoviesSearch?.length && setSearch(prevMoviesSearch);
+
+    prevSavedMoviesSearch?.length &&
+      setSavedMoviesSearch(prevSavedMoviesSearch);
+
+    setIsToggled(prevMoviesSwitcherState);
+    setIsSavedMoviesToggled(prevSavedMoviesSwitcherState);
+
+    if (prevMoviesSearch?.length && prevLoadedMovies?.length) {
+      setFilteredMovies([
+        ...filterMovies(prevLoadedMovies, {
+          prevMoviesSearch,
+          prevMoviesSwitcherState,
+        }),
+      ]);
     }
 
-    setIsToggled(prevSwitcherState);
+    if (prevSavedMoviesSearch?.length) {
+      setFilteredSavedMovies([
+        ...filterMovies(savedMovies, {
+          search: prevSavedMoviesSearch,
+          isToggled: prevSavedMoviesSwitcherState,
+        }),
+      ]);
+    }
   };
 
   const handleSignUp = async ({ name, email, password }) => {
@@ -147,7 +220,7 @@ function App() {
     }
   };
 
-  const handleTokenCheck = async () => {
+  const handleTokenCheck = useCallback(async () => {
     console.log("handleTokenCheck");
     setIsLoading(true);
 
@@ -162,7 +235,7 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   const handleSignIn = async ({ email, password }) => {
     setIsLoading(true);
@@ -251,7 +324,7 @@ function App() {
   }, [isLogged, loadUserMovies]);
 
   useEffect(() => {
-    if (!initialMovies?.length) return;
+    if (!initialMovies?.length || !search?.length) return;
 
     const filteredMovies = filterMovies(initialMovies, {
       search,
@@ -262,22 +335,29 @@ function App() {
   }, [initialMovies]);
 
   useEffect(() => {
-    if (search.length) {
-      filterMovies(initialMovies, { search, isToggled });
-    }
-  }, [search]);
+    if (!search.length) return;
+
+    setFilteredMovies([...filterMovies(initialMovies, { search, isToggled })]);
+  }, [search, isToggled]);
+
+  useEffect(() => {
+    setFilteredSavedMovies([
+      ...filterMovies(savedMovies, {
+        search: savedMoviesSearch,
+        isToggled: isSavedMoviesToggled,
+      }),
+    ]);
+  }, [savedMoviesSearch, isSavedMoviesToggled]);
 
   // ПЕРВАЯ ЗАГРУЗКА
   useEffect(() => {
     console.log(" ПЕРВАЯ ЗАГРУЗКА");
-    setFiltersFromLocalStorage();
+
+    restoreDataFromLocalStorage();
+
     (async () => handleTokenCheck())();
     (async () => handleLoadMovies())();
   }, []);
-
-  useEffect(() => {
-    console.log(" ПЕРВАЯ ЗАГРУЗКА");
-  }, [screenWidth]);
 
   return (
     <UserContext.Provider value={{ isLogged, currentUser }}>
@@ -317,10 +397,10 @@ function App() {
             element={
               <ProtectedRoute
                 element={SavedMovies}
-                movies={savedMovies}
+                movies={filteredSavedMovies}
                 showSavedMovies={true}
-                search={search}
-                toggled={isToggled}
+                search={savedMoviesSearch}
+                toggled={isSavedMoviesToggled}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onDeleteMovie={handleDeleteMovie}
