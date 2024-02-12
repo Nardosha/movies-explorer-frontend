@@ -8,6 +8,7 @@ export const SearchForm = ({
   onSearch,
   onToggle,
   className,
+  validateSearch = false,
 }) => {
   const [searchText, setSearchText] = useState(search);
   const [isShowError, setIsShowError] = useState(false);
@@ -24,12 +25,12 @@ export const SearchForm = ({
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!searchText.trim()) {
+    if (validateSearch &&!searchText.trim()) {
       toggleError(true);
       return;
     }
 
-    onSearch(searchText);
+    onSearch(searchText.trim());
   };
 
   useEffect(() => {
