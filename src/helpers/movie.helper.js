@@ -2,7 +2,7 @@ import {SHORT_MOVIE_DURATION} from "../constants/movies";
 import {BASE_MOVIES_API, MOVIES_API_URL} from "../constants/api";
 
 const filterBy = (isFilter, initialMovies) => {
-  return initialMovies.filter((movie) => {
+  return initialMovies?.filter((movie) => {
     if (isFilter) {
       return movie.duration < SHORT_MOVIE_DURATION;
     }
@@ -15,7 +15,7 @@ export const filterMovies = (initialMovies, { search = "", isToggled }) => {
     return filterBy(isToggled, initialMovies);
   }
 
-  const filteredBySearch = initialMovies.filter((movie) => {
+  const filteredBySearch = initialMovies?.filter((movie) => {
     const ruName = movie.nameRU.toLowerCase();
     const enName = movie.nameEN.toLowerCase();
 
