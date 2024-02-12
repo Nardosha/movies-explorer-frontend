@@ -4,7 +4,7 @@ import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { UserContext } from "../../contexts/UserContext";
 import { FormHeader } from "../FormHeader/FormHeader";
 import Form from "../Form/Form";
-import { USER_NAME_VALIDATION } from "../../constants/forms";
+import {USER_NAME_VALIDATION} from "../../constants/validation";
 
 export const Profile = ({ onSignOut, onUpdateUser }) => {
   const { values, isValid, handleChange, errors, setValues, resetForm } =

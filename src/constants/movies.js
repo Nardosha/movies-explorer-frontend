@@ -1,3 +1,5 @@
+import { AdaptiveBorders } from "./adaptive";
+
 export const Links = {
   STATIC_WEBSITE: {
     TITLE: "Статичный сайт",
@@ -19,22 +21,6 @@ export const Links = {
     TITLE: "Яндекс.Практикум",
     LINK: "https://practicum.yandex.ru/profile/frontend-developer/",
   },
-};
-
-// Ширина 1280px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
-// Ширина 768px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
-// Ширина от 320px до 480px — 5 карточек по 1 в ряд. Кнопка «Ещё» загружает по 2 карточки.
-
-export const DeviceTypes = {
-  LAPTOP: "LAPTOP",
-  TABLET: "TABLET",
-  MOBILE: "MOBILE",
-};
-
-export const AdaptiveBorders = {
-  [DeviceTypes.LAPTOP]: 1280,
-  [DeviceTypes.TABLET]: 768,
-  [DeviceTypes.MOBILE]: 480,
 };
 
 export const CardConfig = {
@@ -71,4 +57,3 @@ export const LocalStorageKeys = {
 };
 
 export const SHORT_MOVIE_DURATION = 40;
-export const NOT_FOUND_MOVIES_MESSAGE = "Ничего не найдено";

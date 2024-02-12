@@ -12,8 +12,8 @@ import { SignUp } from "../SignUp/SignUp";
 import { Footer } from "../Footer/Footer";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { UserContext } from "../../contexts/UserContext";
-import { UseWindowSize } from "../../utils/UseWindowSize";
-import { UseLoaderConfig } from "../../utils/UseLoaderConfig";
+import { UseWindowSize } from "../../hooks/UseWindowSize";
+import { UseLoaderConfig } from "../../hooks/UseLoaderConfig";
 import {
   clearLocalStorage,
   getFromLocalStorage,
@@ -124,7 +124,7 @@ function App() {
     try {
       const movies = await getMovies(loaderConfig);
 
-      setInitialMovies(movies);
+      setInitialMovies([...movies]);
       const filteredMovies = filterMovies(movies, { search, isToggled });
 
       if (!search.length) return;
@@ -133,7 +133,7 @@ function App() {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      hidePreloader();
     }
   }, []);
 
@@ -201,7 +201,7 @@ function App() {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      hidePreloader();
     }
   };
 
@@ -219,7 +219,7 @@ function App() {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      hidePreloader();
     }
   };
 
@@ -235,7 +235,7 @@ function App() {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      hidePreloader();
     }
   }, []);
 
@@ -251,7 +251,7 @@ function App() {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      hidePreloader();
     }
   };
 
@@ -266,7 +266,7 @@ function App() {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      hidePreloader();
     }
   };
 
@@ -334,7 +334,6 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      console.log(43424242424242424, isLogged);
       if (!isLogged) return;
 
       await loadUserMovies();
