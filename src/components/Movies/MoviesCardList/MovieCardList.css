@@ -31,6 +31,17 @@
   list-style: none;
 }
 
+.movie-card-list__error {
+  color: var(--main-text-color);
+  font-size: 16px;
+  font-family: var(--font-family);
+  line-height: 20px;
+  font-weight: normal;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
 @media (min-width: 481px) {
   .movie-card-list__list {
     row-gap: 47px;

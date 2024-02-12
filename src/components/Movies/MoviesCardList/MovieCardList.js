@@ -2,14 +2,14 @@ import { useLocation } from "react-router-dom";
 import { Preloader } from "../../Preloader/Preloader";
 import { MovieCard } from "../MoviesCard/MovieCard";
 import { checkIsMovieSaved } from "../../../hooks/useMoviesLoader";
-import {NOT_FOUND_MOVIES_MESSAGE} from "../../../constants/validation";
 
 export const MovieCardList = ({
   movies,
   savedMovies,
   showSavedMovies = false,
   className,
-  showEmptyText,
+  emptyResultText,
+  loadErrorText,
   isLoading,
   onSaveMovie,
   onDeleteMovie,
@@ -17,13 +17,15 @@ export const MovieCardList = ({
   const location = useLocation();
   const isMoviesLocation = location.pathname === "/movies";
 
+  const errorText = emptyResultText || loadErrorText;
+
   return (
     <div className={`movie-card-list ${className}`}>
       {isLoading ? (
         <Preloader />
       ) : (
         <>
-          {!showEmptyText && (
+          {!errorText && (
             <ul className="movie-card-list__list">
               {movies?.map((movie) => (
                 <li
@@ -44,7 +46,7 @@ export const MovieCardList = ({
             </ul>
           )}
 
-          {showEmptyText && <h2>{NOT_FOUND_MOVIES_MESSAGE}</h2>}
+          {errorText && <h2 className="movie-card-list__error">{errorText}</h2>}
         </>
       )}
     </div>

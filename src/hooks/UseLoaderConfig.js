@@ -1,5 +1,6 @@
-import { AdaptiveBorders, CardConfig, DeviceTypes } from "../constants/movies";
 import { useEffect, useState } from "react";
+import { AdaptiveBorders, DeviceTypes } from "../constants/adaptive";
+import { CardConfig } from "../constants/movies";
 
 export const UseLoaderConfig = (screenWidth) => {
   const [deviceType, setDeviceType] = useState(null);

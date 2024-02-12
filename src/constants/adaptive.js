@@ -1,4 +1,5 @@
 export const SCREEN_SIZE_CHANGING_TIMOUT = 1000
+export const PRELOADER_TIMOUT = 500
 
 export const DeviceTypes = {
     LAPTOP: "LAPTOP",
@@ -11,3 +12,4 @@ export const AdaptiveBorders = {
     [DeviceTypes.TABLET]: 768,
     [DeviceTypes.MOBILE]: 480,
 };
+

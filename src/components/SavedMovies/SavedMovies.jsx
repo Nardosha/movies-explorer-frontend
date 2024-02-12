@@ -7,6 +7,7 @@ export const SavedMovies = ({
   search,
   toggled,
   isLoading,
+  loadErrorText,
   onSearch,
   onToggle,
   showSavedMovies,
@@ -33,6 +34,7 @@ export const SavedMovies = ({
       <MovieCardList
         movies={movies}
         isLoading={isLoading}
+        loadErrorText={loadErrorText}
         showSavedMovies={showSavedMovies}
         onDeleteMovie={onDeleteMovie}
         className="saved-movies__list"

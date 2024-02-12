@@ -33,6 +33,8 @@ import {
   deleteMovie,
   updateUserInfo,
 } from "../../utils/MainApi";
+import { MOVIES_REQUEST_ERROR_TEXT } from "../../constants/validation";
+import { PRELOADER_TIMOUT } from "../../constants/adaptive";
 
 function App() {
   const navigate = useNavigate();
@@ -45,6 +47,7 @@ function App() {
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loadMovesErrorText, setLoadMovesErrorText] = useState("");
 
   const [search, setSearch] = useState("");
   const [savedMoviesSearch, setSavedMoviesSearch] = useState("");
@@ -121,6 +124,8 @@ function App() {
   const handleLoadMovies = useCallback(async () => {
     console.log("handleLoadMovies");
     setIsLoading(true);
+    setLoadMovesErrorText("");
+
     try {
       const movies = await getMovies(loaderConfig);
 
@@ -132,8 +137,10 @@ function App() {
       setFilteredMovies([...filteredMovies]);
     } catch (err) {
       console.log(err);
+      // setLoadMovesErrorText(MOVIES_REQUEST_ERROR_TEXT);
     } finally {
       hidePreloader();
+      setLoadMovesErrorText(MOVIES_REQUEST_ERROR_TEXT);
     }
   }, []);
 
@@ -324,7 +331,7 @@ function App() {
     setPreloaderTimeout(
       setTimeout(() => {
         setIsLoading(false);
-      }, 0),
+      }, PRELOADER_TIMOUT),
     );
   };
 
@@ -385,6 +392,7 @@ function App() {
 
   // ПЕРВАЯ ЗАГРУЗКА
   useEffect(() => {
+    setIsLoading(true);
     console.log(" ПЕРВАЯ ЗАГРУЗКА");
 
     restoreDataFromLocalStorage();
@@ -420,6 +428,7 @@ function App() {
                 search={search}
                 toggled={isToggled}
                 isLoading={isLoading}
+                loadErrorText={loadMovesErrorText}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onSaveMovie={handleSaveMovie}
@@ -437,6 +446,7 @@ function App() {
                 search={savedMoviesSearch}
                 toggled={isSavedMoviesToggled}
                 isLoading={isLoading}
+                loadErrorText={loadMovesErrorText}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onDeleteMovie={handleDeleteMovie}

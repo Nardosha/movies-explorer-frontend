@@ -4,6 +4,7 @@ import { SearchForm } from "../SearchForm/SearchForm";
 import { useMovieLoader } from "../../hooks/useMoviesLoader";
 import { LocalStorageKeys } from "../../constants/movies";
 import { useEffect, useState } from "react";
+import { NOT_FOUND_MOVIES_MESSAGE } from "../../constants/validation";
 
 export const Movies = ({
   movies,
@@ -13,12 +14,15 @@ export const Movies = ({
   toggled,
   onSearch,
   isLoading,
+  loadErrorText,
   onToggle,
   onSaveMovie,
 }) => {
   const { slicedMovies, showMore } = useMovieLoader(movies, loaderConfig);
-  const isShowMoreButton = movies.length > slicedMovies.length;
-  const [isShowEmptyResult, setIsShowEmptyResult] = useState(false);
+  const [emptyResultText, setEmptyResultText] = useState("");
+
+  const isShowMoreButton =
+    movies.length > slicedMovies.length && !loadErrorText && !emptyResultText;
 
   const handleSearch = (newSearch) => {
     onSearch(newSearch, LocalStorageKeys.SEARCH.MOVIES);
@@ -29,10 +33,12 @@ export const Movies = ({
   };
 
   useEffect(() => {
-    setIsShowEmptyResult(!!(search.length && !movies.length));
+    if (search.length && !movies.length) {
+      setEmptyResultText(NOT_FOUND_MOVIES_MESSAGE);
+    }
   }, [movies, search]);
 
-  console.log(search, toggled);
+  console.log(loadErrorText);
 
   return (
     <main className="movies">
@@ -47,11 +53,12 @@ export const Movies = ({
 
       <>
         <MovieCardList
-          className="movies__list"
-          movies={slicedMovies}
-          showEmptyText={isShowEmptyResult}
           isLoading={isLoading}
+          movies={slicedMovies}
           savedMovies={savedMovies}
+          emptyResultText={emptyResultText}
+          loadErrorText={loadErrorText}
+          className="movies__list"
           onSaveMovie={onSaveMovie}
         />
 
