@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { Preloader } from "../../Preloader/Preloader";
 import { MovieCard } from "../MoviesCard/MovieCard";
 import { checkIsMovieSaved } from "../../../hooks/useMoviesLoader";
 import { NOT_FOUND_MOVIES_MESSAGE } from "../../../constants/movies";
@@ -9,6 +10,7 @@ export const MovieCardList = ({
   showSavedMovies = false,
   className,
   showEmptyText,
+  isLoading,
   onSaveMovie,
   onDeleteMovie,
 }) => {
@@ -17,28 +19,34 @@ export const MovieCardList = ({
 
   return (
     <div className={`movie-card-list ${className}`}>
-      {!!movies?.length && (
-        <ul className="movie-card-list__list">
-          {movies?.map((movie) => (
-            <li
-              key={movie.movieId || movie.id}
-              className="movie-card-list__list-item"
-            >
-              <MovieCard
-                movie={movie}
-                showSavedMovies={showSavedMovies}
-                isSaved={
-                  isMoviesLocation && checkIsMovieSaved(movie, savedMovies)
-                }
-                onSaveMovie={onSaveMovie}
-                onDeleteMovie={onDeleteMovie}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <>
+          {!showEmptyText && (
+            <ul className="movie-card-list__list">
+              {movies?.map((movie) => (
+                <li
+                  key={movie.movieId || movie.id}
+                  className="movie-card-list__list-item"
+                >
+                  <MovieCard
+                    movie={movie}
+                    showSavedMovies={showSavedMovies}
+                    isSaved={
+                      isMoviesLocation && checkIsMovieSaved(movie, savedMovies)
+                    }
+                    onSaveMovie={onSaveMovie}
+                    onDeleteMovie={onDeleteMovie}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
 
-      {showEmptyText && <h2>{NOT_FOUND_MOVIES_MESSAGE}</h2>}
+          {showEmptyText && <h2>{NOT_FOUND_MOVIES_MESSAGE}</h2>}
+        </>
+      )}
     </div>
   );
 };
