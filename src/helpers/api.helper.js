@@ -1,8 +1,14 @@
 import { MAIN_API_URL } from "../constants/api";
+import { SERVER_ERROR_TEXT } from "../constants/validation";
 
 export const checkResponse = (res) => {
-  if (res.ok) return res.json();
-  return Promise.reject(`${res.message}`);
+  const result = res.json();
+  if (res.ok) return result;
+  console.log([res], result, res.message);
+
+  return result.then((err) =>
+    Promise.reject(`${err?.message || err?.statusText || SERVER_ERROR_TEXT}`),
+  );
 };
 
 export const makeRequest = (endpoint, method, isCredentialsInclude, data) => {
