@@ -24,13 +24,13 @@ const Form = ({
       <fieldset className="form__inputs">
         {children}
 
-        <div className="form__error">{formError}</div>
+        <div className="form__error">formError</div>
       </fieldset>
 
       {isEdit && (
         <SubmitButton
           text={buttonText}
-          className="form__submit-button"
+          className={`form__submit-button ${btnClassName}`}
           disabled={!isValid || btnDisabled}
         />
       )}

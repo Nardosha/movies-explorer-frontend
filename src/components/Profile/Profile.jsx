@@ -1,9 +1,10 @@
 import { SubmitButton } from "../SubmitButton/SubmitButton";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { UserContext } from "../../contexts/UserContext";
 import { FormHeader } from "../FormHeader/FormHeader";
 import Form from "../Form/Form";
+import { USER_NAME_VALIDATION } from "../../constants/forms";
 
 export const Profile = ({ onSignOut, onUpdateUser }) => {
   const { values, isValid, handleChange, errors, setValues, resetForm } =
@@ -39,6 +40,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
   };
 
   useEffect(() => {
+    console.log(isValuesChanged());
     setIsDirtyForm(() => isValuesChanged());
   }, [values]);
 
@@ -66,48 +68,55 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
           isEdit={isEdit}
           onSubmit={onSubmit}
         >
-          <div className="profile__form-item">
-            <label
-              htmlFor="user-name"
-              className="profile__form-label profile__info-label_name"
-            >
-              Имя
-            </label>
+          <div className="profile__form-item-wrapper">
+            <div className="profile__form-item">
+              <label
+                htmlFor="user-name"
+                className="profile__form-label profile__info-label_name"
+              >
+                Имя
+              </label>
 
-            <input
-              id="user-name"
-              value={name || ""}
-              type="text"
-              disabled={!isEdit}
-              required
-              placeholder="Имя"
-              name="name"
-              minLength="2"
-              maxLength="30"
-              className="profile__form-input profile__form-input_name"
-              onChange={(e) => handleChange(e)}
-            />
+              <input
+                id="user-name"
+                value={name || ""}
+                type="text"
+                disabled={!isEdit}
+                pattern={USER_NAME_VALIDATION}
+                required
+                placeholder="Имя"
+                name="name"
+                minLength="2"
+                maxLength="30"
+                className="profile__form-input profile__form-input_name"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+
+            <span className="form__input-error">{errors.name || ""} </span>
           </div>
+          <div className="profile__form-item-wrapper">
+            <div className="profile__form-item">
+              <label
+                htmlFor="user-email"
+                className="profile__form-label profile__info-label_email"
+              >
+                E-mail
+              </label>
 
-          <div className="profile__form-item">
-            <label
-              htmlFor="user-email"
-              className="profile__form-label profile__info-label_email"
-            >
-              E-mail
-            </label>
-
-            <input
-              id="user-email"
-              value={email || ""}
-              disabled={!isEdit}
-              required
-              placeholder="E-mail"
-              type="email"
-              name="email"
-              className="profile__form-input profile__form-input_email"
-              onChange={(e) => handleChange(e)}
-            />
+              <input
+                id="user-email"
+                value={email || ""}
+                disabled={!isEdit}
+                required
+                placeholder="E-mail"
+                type="email"
+                name="email"
+                className="profile__form-input profile__form-input_email"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <span className="form__input-error">{errors.email || ""} </span>
           </div>
         </Form>
 

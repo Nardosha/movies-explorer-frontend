@@ -251,7 +251,7 @@ function App() {
   }, [isLogged, loadUserMovies]);
 
   useEffect(() => {
-    if (!initialMovies.length) return;
+    if (!initialMovies?.length) return;
 
     const filteredMovies = filterMovies(initialMovies, {
       search,
