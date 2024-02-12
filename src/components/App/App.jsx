@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
 import { useCallback, useEffect, useState } from "react";
@@ -226,7 +226,6 @@ function App() {
   const handleTokenCheck = useCallback(async () => {
     console.log("handleTokenCheck");
     setIsLoading(true);
-
     try {
       const { data } = await getUserInfo();
       console.log(data);
@@ -328,6 +327,10 @@ function App() {
       }, 0),
     );
   };
+
+  useEffect(() => {
+    console.log(screenWidth);
+  }, [screenWidth]);
 
   useEffect(() => {
     (async () => {
@@ -462,5 +465,4 @@ function App() {
     </UserContext.Provider>
   );
 }
-
 export default App;

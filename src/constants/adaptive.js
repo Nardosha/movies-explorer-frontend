@@ -1,0 +1,1 @@
+export const SCREEN_SIZE_CHANGING_TIMOUT = 1000
