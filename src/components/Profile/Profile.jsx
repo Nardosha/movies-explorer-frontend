@@ -1,17 +1,16 @@
-import { SubmitButton } from "../SubmitButton/SubmitButton";
 import React, { useContext, useEffect, useState } from "react";
-import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { UserContext } from "../../contexts/UserContext";
-import { FormHeader } from "../FormHeader/FormHeader";
 import Form from "../Form/Form";
-import {USER_NAME_VALIDATION} from "../../constants/validation";
+import { FormHeader } from "../FormHeader/FormHeader";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import { USER_NAME_VALIDATION } from "../../constants/validation";
 
-export const Profile = ({ onSignOut, onUpdateUser }) => {
+export const Profile = ({ errorText, onSignOut, onUpdateUser }) => {
   const { values, isValid, handleChange, errors, setValues, resetForm } =
     useFormWithValidation();
   const { name, email } = values;
 
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useContext(UserContext);
   const [isEdit, setIsEdit] = useState(false);
   const [isDirtyForm, setIsDirtyForm] = useState(false);
 
@@ -39,6 +38,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
     setIsEdit(false);
   };
 
+  console.log("CURRENT USER", "");
   useEffect(() => {
     console.log(isValuesChanged());
     setIsDirtyForm(() => isValuesChanged());
@@ -65,6 +65,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
           formError={""}
           btnDisabled={!isValid || !isDirtyForm}
           btnClassName="profile__submit-button"
+          errorText={errorText}
           isEdit={isEdit}
           onSubmit={onSubmit}
         >
