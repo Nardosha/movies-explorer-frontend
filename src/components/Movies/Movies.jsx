@@ -38,8 +38,6 @@ export const Movies = ({
     }
   }, [movies, search]);
 
-  console.log(loadErrorText);
-
   return (
     <main className="movies">
       <SearchForm

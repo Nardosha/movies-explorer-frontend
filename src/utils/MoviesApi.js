@@ -5,6 +5,6 @@ import {MOVIES_API_URL} from "../constants/api";
 /** Получение всех фильмов
  *  @returns массив с фильмами
  */
-export const loadMovies = async () => {
-  return await fetch(MOVIES_API_URL).then(checkResponse);
+export const loadMovies = () => {
+  return fetch(MOVIES_API_URL).then(checkResponse);
 };

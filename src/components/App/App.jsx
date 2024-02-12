@@ -32,10 +32,7 @@ import {
   deleteMovie,
   updateUserInfo,
 } from "../../utils/MainApi";
-import {
-  MOVIES_REQUEST_ERROR_TEXT,
-  SERVER_ERROR,
-} from "../../constants/validation";
+import { MOVIES_REQUEST_ERROR_TEXT } from "../../constants/validation";
 import { PRELOADER_TIMOUT } from "../../constants/adaptive";
 import { loadMovies } from "../../utils/MoviesApi";
 
@@ -51,7 +48,7 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loadMovesErrorText, setLoadMovesErrorText] = useState("");
-  const [authError, setAuthError] = useState("");
+  const [authError, setAuthError] = useState(null);
 
   const [search, setSearch] = useState("");
   const [savedMoviesSearch, setSavedMoviesSearch] = useState("");
@@ -196,7 +193,7 @@ function App() {
   const handleSignUp = async ({ name, email, password }) => {
     console.log("handleSignUp", { name, email, password });
     setIsLoading(true);
-    setAuthError("");
+    setAuthError(null);
 
     try {
       const newUser = await signup({ name, email, password });
@@ -206,7 +203,7 @@ function App() {
       await handleSignIn({ email, password });
     } catch (err) {
       console.log(err);
-      setAuthError(err ?? SERVER_ERROR);
+      setAuthError(err);
     } finally {
       hidePreloader();
     }
@@ -215,7 +212,7 @@ function App() {
   const handleSignOut = async () => {
     console.log("handleSignOut");
     setIsLoading(true);
-    setAuthError("");
+    setAuthError(null);
 
     try {
       await signOut();
@@ -226,7 +223,7 @@ function App() {
       navigate("/", { replace: true });
     } catch (err) {
       console.log(err);
-      setAuthError(err ?? SERVER_ERROR);
+      setAuthError(err);
     } finally {
       hidePreloader();
     }
@@ -234,7 +231,7 @@ function App() {
 
   const handleTokenCheck = useCallback(async () => {
     setIsLoading(true);
-    setAuthError("");
+    setAuthError(null);
 
     try {
       const { data: user } = await getUserInfo();
@@ -252,7 +249,7 @@ function App() {
   const handleSignIn = async ({ email, password }) => {
     console.log("handleSignIn", { email, password });
     setIsLoading(true);
-    setAuthError("");
+    setAuthError(null);
 
     try {
       const { data: user } = await signIn({ email, password });
@@ -261,7 +258,7 @@ function App() {
       navigate("/movies", { replace: true });
     } catch (err) {
       console.log(err);
-      setAuthError(err || SERVER_ERROR);
+      setAuthError(err);
     } finally {
       hidePreloader();
     }
@@ -270,7 +267,7 @@ function App() {
   const handleUpdateUserInfo = async ({ name, email }) => {
     console.log("handleUpdateUserInfo", { name, email });
     setIsLoading(true);
-    setAuthError("");
+    setAuthError(null);
 
     try {
       const { data: user } = await updateUserInfo({ name, email });
@@ -279,7 +276,7 @@ function App() {
       setCurrentUser(user);
     } catch (err) {
       console.log(err);
-      setAuthError(err || SERVER_ERROR);
+      setAuthError(err);
     } finally {
       hidePreloader();
     }
