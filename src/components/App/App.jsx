@@ -33,7 +33,6 @@ import {
   updateUserInfo,
 } from "../../utils/MainApi";
 import { MOVIES_REQUEST_ERROR_TEXT } from "../../constants/validation";
-import { PRELOADER_TIMOUT } from "../../constants/adaptive";
 import { loadMovies } from "../../utils/MoviesApi";
 
 function App() {
@@ -91,10 +90,11 @@ function App() {
       setFilteredSavedMovies([...filteredSavedMovies]);
     }
 
-    hidePreloader();
+    setIsLoading(false);
   };
 
   const onSwitcherToggle = (newValue, key) => {
+    setIsLoading(true)
     setToLocalStorage(key, newValue);
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES) {
@@ -136,7 +136,7 @@ function App() {
       console.log(err);
       setLoadMovesErrorText(MOVIES_REQUEST_ERROR_TEXT);
     } finally {
-      hidePreloader();
+      setIsLoading(false);
     }
   }, []);
 
@@ -200,7 +200,7 @@ function App() {
       console.log(err);
       setAuthError(err);
     } finally {
-      hidePreloader();
+      setIsLoading(false);
     }
   };
 
@@ -219,7 +219,7 @@ function App() {
       console.log(err);
       setAuthError(err);
     } finally {
-      hidePreloader();
+      setIsLoading(false);
     }
   };
 
@@ -230,12 +230,13 @@ function App() {
     try {
       const { data: user } = await getUserInfo();
 
+      console.log(user)
       setIsLogged(true);
       setCurrentUser({ ...user });
     } catch (err) {
       console.log(err);
     } finally {
-      hidePreloader();
+      setIsLoading(false);
     }
   }, []);
 
@@ -252,7 +253,7 @@ function App() {
       console.log(err);
       setAuthError(err);
     } finally {
-      hidePreloader();
+      setIsLoading(false);
     }
   };
 
@@ -268,7 +269,7 @@ function App() {
       console.log(err);
       setAuthError(err);
     } finally {
-      hidePreloader();
+      setIsLoading(false);
     }
   };
 
@@ -313,18 +314,6 @@ function App() {
     }
   };
 
-  const hidePreloader = () => {
-    if (preloaderTimeout) {
-      clearTimeout(preloaderTimeout);
-    }
-
-    setPreloaderTimeout(
-      setTimeout(() => {
-        setIsLoading(false);
-      }, PRELOADER_TIMOUT),
-    );
-  };
-
   useEffect(() => {
     (async () => {
       if (!isLogged) return;
@@ -351,7 +340,7 @@ function App() {
 
     setFilteredMovies([...filterMovies(initialMovies, { search, isToggled })]);
 
-    hidePreloader();
+    setIsLoading(false);
   }, [search, isToggled]);
 
   useEffect(() => {

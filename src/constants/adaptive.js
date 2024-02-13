@@ -1,5 +1,4 @@
 export const SCREEN_SIZE_CHANGING_TIMOUT = 1000
-export const PRELOADER_TIMOUT = 500
 
 export const DeviceTypes = {
     LAPTOP: "LAPTOP",
