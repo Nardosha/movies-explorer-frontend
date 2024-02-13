@@ -308,7 +308,9 @@ function App() {
   const handleDeleteMovie = async (movie) => {
     try {
       const deletedMovie = savedMovies.find(
-        (savedMovie) => savedMovie.movieId === movie.movieId,
+        (savedMovie) =>
+          savedMovie.movieId === movie.movieId ||
+          savedMovie.movieId === movie.id,
       );
 
       if (!deletedMovie) return;
@@ -319,7 +321,7 @@ function App() {
 
       setSavedMovies([
         ...savedMovies.filter(
-          (savedMovie) => savedMovie.movieId !== movie.movieId,
+          (savedMovie) => savedMovie._id !== deletedMovie._id,
         ),
       ]);
     } catch (err) {
@@ -419,6 +421,7 @@ function App() {
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onSaveMovie={handleSaveMovie}
+                onDeleteMovie={handleDeleteMovie}
               />
             }
           />

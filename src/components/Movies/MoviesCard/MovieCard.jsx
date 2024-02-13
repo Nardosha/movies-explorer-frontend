@@ -21,10 +21,13 @@ export const MovieCard = ({
       : initialMovie.image,
   };
   const saveMovie = () => {
+    console.log("saveMovie");
+
     onSaveMovie(initialMovie);
   };
 
   const deleteMovie = () => {
+    console.log("deleteMovie");
     onDeleteMovie(initialMovie);
   };
 
@@ -43,6 +46,7 @@ export const MovieCard = ({
           <button
             className="movie-card__button movie-card__saved-button"
             type="button"
+            onClick={deleteMovie}
           />
         ) : (
           <RoundedButton

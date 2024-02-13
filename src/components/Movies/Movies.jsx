@@ -17,6 +17,7 @@ export const Movies = ({
   loadErrorText,
   onToggle,
   onSaveMovie,
+  onDeleteMovie,
 }) => {
   const { slicedMovies, showMore } = useMovieLoader(movies, loaderConfig);
   const [emptyResultText, setEmptyResultText] = useState("");
@@ -63,6 +64,7 @@ export const Movies = ({
           loadErrorText={loadErrorText}
           className="movies__list"
           onSaveMovie={onSaveMovie}
+          onDeleteMovie={onDeleteMovie}
         />
 
         {isShowMoreButton && (
