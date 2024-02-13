@@ -2,13 +2,13 @@ import { useLocation } from "react-router-dom";
 import { Preloader } from "../../Preloader/Preloader";
 import { MovieCard } from "../MoviesCard/MovieCard";
 import { checkIsMovieSaved } from "../../../hooks/useMoviesLoader";
+import { NOT_FOUND_MOVIES_MESSAGE } from "../../../constants/validation";
 
 export const MovieCardList = ({
   movies,
   savedMovies,
   showSavedMovies = false,
   className,
-  emptyResultText,
   loadErrorText,
   isLoading,
   onSaveMovie,
@@ -17,6 +17,7 @@ export const MovieCardList = ({
   const location = useLocation();
   const isMoviesLocation = location.pathname === "/movies";
 
+  const emptyResultText = !movies.length ? NOT_FOUND_MOVIES_MESSAGE : "";
   const errorText = emptyResultText || loadErrorText;
 
   return (

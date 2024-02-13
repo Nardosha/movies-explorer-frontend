@@ -113,9 +113,10 @@ function App() {
     setIsLoading(true);
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES) {
-      setIsToggled(newValue);
 
       if (search.length) {
+        setIsToggled(newValue);
+
         setFilteredMovies([
           ...filterMovies(initialMovies, { search, isToggled: newValue }),
         ]);
