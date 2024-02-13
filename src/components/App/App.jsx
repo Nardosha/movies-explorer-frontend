@@ -382,7 +382,6 @@ function App() {
     (async () => handleLoadMovies())();
   }, [isLogged, handleTokenCheck]);
 
-  // ПЕРВАЯ ЗАГРУЗКА
   useEffect(() => {
     setIsLoading(true);
     restoreDataFromLocalStorage();
