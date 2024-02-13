@@ -32,7 +32,7 @@
 .form__input {
   background-color: transparent;
   border: none;
-  color: #ffffff;
+  color: var(--main-text-color);
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -51,6 +51,16 @@
   color: var(--text-red-color);
   font-size: 10px;
   margin: 10px 0 0 0;
+}
+
+.form__success {
+  color: var(--primary-green-color);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  padding: 0;
+  margin: 20px 0 0 0;
 }
 
 .form__btn-submit {

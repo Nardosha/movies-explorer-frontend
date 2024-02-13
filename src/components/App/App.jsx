@@ -32,7 +32,11 @@ import {
   deleteMovie,
   updateUserInfo,
 } from "../../utils/MainApi";
-import { MOVIES_REQUEST_ERROR_TEXT } from "../../constants/validation";
+import {
+  MOVIES_REQUEST_ERROR_TEXT,
+  SUCCESS_NOTIFICATION_DURATION,
+  UPDATE_USER_INFO_SUCCESS_TEXT,
+} from "../../constants/validation";
 import { loadMovies } from "../../utils/MoviesApi";
 
 function App() {
@@ -47,6 +51,8 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [loadMovesErrorText, setLoadMovesErrorText] = useState("");
   const [authError, setAuthError] = useState(null);
+  const [successText, setSuccessText] = useState(null);
+  const [notificationTimer, setNotificationTimer] = useState(null);
 
   const [search, setSearch] = useState("");
   const [savedMoviesSearch, setSavedMoviesSearch] = useState("");
@@ -266,6 +272,20 @@ function App() {
     }
   };
 
+  const showSuccessText = (text, delay) => {
+    setSuccessText(text);
+
+    if (notificationTimer) {
+      clearTimeout(notificationTimer);
+    }
+
+    setNotificationTimer(
+      setTimeout(() => {
+        setSuccessText(null);
+      }, delay),
+    );
+  };
+
   const handleUpdateUserInfo = async ({ name, email }) => {
     setIsLoading(true);
     setAuthError(null);
@@ -274,6 +294,10 @@ function App() {
       const { data: user } = await updateUserInfo({ name, email });
 
       setCurrentUser(user);
+      showSuccessText(
+        UPDATE_USER_INFO_SUCCESS_TEXT,
+        SUCCESS_NOTIFICATION_DURATION,
+      );
     } catch (err) {
       console.log(err);
       setAuthError(err);
@@ -452,6 +476,7 @@ function App() {
                 isLogged={isLogged}
                 element={Profile}
                 errorText={authError}
+                successText={successText}
                 onSignOut={handleSignOut}
                 onUpdateUser={handleUpdateUserInfo}
               />

@@ -10,6 +10,7 @@ const Form = ({
   btnDisabled,
   btnClassName,
   errorText,
+  successText,
   className,
   isEdit = true,
 }) => {
@@ -25,6 +26,7 @@ const Form = ({
         {children}
 
         {errorText && <div className="form__error">{errorText}</div>}
+        {successText && <div className="form__success">{successText}</div>}
       </fieldset>
 
       {isEdit && (

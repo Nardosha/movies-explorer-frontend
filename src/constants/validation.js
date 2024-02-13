@@ -12,3 +12,7 @@ export const SERVER_ERROR_TEXT = "Что-то пошло не так.";
 
 export const MOVIES_REQUEST_ERROR_TEXT =
   "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.";
+
+export const UPDATE_USER_INFO_SUCCESS_TEXT = "Данные успешно изменены!";
+
+export const SUCCESS_NOTIFICATION_DURATION = 3000;

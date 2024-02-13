@@ -5,7 +5,7 @@ import { FormHeader } from "../FormHeader/FormHeader";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import { USER_NAME_VALIDATION } from "../../constants/validation";
 
-export const Profile = ({ errorText, onSignOut, onUpdateUser }) => {
+export const Profile = ({ errorText, successText, onSignOut, onUpdateUser }) => {
   const { values, isValid, handleChange, errors, setValues, resetForm } =
     useFormWithValidation();
   const { name, email } = values;
@@ -61,6 +61,7 @@ export const Profile = ({ errorText, onSignOut, onUpdateUser }) => {
           btnClassName="profile__submit-button"
           errorText={errorText}
           isEdit={isEdit}
+          successText={successText}
           onSubmit={onSubmit}
         >
           <div className="profile__form-item-wrapper">
