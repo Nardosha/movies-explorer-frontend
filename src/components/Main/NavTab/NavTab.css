@@ -26,7 +26,7 @@
   border-radius: 6px;
   min-width: 82px;
   min-height: 26px;
-  padding: 5px 16px;
+  padding: 0;
   margin: 0;
 }
 
@@ -41,7 +41,7 @@
   font-size: var(--mobile-button-font-size);
   font-weight: 500;
   line-height: var(--mobile-line-height);
-  padding: 0;
+  padding: 5px 16px;
   margin: 0;
 }
 
@@ -54,10 +54,10 @@
     border-radius: 10px;
     min-width: 96px;
     min-height: 36px;
-    padding: 10px 17px;
   }
 
   .nav-tab__link {
     font-size: var(--tablet-button-font-size);
+    padding: 10px 17px;
   }
 }
