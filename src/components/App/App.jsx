@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "../Header/Header";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
 import { Main } from "../Main/Main";
 import { useCallback, useEffect, useState } from "react";
@@ -62,7 +62,7 @@ function App() {
 
   const screenWidth = UseWindowSize();
   const { deviceType, loaderConfig } = UseLoaderConfig(screenWidth);
-  const { isShowHeader, isShowFooter } = useLocationHook();
+  const { isShowHeader, isShowFooter, isSavedMoviesOpened } = useLocationHook();
 
   const handleOpenMenu = (value) => {
     if (deviceType === "LAPTOP") return;
@@ -70,16 +70,19 @@ function App() {
     setIsMenuOpen(value);
   };
 
+  const resetSavedMoviesFilter = useCallback(() => {
+    setIsSavedMoviesToggled(false);
+    setSavedMoviesSearch("");
+  }, []);
+
   const filterResetStates = () => {
     setSearch("");
     setSavedMoviesSearch("");
     setIsToggled(false);
-    setIsSavedMoviesToggled(false);
   };
 
   const onSearch = (newSearch, key) => {
     setIsLoading(true);
-    setToLocalStorage(key, newSearch);
 
     if (key === LocalStorageKeys.SEARCH.MOVIES) {
       setSearch(newSearch);
@@ -89,6 +92,7 @@ function App() {
         isToggled,
       });
 
+      setToLocalStorage(key, newSearch);
       setToLocalStorage(LocalStorageKeys.LOADED_MOVIES, filteredMovies);
       setFilteredMovies([...filteredMovies]);
     }
@@ -107,7 +111,6 @@ function App() {
 
   const onSwitcherToggle = (newValue, key) => {
     setIsLoading(true);
-    setToLocalStorage(key, newValue);
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES) {
       setIsToggled(newValue);
@@ -116,6 +119,7 @@ function App() {
         setFilteredMovies([
           ...filterMovies(initialMovies, { search, isToggled: newValue }),
         ]);
+        setToLocalStorage(key, newValue);
       }
     }
 
@@ -158,15 +162,9 @@ function App() {
     const prevMoviesSearch = getFromLocalStorage(
       LocalStorageKeys.SEARCH.MOVIES,
     );
-    const prevSavedMoviesSearch = getFromLocalStorage(
-      LocalStorageKeys.SEARCH.SAVED_MOVIES,
-    );
+
     const prevMoviesSwitcherState = !!getFromLocalStorage(
       LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES,
-    );
-
-    const prevSavedMoviesSwitcherState = !!getFromLocalStorage(
-      LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_SAVED_MOVIES,
     );
 
     const prevLoadedMovies = getFromLocalStorage(
@@ -175,26 +173,13 @@ function App() {
 
     prevMoviesSearch?.length && setSearch(prevMoviesSearch);
 
-    prevSavedMoviesSearch?.length &&
-      setSavedMoviesSearch(prevSavedMoviesSearch);
-
     setIsToggled(prevMoviesSwitcherState);
-    setIsSavedMoviesToggled(prevSavedMoviesSwitcherState);
 
     if (prevMoviesSearch?.length && prevLoadedMovies?.length) {
       setFilteredMovies([
         ...filterMovies(prevLoadedMovies, {
           prevMoviesSearch,
           prevMoviesSwitcherState,
-        }),
-      ]);
-    }
-
-    if (prevSavedMoviesSearch?.length) {
-      setFilteredSavedMovies([
-        ...filterMovies(savedMovies, {
-          search: prevSavedMoviesSearch,
-          isToggled: prevSavedMoviesSwitcherState,
         }),
       ]);
     }
@@ -381,6 +366,12 @@ function App() {
 
     setIsLoading(false);
   }, [search, isToggled]);
+
+  useEffect(() => {
+    if (isSavedMoviesOpened) {
+      resetSavedMoviesFilter();
+    }
+  }, [isSavedMoviesOpened]);
 
   useEffect(() => {
     setFilteredSavedMovies([

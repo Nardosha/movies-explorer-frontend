@@ -7,8 +7,11 @@ export const useLocationHook = () => {
   const isShowHeader = validRoutesForHeader.includes(location.pathname);
   const isShowFooter = validRoutesForFooter.includes(location.pathname);
 
+  const isSavedMoviesOpened = location.pathname === "/saved-movies";
+
   return {
     isShowHeader,
     isShowFooter,
+    isSavedMoviesOpened
   };
 };
