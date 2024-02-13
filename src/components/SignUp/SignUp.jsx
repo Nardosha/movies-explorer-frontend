@@ -3,17 +3,35 @@ import { FormInput } from "../FormInput/FormInput";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import Form from "../Form/Form";
 import { FormHeader } from "../FormHeader/FormHeader";
-import {USER_NAME_VALIDATION} from "../../constants/validation";
+import { USER_NAME_VALIDATION } from "../../constants/validation";
+import { useEffect } from "react";
 
-export const SignUp = ({ errorText, onSubmit }) => {
-  const { values, isValid, handleChange, errors } = useFormWithValidation();
+export const SignUp = ({ errorText, onReset, onSubmit }) => {
+  const { values, isValid, handleChange, errors, setIsValid } =
+    useFormWithValidation();
+
   const { name, email, password } = values;
+
+  const isRequiredFieldsError =
+    !isValid && (!name?.length || !email?.length || !password?.length);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    setIsValid(true);
+
+    if (!name?.length || !email?.length || !password?.length) {
+      setIsValid(false);
+      return;
+    }
+
     onSubmit(values);
   };
+
+  useEffect(() => {
+    onReset();
+  }, []);
+
   return (
     <main className="sign-up">
       <section className="sign-up__wrapper">
@@ -30,6 +48,7 @@ export const SignUp = ({ errorText, onSubmit }) => {
           formError={""}
           btnDisabled={!isValid}
           errorText={errorText}
+          isRequiredFieldsError={isRequiredFieldsError}
           onSubmit={handleSubmit}
         >
           <FormInput

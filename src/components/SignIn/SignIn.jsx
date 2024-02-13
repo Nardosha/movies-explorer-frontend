@@ -3,16 +3,34 @@ import { FormInput } from "../FormInput/FormInput";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import Form from "../Form/Form";
 import { FormHeader } from "../FormHeader/FormHeader";
+import {useEffect, useState} from "react";
 
-export const SignIn = ({ errorText, onSubmit }) => {
-  const { values, isValid, handleChange, errors } = useFormWithValidation();
+export const SignIn = ({ errorText, onReset, onSubmit }) => {
+  const { values, isValid, handleChange, errors, setIsValid } =
+    useFormWithValidation();
+
   const { email, password } = values;
+
+  const isRequiredFieldsError =
+      !isValid && (!email?.length || !password?.length);
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
 
-    await onSubmit(values);
+    setIsValid(true);
+
+    if (!email?.length || !password?.length) {
+      setIsValid(false);
+
+      return;
+    }
+
+    onSubmit(values);
   };
+
+  useEffect(() => {
+    onReset();
+  }, []);
 
   return (
     <main className="sign-in">
@@ -31,6 +49,7 @@ export const SignIn = ({ errorText, onSubmit }) => {
           formError={""}
           btnDisabled={!isValid}
           errorText={errorText}
+          isRequiredFieldsError={isRequiredFieldsError}
           onSubmit={onFormSubmit}
         >
           <FormInput
