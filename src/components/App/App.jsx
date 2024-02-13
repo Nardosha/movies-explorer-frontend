@@ -201,7 +201,7 @@ function App() {
 
   const handleSignUp = async ({ name, email, password }) => {
     setIsLoading(true);
-    resetAuthError()
+    resetAuthError();
 
     try {
       const newUser = await signup({ name, email, password });
@@ -219,7 +219,7 @@ function App() {
 
   const handleSignOut = async () => {
     setIsLoading(true);
-    resetAuthError()
+    resetAuthError();
 
     try {
       await signOut();
@@ -240,11 +240,11 @@ function App() {
 
   const handleTokenCheck = useCallback(async () => {
     setIsLoading(true);
-    resetAuthError()
+    resetAuthError();
 
     try {
       const { data: user } = await getUserInfo();
-
+      console.log("setCurrentUser");
       setIsLogged(true);
       setCurrentUser({ ...user });
     } catch (err) {
@@ -256,13 +256,15 @@ function App() {
 
   const handleSignIn = async ({ email, password }) => {
     setIsLoading(true);
-    resetAuthError()
+    resetAuthError();
 
     try {
       const { data: user } = await signIn({ email, password });
 
-      setIsLogged(true);
-      navigate("/movies", { replace: true });
+      if (user) {
+        setIsLogged(true);
+        navigate("/movies", { replace: true });
+      }
     } catch (err) {
       console.log(err);
       setAuthError(err);
@@ -287,7 +289,7 @@ function App() {
 
   const handleUpdateUserInfo = async ({ name, email }) => {
     setIsLoading(true);
-    resetAuthError()
+    resetAuthError();
 
     try {
       const { data: user } = await updateUserInfo({ name, email });
@@ -492,12 +494,24 @@ function App() {
 
           <Route
             path="/signin"
-            element={<SignIn errorText={authError} onReset={resetAuthError} onSubmit={handleSignIn} />}
+            element={
+              <SignIn
+                errorText={authError}
+                onReset={resetAuthError}
+                onSubmit={handleSignIn}
+              />
+            }
           />
 
           <Route
             path="/signup"
-            element={<SignUp errorText={authError} onReset={resetAuthError} onSubmit={handleSignUp} />}
+            element={
+              <SignUp
+                errorText={authError}
+                onReset={resetAuthError}
+                onSubmit={handleSignUp}
+              />
+            }
           />
 
           <Route path="/*" element={<NotFoundPage />} />
