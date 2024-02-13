@@ -43,7 +43,6 @@ import { Footer } from "../Footer/Footer";
 function App() {
   const navigate = useNavigate();
 
-  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -195,6 +194,10 @@ function App() {
         }),
       ]);
     }
+
+    if (prevMoviesSwitcherState || prevMoviesSearch?.length) {
+      setMoviesFiltersIsDirty(true);
+    }
   };
 
   const resetAuthError = () => {
@@ -242,14 +245,11 @@ function App() {
   };
 
   const handleTokenCheck = useCallback(async () => {
-    console.log("handleTokenCheck");
     setIsLoading(true);
-    setIsTokenChecked(false);
     resetAuthError();
 
     try {
       const { data: user } = await getUserInfo();
-      console.log("setCurrentUser", user);
 
       setIsLogged(true);
       setCurrentUser(user);
@@ -427,10 +427,6 @@ function App() {
     setIsLoading(true);
     restoreDataFromLocalStorage();
   }, []);
-
-  useEffect(() => {
-    console.log(isLogged);
-  }, [isLogged]);
 
   return (
     <UserContext.Provider value={currentUser}>
