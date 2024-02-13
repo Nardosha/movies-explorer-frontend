@@ -317,7 +317,11 @@ function App() {
 
       if (!data) return;
 
-      await loadUserMovies();
+      setSavedMovies([
+        ...savedMovies.filter(
+          (savedMovie) => savedMovie.movieId !== movie.movieId,
+        ),
+      ]);
     } catch (err) {
       console.log(err);
     }
