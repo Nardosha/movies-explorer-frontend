@@ -3,8 +3,6 @@ import { MoreButton } from "../MoreButton/MoreButton";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { useMovieLoader } from "../../hooks/useMoviesLoader";
 import { LocalStorageKeys } from "../../constants/movies";
-import { useEffect, useState } from "react";
-import { NOT_FOUND_MOVIES_MESSAGE } from "../../constants/validation";
 
 export const Movies = ({
   movies,
@@ -15,34 +13,23 @@ export const Movies = ({
   onSearch,
   isLoading,
   loadErrorText,
+  hadFiltered,
   onToggle,
   onSaveMovie,
   onDeleteMovie,
 }) => {
   const { slicedMovies, showMore } = useMovieLoader(movies, loaderConfig);
-  const [emptyResultText, setEmptyResultText] = useState("");
 
   const isShowMoreButton =
-    movies.length > slicedMovies.length &&
-    !loadErrorText.length &&
-    !emptyResultText.length &&
-    !isLoading;
+    movies.length > slicedMovies.length && !loadErrorText.length && !isLoading;
 
   const handleSearch = (newSearch) => {
-    setEmptyResultText("");
     onSearch(newSearch, LocalStorageKeys.SEARCH.MOVIES);
   };
 
   const handleToggle = (newValue) => {
-    setEmptyResultText("");
     onToggle(newValue, LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES);
   };
-
-  useEffect(() => {
-    if (search.length && !slicedMovies.length) {
-      setEmptyResultText(NOT_FOUND_MOVIES_MESSAGE);
-    }
-  }, [movies, search, isLoading]);
 
   return (
     <main className="movies">
@@ -60,8 +47,8 @@ export const Movies = ({
           isLoading={isLoading}
           movies={slicedMovies}
           savedMovies={savedMovies}
-          emptyResultText={emptyResultText}
           loadErrorText={loadErrorText}
+          hadFiltered={hadFiltered}
           className="movies__list"
           onSaveMovie={onSaveMovie}
           onDeleteMovie={onDeleteMovie}

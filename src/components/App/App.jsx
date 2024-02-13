@@ -54,6 +54,10 @@ function App() {
   const [successText, setSuccessText] = useState(null);
   const [notificationTimer, setNotificationTimer] = useState(null);
 
+  const [moviesFiltersIsDirty, setMoviesFiltersIsDirty] = useState(false);
+  const [savedMoviesFiltersIsDirty, setSavedMoviesFiltersIsDirty] =
+    useState(false);
+
   const [search, setSearch] = useState("");
   const [savedMoviesSearch, setSavedMoviesSearch] = useState("");
   const [isToggled, setIsToggled] = useState(false);
@@ -79,6 +83,8 @@ function App() {
     setSearch("");
     setSavedMoviesSearch("");
     setIsToggled(false);
+    setMoviesFiltersIsDirty(false);
+    setSavedMoviesFiltersIsDirty(false);
   };
 
   const onSearch = (newSearch, key) => {
@@ -86,6 +92,7 @@ function App() {
 
     if (key === LocalStorageKeys.SEARCH.MOVIES) {
       setSearch(newSearch);
+      setMoviesFiltersIsDirty(true);
 
       const filteredMovies = filterMovies(initialMovies, {
         search: newSearch,
@@ -99,6 +106,7 @@ function App() {
 
     if (key === LocalStorageKeys.SEARCH.SAVED_MOVIES) {
       setSavedMoviesSearch(newSearch);
+      setSavedMoviesFiltersIsDirty(true);
       const filteredSavedMovies = filterMovies(savedMovies, {
         search: newSearch,
         isToggled: isSavedMoviesToggled,
@@ -113,19 +121,20 @@ function App() {
     setIsLoading(true);
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES) {
+      setIsToggled(newValue);
+      setMoviesFiltersIsDirty(true);
+      setToLocalStorage(key, newValue);
 
       if (search.length) {
-        setIsToggled(newValue);
-
         setFilteredMovies([
           ...filterMovies(initialMovies, { search, isToggled: newValue }),
         ]);
-        setToLocalStorage(key, newValue);
       }
     }
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_SAVED_MOVIES) {
       setIsSavedMoviesToggled(newValue);
+      setSavedMoviesFiltersIsDirty(true);
 
       setFilteredSavedMovies([
         ...filterMovies(savedMovies, {
@@ -434,6 +443,7 @@ function App() {
                 toggled={isToggled}
                 isLoading={isLoading}
                 loadErrorText={loadMovesErrorText}
+                hadFiltered={moviesFiltersIsDirty}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onSaveMovie={handleSaveMovie}
@@ -454,6 +464,7 @@ function App() {
                 toggled={isSavedMoviesToggled}
                 isLoading={isLoading}
                 loadErrorText={loadMovesErrorText}
+                hadFiltered={savedMoviesFiltersIsDirty}
                 onSearch={onSearch}
                 onToggle={onSwitcherToggle}
                 onDeleteMovie={handleDeleteMovie}

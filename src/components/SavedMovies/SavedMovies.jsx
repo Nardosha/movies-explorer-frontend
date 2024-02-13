@@ -12,6 +12,7 @@ export const SavedMovies = ({
   onToggle,
   showSavedMovies,
   onDeleteMovie,
+  hadFiltered,
 }) => {
   const handleSearch = (newSearch) => {
     onSearch(newSearch, LocalStorageKeys.SEARCH.SAVED_MOVIES);
@@ -35,6 +36,7 @@ export const SavedMovies = ({
         movies={movies}
         isLoading={isLoading}
         loadErrorText={loadErrorText}
+        hadFiltered={hadFiltered}
         showSavedMovies={showSavedMovies}
         onDeleteMovie={onDeleteMovie}
         className="saved-movies__list"

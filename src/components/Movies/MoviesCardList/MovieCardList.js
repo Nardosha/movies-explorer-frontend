@@ -11,13 +11,16 @@ export const MovieCardList = ({
   className,
   loadErrorText,
   isLoading,
+  hadFiltered,
   onSaveMovie,
   onDeleteMovie,
 }) => {
   const location = useLocation();
   const isMoviesLocation = location.pathname === "/movies";
 
-  const emptyResultText = !movies.length ? NOT_FOUND_MOVIES_MESSAGE : "";
+  const emptyResultText =
+    !movies.length && hadFiltered ? NOT_FOUND_MOVIES_MESSAGE : "";
+
   const errorText = emptyResultText || loadErrorText;
 
   return (
