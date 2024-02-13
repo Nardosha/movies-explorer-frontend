@@ -5,11 +5,11 @@ import { Hero } from "./Hero/Hero";
 
 export const Home = () => {
   return (
-    <div className="home">
+    <main className="home">
       <Hero />
       <AboutProject id="about-project" />
       <Techs id="techs" />
       <AboutMe id="about-me" />
-    </div>
+    </main>
   );
 };

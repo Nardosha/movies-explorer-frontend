@@ -1,6 +1,6 @@
-export const AboutProject = ({id, className}) => {
+export const AboutProject = ({ id, className }) => {
   return (
-    <div id={id} className={`about-project ${className}`}>
+    <section id={id} className={`about-project ${className}`}>
       <h2 className="about-project__title">О проекте</h2>
 
       <ul className="about-project__list">
@@ -39,6 +39,6 @@ export const AboutProject = ({id, className}) => {
           <p className="about-project__scheme-item">Front-end</p>
         </li>
       </ul>
-    </div>
+    </section>
   );
 };

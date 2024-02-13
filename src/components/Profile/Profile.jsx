@@ -45,8 +45,8 @@ export const Profile = ({ errorText, successText, onSignOut, onUpdateUser }) => 
   }, [currentUser, setValues, resetForm]);
 
   return (
-    <main className="profile">
-      <section className="profile__wrapper">
+    <section className="profile">
+      <div className="profile__wrapper">
         <FormHeader
           className="profile__title"
           title={`Привет, ${currentUser.name}!`}
@@ -139,7 +139,7 @@ export const Profile = ({ errorText, successText, onSignOut, onUpdateUser }) => 
             </li>
           </ul>
         )}
-      </section>
-    </main>
+      </div>
+    </section>
   );
 };

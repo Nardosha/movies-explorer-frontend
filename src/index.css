@@ -10,7 +10,7 @@
 @import "./components/FormHeader/FormHeader.css";
 
 @import "./components/App/App.css";
-
+@import "./components/Layout/Layout.css";
 @import "./components/Home/Home.css";
 @import "./components/Home/Hero/Hero.css";
 @import "./components/Home/NavTab/NavTab.css";

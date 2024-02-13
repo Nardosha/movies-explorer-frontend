@@ -37,10 +37,13 @@ import {
 import { loadMovies } from "../../utils/MoviesApi";
 import { Home } from "../Home/Home";
 import { Layout } from "../Layout/Layout";
+import { Header } from "../Header/Header";
+import { Footer } from "../Footer/Footer";
 
 function App() {
   const navigate = useNavigate();
 
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -241,11 +244,13 @@ function App() {
   const handleTokenCheck = useCallback(async () => {
     console.log("handleTokenCheck");
     setIsLoading(true);
+    setIsTokenChecked(false);
     resetAuthError();
 
     try {
       const { data: user } = await getUserInfo();
-      console.log("setCurrentUser");
+      console.log("setCurrentUser", user);
+
       setIsLogged(true);
       setCurrentUser(user);
     } catch (err) {
@@ -409,7 +414,7 @@ function App() {
   }, [savedMoviesSearch, isSavedMoviesToggled]);
 
   useEffect(() => {
-    handleTokenCheck()
+    (async () => handleTokenCheck())();
   }, [isLogged, handleTokenCheck]);
 
   useEffect(() => {
@@ -430,7 +435,15 @@ function App() {
   return (
     <UserContext.Provider value={currentUser}>
       <div className={isMenuOpen ? "app app_menu-active" : "app"}>
+        <Header
+          isLogged={isLogged}
+          isMenuOpen={isMenuOpen}
+          onMenuToggle={handleOpenMenu}
+        />
+
         <Routes>
+          <Route index element={<Home />} />
+
           <Route
             path="/"
             element={
@@ -442,7 +455,6 @@ function App() {
               />
             }
           >
-            <Route index element={<Home />} />
             <Route
               path="movies"
               element={
@@ -524,6 +536,7 @@ function App() {
 
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
+        {isShowFooter && <Footer />}
       </div>
     </UserContext.Provider>
   );
