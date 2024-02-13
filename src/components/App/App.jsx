@@ -1,15 +1,12 @@
 import "./App.css";
-import { Header } from "../Header/Header";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage";
-import { Main } from "../Main/Main";
 import { useCallback, useEffect, useState } from "react";
 import { Movies } from "../Movies/Movies";
 import { SavedMovies } from "../SavedMovies/SavedMovies";
 import { Profile } from "../Profile/Profile";
 import { SignIn } from "../SignIn/SignIn";
 import { SignUp } from "../SignUp/SignUp";
-import { Footer } from "../Footer/Footer";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { UserContext } from "../../contexts/UserContext";
 import { UseWindowSize } from "../../hooks/UseWindowSize";
@@ -38,6 +35,8 @@ import {
   UPDATE_USER_INFO_SUCCESS_TEXT,
 } from "../../constants/validation";
 import { loadMovies } from "../../utils/MoviesApi";
+import { Home } from "../Home/Home";
+import { Layout } from "../Layout/Layout";
 
 function App() {
   const navigate = useNavigate();
@@ -66,7 +65,7 @@ function App() {
 
   const screenWidth = UseWindowSize();
   const { deviceType, loaderConfig } = UseLoaderConfig(screenWidth);
-  const { isShowHeader, isShowFooter, isSavedMoviesOpened } = useLocationHook();
+  const { isShowFooter, isSavedMoviesOpened } = useLocationHook();
 
   const handleOpenMenu = (value) => {
     if (deviceType === "LAPTOP") return;
@@ -209,6 +208,7 @@ function App() {
       if (!newUser) return;
 
       await handleSignIn({ email, password });
+      navigate("/movies", { replace: true });
     } catch (err) {
       console.log(err);
       setAuthError(err);
@@ -239,6 +239,7 @@ function App() {
   };
 
   const handleTokenCheck = useCallback(async () => {
+    console.log("handleTokenCheck");
     setIsLoading(true);
     resetAuthError();
 
@@ -246,7 +247,7 @@ function App() {
       const { data: user } = await getUserInfo();
       console.log("setCurrentUser");
       setIsLogged(true);
-      setCurrentUser({ ...user });
+      setCurrentUser(user);
     } catch (err) {
       console.log(err);
     } finally {
@@ -408,89 +409,96 @@ function App() {
   }, [savedMoviesSearch, isSavedMoviesToggled]);
 
   useEffect(() => {
-    (async () => handleTokenCheck())();
+    handleTokenCheck()
   }, [isLogged, handleTokenCheck]);
 
   useEffect(() => {
     if (!isLogged) return;
 
     (async () => handleLoadMovies())();
-  }, [isLogged, handleTokenCheck]);
+  }, [isLogged]);
 
   useEffect(() => {
     setIsLoading(true);
     restoreDataFromLocalStorage();
   }, []);
 
+  useEffect(() => {
+    console.log(isLogged);
+  }, [isLogged]);
+
   return (
     <UserContext.Provider value={currentUser}>
       <div className={isMenuOpen ? "app app_menu-active" : "app"}>
-        {isShowHeader && (
-          <Header
-            isLogged={isLogged}
-            isMenuOpen={isMenuOpen}
-            onMenuToggle={handleOpenMenu}
-          />
-        )}
-
         <Routes>
-          <Route path="/" element={<Main />} />
-
           <Route
-            path="/movies"
+            path="/"
             element={
-              <ProtectedRoute
-                element={Movies}
+              <Layout
                 isLogged={isLogged}
-                movies={filteredMovies}
-                savedMovies={savedMovies}
-                loaderConfig={loaderConfig}
-                search={search}
-                toggled={isToggled}
-                isLoading={isLoading}
-                loadErrorText={loadMovesErrorText}
-                hadFiltered={moviesFiltersIsDirty}
-                onSearch={onSearch}
-                onToggle={onSwitcherToggle}
-                onSaveMovie={handleSaveMovie}
-                onDeleteMovie={handleDeleteMovie}
+                isShowFooter={isShowFooter}
+                isMenuOpen={isMenuOpen}
+                onMenuToggle={handleOpenMenu}
               />
             }
-          />
+          >
+            <Route index element={<Home />} />
+            <Route
+              path="movies"
+              element={
+                <ProtectedRoute
+                  element={Movies}
+                  isLogged={isLogged}
+                  movies={filteredMovies}
+                  savedMovies={savedMovies}
+                  loaderConfig={loaderConfig}
+                  search={search}
+                  toggled={isToggled}
+                  isLoading={isLoading}
+                  loadErrorText={loadMovesErrorText}
+                  hadFiltered={moviesFiltersIsDirty}
+                  onSearch={onSearch}
+                  onToggle={onSwitcherToggle}
+                  onSaveMovie={handleSaveMovie}
+                  onDeleteMovie={handleDeleteMovie}
+                />
+              }
+            />
 
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute
-                isLogged={isLogged}
-                element={SavedMovies}
-                movies={filteredSavedMovies}
-                showSavedMovies={true}
-                search={savedMoviesSearch}
-                toggled={isSavedMoviesToggled}
-                isLoading={isLoading}
-                loadErrorText={loadMovesErrorText}
-                hadFiltered={savedMoviesFiltersIsDirty}
-                onSearch={onSearch}
-                onToggle={onSwitcherToggle}
-                onDeleteMovie={handleDeleteMovie}
-              />
-            }
-          />
+            <Route
+              path="saved-movies"
+              element={
+                <ProtectedRoute
+                  isLogged={isLogged}
+                  element={SavedMovies}
+                  movies={filteredSavedMovies}
+                  showSavedMovies={true}
+                  search={savedMoviesSearch}
+                  toggled={isSavedMoviesToggled}
+                  isLoading={isLoading}
+                  loadErrorText={loadMovesErrorText}
+                  hadFiltered={savedMoviesFiltersIsDirty}
+                  onSearch={onSearch}
+                  onToggle={onSwitcherToggle}
+                  onDeleteMovie={handleDeleteMovie}
+                />
+              }
+            />
 
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute
-                isLogged={isLogged}
-                element={Profile}
-                errorText={authError}
-                successText={successText}
-                onSignOut={handleSignOut}
-                onUpdateUser={handleUpdateUserInfo}
-              />
-            }
-          />
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute
+                  isLogged={isLogged}
+                  element={Profile}
+                  errorText={authError}
+                  successText={successText}
+                  onSignOut={handleSignOut}
+                  onUpdateUser={handleUpdateUserInfo}
+                />
+              }
+            />
+          </Route>
 
           <Route
             path="/signin"
@@ -516,8 +524,6 @@ function App() {
 
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
-
-        {isShowFooter && <Footer />}
       </div>
     </UserContext.Provider>
   );

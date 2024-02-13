@@ -10,13 +10,13 @@
 @import "./components/FormHeader/FormHeader.css";
 
 @import "./components/App/App.css";
-@import "./components/Main/Main.css";
-@import "./components/Main/Hero/Hero.css";
-@import "./components/Main/NavTab/NavTab.css";
-@import "./components/Main/Promo/Promo.css";
-@import "./components/Main/AboutProject/AboutProject.css";
-@import "./components/Main/Techs/Techs.css";
-@import "./components/Main/AboutMe/AboutMe.css";
+
+@import "./components/Home/Home.css";
+@import "./components/Home/Hero/Hero.css";
+@import "./components/Home/NavTab/NavTab.css";
+@import "./components/Home/AboutProject/AboutProject.css";
+@import "./components/Home/Techs/Techs.css";
+@import "./components/Home/AboutMe/AboutMe.css";
 @import "./components/Footer/Footer.css";
 
 @import "./components/Movies/MoviesCardList/MovieCardList.css";
