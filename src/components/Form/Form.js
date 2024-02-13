@@ -1,5 +1,6 @@
 import React from "react";
 import { SubmitButton } from "../SubmitButton/SubmitButton";
+import { REQUIRED_FIELDS_VALIDATION_TEXT } from "../../constants/validation";
 
 const Form = ({
   onSubmit,
@@ -10,6 +11,7 @@ const Form = ({
   btnDisabled,
   btnClassName,
   errorText,
+  isRequiredFieldsError,
   successText,
   className,
   isEdit = true,
@@ -25,8 +27,15 @@ const Form = ({
       <fieldset className="form__inputs">
         {children}
 
-        {errorText && <div className="form__error">{errorText}</div>}
-        {successText && <div className="form__success">{successText}</div>}
+        <div className="form__valid-status">
+          {errorText && <div className="form__error">{errorText}</div>}
+
+          {isRequiredFieldsError && (
+            <div className="form__error">{REQUIRED_FIELDS_VALIDATION_TEXT}</div>
+          )}
+
+          {successText && <div className="form__success">{successText}</div>}
+        </div>
       </fieldset>
 
       {isEdit && (
