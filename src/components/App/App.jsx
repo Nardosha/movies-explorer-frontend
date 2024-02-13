@@ -42,7 +42,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
-  const [preloaderTimeout, setPreloaderTimeout] = useState(null);
   const [initialMovies, setInitialMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,6 +62,13 @@ function App() {
     if (deviceType === "LAPTOP") return;
 
     setIsMenuOpen(value);
+  };
+
+  const filterResetStates = () => {
+    setSearch("");
+    setSavedMoviesSearch("");
+    setIsToggled(false);
+    setIsSavedMoviesToggled(false);
   };
 
   const onSearch = (newSearch, key) => {
@@ -94,17 +100,17 @@ function App() {
   };
 
   const onSwitcherToggle = (newValue, key) => {
-    setIsLoading(true)
+    setIsLoading(true);
     setToLocalStorage(key, newValue);
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_MOVIES) {
       setIsToggled(newValue);
 
-      setFilteredMovies([
-        ...filterMovies(initialMovies, { search, isToggled: newValue }),
-      ]);
-
-      return;
+      if (search.length) {
+        setFilteredMovies([
+          ...filterMovies(initialMovies, { search, isToggled: newValue }),
+        ]);
+      }
     }
 
     if (key === LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_SAVED_MOVIES) {
@@ -117,6 +123,8 @@ function App() {
         }),
       ]);
     }
+
+    setIsLoading(false);
   };
 
   const handleLoadMovies = useCallback(async () => {
@@ -213,6 +221,8 @@ function App() {
       setIsLogged(false);
       setCurrentUser(null);
       setSavedMovies([]);
+      setFilteredMovies([]);
+      filterResetStates();
       clearLocalStorage();
       navigate("/", { replace: true });
     } catch (err) {
@@ -230,7 +240,6 @@ function App() {
     try {
       const { data: user } = await getUserInfo();
 
-      console.log(user)
       setIsLogged(true);
       setCurrentUser({ ...user });
     } catch (err) {
@@ -334,9 +343,9 @@ function App() {
   }, [initialMovies]);
 
   useEffect(() => {
-    setIsLoading(true);
-
     if (!search.length) return;
+
+    setIsLoading(true);
 
     setFilteredMovies([...filterMovies(initialMovies, { search, isToggled })]);
 
