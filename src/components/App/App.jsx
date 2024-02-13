@@ -195,9 +195,13 @@ function App() {
     }
   };
 
+  const resetAuthError = () => {
+    setAuthError(null);
+  };
+
   const handleSignUp = async ({ name, email, password }) => {
     setIsLoading(true);
-    setAuthError(null);
+    resetAuthError()
 
     try {
       const newUser = await signup({ name, email, password });
@@ -215,7 +219,7 @@ function App() {
 
   const handleSignOut = async () => {
     setIsLoading(true);
-    setAuthError(null);
+    resetAuthError()
 
     try {
       await signOut();
@@ -236,7 +240,7 @@ function App() {
 
   const handleTokenCheck = useCallback(async () => {
     setIsLoading(true);
-    setAuthError(null);
+    resetAuthError()
 
     try {
       const { data: user } = await getUserInfo();
@@ -252,7 +256,7 @@ function App() {
 
   const handleSignIn = async ({ email, password }) => {
     setIsLoading(true);
-    setAuthError(null);
+    resetAuthError()
 
     try {
       const { data: user } = await signIn({ email, password });
@@ -283,7 +287,7 @@ function App() {
 
   const handleUpdateUserInfo = async ({ name, email }) => {
     setIsLoading(true);
-    setAuthError(null);
+    resetAuthError()
 
     try {
       const { data: user } = await updateUserInfo({ name, email });
@@ -488,12 +492,12 @@ function App() {
 
           <Route
             path="/signin"
-            element={<SignIn errorText={authError} onSubmit={handleSignIn} />}
+            element={<SignIn errorText={authError} onReset={resetAuthError} onSubmit={handleSignIn} />}
           />
 
           <Route
             path="/signup"
-            element={<SignUp errorText={authError} onSubmit={handleSignUp} />}
+            element={<SignUp errorText={authError} onReset={resetAuthError} onSubmit={handleSignUp} />}
           />
 
           <Route path="/*" element={<NotFoundPage />} />
