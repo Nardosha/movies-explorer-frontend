@@ -37,12 +37,12 @@ import {
 import { loadMovies } from "../../utils/MoviesApi";
 import { Home } from "../Home/Home";
 import { Layout } from "../Layout/Layout";
-import { Header } from "../Header/Header";
-import { Footer } from "../Footer/Footer";
+import { Preloader } from "../Preloader/Preloader";
 
 function App() {
   const navigate = useNavigate();
 
+  const [isContentLoading, setIsContentLoading] = useState(true);
   const [isLogged, setIsLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -69,7 +69,7 @@ function App() {
   const { deviceType, loaderConfig } = UseLoaderConfig(screenWidth);
   const { isShowFooter, isSavedMoviesOpened } = useLocationHook();
 
-  const handleOpenMenu = (value) => {
+  const onMenuToggle = (value) => {
     if (deviceType === "LAPTOP") return;
 
     setIsMenuOpen(value);
@@ -257,6 +257,7 @@ function App() {
       console.log(err);
     } finally {
       setIsLoading(false);
+      setIsContentLoading(false);
     }
   }, []);
 
@@ -428,18 +429,12 @@ function App() {
     restoreDataFromLocalStorage();
   }, []);
 
-  return (
-    <UserContext.Provider value={currentUser}>
-      <div className={isMenuOpen ? "app app_menu-active" : "app"}>
-        <Header
-          isLogged={isLogged}
-          isMenuOpen={isMenuOpen}
-          onMenuToggle={handleOpenMenu}
-        />
-
+  return isContentLoading ? (
+    <Preloader />
+  ) : (
+    <div className={isMenuOpen ? "app app_menu-active" : "app"}>
+      <UserContext.Provider value={currentUser}>
         <Routes>
-          <Route index element={<Home />} />
-
           <Route
             path="/"
             element={
@@ -447,10 +442,12 @@ function App() {
                 isLogged={isLogged}
                 isShowFooter={isShowFooter}
                 isMenuOpen={isMenuOpen}
-                onMenuToggle={handleOpenMenu}
+                onMenuToggle={onMenuToggle}
               />
             }
           >
+            <Route index element={<Home />} />
+
             <Route
               path="movies"
               element={
@@ -512,6 +509,7 @@ function App() {
             path="/signin"
             element={
               <SignIn
+                isLogged={isLogged}
                 errorText={authError}
                 onReset={resetAuthError}
                 onSubmit={handleSignIn}
@@ -523,6 +521,7 @@ function App() {
             path="/signup"
             element={
               <SignUp
+                isLogged={isLogged}
                 errorText={authError}
                 onReset={resetAuthError}
                 onSubmit={handleSignUp}
@@ -532,9 +531,8 @@ function App() {
 
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
-        {isShowFooter && <Footer />}
-      </div>
-    </UserContext.Provider>
+      </UserContext.Provider>
+    </div>
   );
 }
 export default App;
