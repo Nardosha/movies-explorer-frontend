@@ -330,7 +330,7 @@ function App() {
 
       if (!movie) return;
 
-      await loadUserMovies();
+      setSavedMovies([...savedMovies, movie]);
     } catch (err) {
       console.log(err);
     }

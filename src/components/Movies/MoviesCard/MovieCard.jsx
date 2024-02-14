@@ -21,8 +21,6 @@ export const MovieCard = ({
       : initialMovie.image,
   };
   const saveMovie = () => {
-    console.log("saveMovie");
-
     onSaveMovie(initialMovie);
   };
 
