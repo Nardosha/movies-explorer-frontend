@@ -1,18 +1,18 @@
-import { NavLink } from "react-router-dom";
-import { FormInput } from "../FormInput/FormInput";
-import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import { useEffect } from "react";
+import { Navigate, NavLink } from "react-router-dom";
 import Form from "../Form/Form";
 import { FormHeader } from "../FormHeader/FormHeader";
-import {useEffect, useState} from "react";
+import { FormInput } from "../FormInput/FormInput";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-export const SignIn = ({ errorText, onReset, onSubmit }) => {
+export const SignIn = ({ isLogged, errorText, onReset, onSubmit }) => {
   const { values, isValid, handleChange, errors, setIsValid } =
     useFormWithValidation();
 
   const { email, password } = values;
 
   const isRequiredFieldsError =
-      !isValid && (!email?.length || !password?.length);
+    !isValid && (!email?.length || !password?.length);
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +32,9 @@ export const SignIn = ({ errorText, onReset, onSubmit }) => {
     onReset();
   }, []);
 
-  return (
+  return isLogged ? (
+    <Navigate to="/" replace />
+  ) : (
     <main className="sign-in">
       <section className="sign-in__wrapper">
         <FormHeader
