@@ -1,55 +1,95 @@
-import { NavLink } from "react-router-dom";
-import { Logo } from "../Logo/Logo";
+import { useEffect } from "react";
+import { Navigate, NavLink } from "react-router-dom";
+import Form from "../Form/Form";
+import { FormHeader } from "../FormHeader/FormHeader";
 import { FormInput } from "../FormInput/FormInput";
-import { SubmitButton } from "../SubmitButton/SubmitButton";
-import { useState } from "react";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-export const SignIn = () => {
-  const [isFormValid, setIsFormValid] = useState(true);
-  const [formErrorText, setFormErrorText] = useState("");
+export const SignIn = ({ isLogged, errorText, onReset, onSubmit }) => {
+  const { values, isValid, handleChange, errors, setIsValid } =
+    useFormWithValidation();
 
-  return (
+  const { email, password } = values;
+
+  const isRequiredFieldsError =
+    !isValid && (!email?.length || !password?.length);
+
+  const onFormSubmit = async (e) => {
+    e.preventDefault();
+
+    setIsValid(true);
+
+    if (!email?.length || !password?.length) {
+      setIsValid(false);
+
+      return;
+    }
+
+    onSubmit(values);
+  };
+
+  useEffect(() => {
+    onReset();
+  }, []);
+
+  return isLogged ? (
+    <Navigate to="/" replace />
+  ) : (
     <main className="sign-in">
-      <Logo className="sign-in__logo" />
+      <section className="sign-in__wrapper">
+        <FormHeader
+          title="Рады видеть!"
+          showLogo={true}
+          className="sign-in__header"
+        />
 
-      <h1 className="sign-in__title">Рады видеть!</h1>
-
-      <form action="#" className="sign-in__form">
-        <div className="sign-in__form-inputs">
+        <Form
+          title={"Вход"}
+          buttonText={"Войти"}
+          isValid={isValid}
+          className="sign-in__form"
+          formError={""}
+          btnDisabled={!isValid}
+          errorText={errorText}
+          isRequiredFieldsError={isRequiredFieldsError}
+          onSubmit={onFormSubmit}
+        >
           <FormInput
-            label="E-mail"
-            type="email"
             id="email"
-            name="email"
-            placeholder="Введите e-mail"
-            className="sign-in__email-input"
+            errorText={errors.email}
+            value={email || ""}
             required
+            name="email"
+            type="email"
+            label="E-mail"
+            placeholder="Введите e-mail"
+            className="form__input sign-in__email-input"
+            onChange={(e) => handleChange(e)}
           />
 
           <FormInput
-            label="Пароль"
-            type="password"
             id="password"
+            value={password || ""}
+            errorText={errors.password}
+            required
             name="password"
-            placeholder="Введите пароль"
-            className="sign-in__password-input"
+            type="password"
+            label="Пароль"
             minLength="2"
             maxLength="30"
-            required
+            placeholder="Введите пароль"
+            className="form__input sign-in__password-input"
+            onChange={(e) => handleChange(e)}
           />
+        </Form>
 
-          <div className="sign-in__error-message">{formErrorText}</div>
+        <div className="sign-in__navigation">
+          <span>Ещё не зарегистрированы?</span>
+          <NavLink className="sign-in__sign-up-link" to="/signup">
+            Регистрация
+          </NavLink>
         </div>
-
-        <SubmitButton text="Войти" className="sign-in__submit-button" />
-      </form>
-
-      <div className="sign-in__navigation">
-        <span>Ещё не зарегистрированы?</span>
-        <NavLink className="sign-in__sign-up-link" to="/signup">
-          Регистрация
-        </NavLink>
-      </div>
+      </section>
     </main>
   );
 };

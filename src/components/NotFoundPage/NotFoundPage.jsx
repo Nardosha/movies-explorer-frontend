@@ -1,6 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const NotFoundPage = () => {
+  const navigate = useNavigate();
+
+  function goBack() {
+    navigate(-1);
+  }
   return (
     <main className="not-found-page">
       <div className="not-found-page__container">
@@ -8,9 +13,9 @@ export const NotFoundPage = () => {
         <p className="not-found-page__subtitle">Страница не найдена</p>
       </div>
 
-      <NavLink to="/" replace className="not-found-page__link-back">
+      <button href="#" className="not-found-page__link-back" onClick={goBack}>
         Назад
-      </NavLink>
+      </button>
     </main>
   );
 };

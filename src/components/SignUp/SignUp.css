@@ -1,4 +1,5 @@
 .sign-up {
+  flex: 1 0 auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -7,42 +8,28 @@
   padding: 56px 30px 30px 30px;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
 }
 
-.sign-up__logo {
-  margin: 0 auto 50px auto;
-}
-
-.sign-up__title {
-  color: var(--main-text-color);
-  font-family: var(--font-family);
-  font-size: 24px;
-  font-weight: 500;
-  line-height: normal;
+.sign-up__wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   padding: 0;
-  margin: 0 auto 80px auto;
+  margin: 0;
+}
+
+.sign-up__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 80px 0;
 }
 
 .sign-up__form {
-  position: relative;
-  color: var(--main-text-color);
-  font-family: var(--font-family);
-  font-size: 13px;
-  font-weight: 400;
-  line-height: normal;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-  flex: 1 1 auto;
-}
-
-.sign-up__form-inputs {
-  height: 100%;
-  width: 100%;
+  margin: 0 0 14px 0;
 }
 
 .sign-up__name-input {
@@ -52,18 +39,11 @@
 .sign-up__email-input {
   margin: 0 0 20px 0;
 }
+
 .sign-up__password-input {
   margin: 0 0 10px 0;
 }
 
-.sign-up__error-message {
-  color: var(--text-red-color);
-  font-size: 10px;
-}
-
-.sign-up__submit-button {
-  margin: 0 0 14px 0;
-}
 .sign-up__navigation {
   color: var(--gray-text-color);
   font-family: var(--font-family);
@@ -72,6 +52,7 @@
   line-height: normal;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
 }
 
@@ -83,32 +64,18 @@
 
 @media (min-width: 321px) {
   .sign-up {
-    max-width: 396px;
     padding: 0;
-    margin: 0 auto;
+    /*flex: unset;*/
+    margin: 0 -15px;
   }
 
-  .sign-up__logo {
-    align-self: flex-start;
+  .sign-up__wrapper {
+    padding: 0 15px;
+  }
+
+  .sign-up__header {
+    justify-content: flex-start;
     margin: 0 0 40px 0;
-  }
-
-  .sign-up__title {
-    align-self: flex-start;
-    margin: 0 0 40px 0;
-  }
-
-  .sign-up__form {
-    flex: unset;
-    max-width: 396px;
-  }
-
-  .sign-up__error-message {
-    min-height: 12px;
-  }
-
-  .sign-up__form-inputs {
-    margin: 0 0 69px 0;
   }
 
   .sign-up__navigation {

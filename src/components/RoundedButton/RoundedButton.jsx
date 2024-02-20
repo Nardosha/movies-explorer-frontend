@@ -1,8 +1,9 @@
-export const RoundedButton = ({ title, className }) => {
+export const RoundedButton = ({ title, className, onClick }) => {
   return (
     <button
-      className={`rounded-button  rounded-button_active ${className}`}
+      onClick={onClick}
       type="button"
+      className={`rounded-button  rounded-button_active ${className}`}
     >
       {title}
     </button>

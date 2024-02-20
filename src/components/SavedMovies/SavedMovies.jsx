@@ -1,17 +1,46 @@
-import { SearchForm } from "../Movies/SearchForm/SearchForm";
+import { SearchForm } from "../SearchForm/SearchForm";
 import { MovieCardList } from "../Movies/MoviesCardList/MovieCardList";
-import { MoreButton } from "../MoreButton/MoreButton";
+import { LocalStorageKeys } from "../../constants/movies";
 
-export const SavedMovies = ({ movies, showSavedMovies }) => {
-  const savedMovies = movies.filter((movie) => movie.isSaved);
+export const SavedMovies = ({
+  movies,
+  search,
+  toggled,
+  isLoading,
+  loadErrorText,
+  onSearch,
+  onToggle,
+  showSavedMovies,
+  onDeleteMovie,
+  hadFiltered,
+}) => {
+  const handleSearch = (newSearch) => {
+    onSearch(newSearch, LocalStorageKeys.SEARCH.SAVED_MOVIES);
+  };
+
+  const handleToggle = (newValue) => {
+    onToggle(newValue, LocalStorageKeys.TOGGLE.IS_SHOW_SHORT_SAVED_MOVIES);
+  };
 
   return (
     <main className="saved-movies">
-      <SearchForm className="saved-movies__search-form" />
+      <SearchForm
+        search={search}
+        toggled={toggled}
+        onSearch={handleSearch}
+        onToggle={handleToggle}
+        className="saved-movies__search-form"
+      />
 
-      <MovieCardList movies={savedMovies} showSavedMovies={showSavedMovies} className="saved-movies__list"/>
-
-      <MoreButton className="saved-movies__more-button" />
+      <MovieCardList
+        movies={movies}
+        isLoading={isLoading}
+        loadErrorText={loadErrorText}
+        hadFiltered={hadFiltered}
+        showSavedMovies={showSavedMovies}
+        onDeleteMovie={onDeleteMovie}
+        className="saved-movies__list"
+      />
     </main>
   );
 };

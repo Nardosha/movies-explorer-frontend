@@ -17,6 +17,11 @@
   margin: 0;
 }
 
-.submit-button:hover {
+.submit-button:not(.submit-button_state_disabled):hover {
   opacity: 0.7;
+}
+
+.submit-button_state_disabled {
+  cursor: unset;
+  background-color: var(--gray-text-color);
 }

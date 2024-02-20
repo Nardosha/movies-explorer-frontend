@@ -1,69 +1,109 @@
-import { NavLink } from "react-router-dom";
-import { Logo } from "../Logo/Logo";
+import { useEffect } from "react";
+import { Navigate, NavLink } from "react-router-dom";
+import Form from "../Form/Form";
+import { FormHeader } from "../FormHeader/FormHeader";
 import { FormInput } from "../FormInput/FormInput";
-import { SubmitButton } from "../SubmitButton/SubmitButton";
-import { useState } from "react";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import { USER_NAME_VALIDATION } from "../../constants/validation";
 
-export const SignUp = () => {
-  const [isFormValid, setIsFormValid] = useState(true);
-  const [formErrorText, setFormErrorText] = useState("");
+export const SignUp = ({ isLogged, errorText, onReset, onSubmit }) => {
+  const { values, isValid, handleChange, errors, setIsValid } =
+    useFormWithValidation();
 
-  return (
+  const { name, email, password } = values;
+
+  const isRequiredFieldsError =
+    !isValid && (!name?.length || !email?.length || !password?.length);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setIsValid(true);
+
+    if (!name?.length || !email?.length || !password?.length) {
+      setIsValid(false);
+      return;
+    }
+
+    onSubmit(values);
+  };
+
+  useEffect(() => {
+    onReset();
+  }, []);
+
+  return isLogged ? (
+    <Navigate to="/" replace />
+  ) : (
     <main className="sign-up">
-      <Logo className="sign-up__logo" />
+      <section className="sign-up__wrapper">
+        <FormHeader
+          title="Добро пожаловать!"
+          showLogo={true}
+          className="sign-up__header"
+        />
 
-      <h1 className="sign-up__title">Добро пожаловать!</h1>
-
-      <form action="#" className="sign-up__form">
-        <div className="sign-up__form-inputs">
+        <Form
+          buttonText={"Зарегистрироваться"}
+          isValid={isValid}
+          className="sign-up__form"
+          formError={""}
+          btnDisabled={!isValid}
+          errorText={errorText}
+          isRequiredFieldsError={isRequiredFieldsError}
+          onSubmit={handleSubmit}
+        >
           <FormInput
-            label="Имя"
             id="name"
-            name="name"
-            placeholder="Введите имя"
+            value={name || ""}
+            errorText={errors.name}
             required
-            className="sign-up__name-input"
+            pattern={USER_NAME_VALIDATION}
+            name="name"
+            label="Имя"
             minLength="2"
             maxLength="30"
+            placeholder="Введите имя"
+            className="sign-up__name-input"
+            onChange={(e) => handleChange(e)}
           />
 
           <FormInput
-            label="E-mail"
             id="email"
+            value={email || ""}
+            errorText={errors.email}
+            required
             name="email"
             type="email"
+            label="E-mail"
             placeholder="Введите e-mail"
             className="sign-up__email-input"
-            required
+            onChange={(e) => handleChange(e)}
           />
 
           <FormInput
-            label="Пароль"
             id="password"
+            value={password || ""}
+            errorText={errors.password}
+            required
             name="password"
             type="password"
+            label="Пароль"
             placeholder="Введите пароль"
-            className="sign-up__password-input"
             minLength="2"
             maxLength="30"
-            required
+            className="sign-up__password-input"
+            onChange={(e) => handleChange(e)}
           />
+        </Form>
 
-          <div className="sign-up__error-message">{formErrorText}</div>
+        <div className="sign-up__navigation">
+          <span>Уже зарегистрированы?</span>
+          <NavLink className="sign-up__sign-in-link" to="/signin">
+            Войти
+          </NavLink>
         </div>
-
-        <SubmitButton
-          text="Зарегистрироваться"
-          className="sign-up__submit-button"
-        />
-      </form>
-
-      <div className="sign-up__navigation">
-        <span>Уже зарегистрированы?</span>
-        <NavLink className="sign-up__sign-in-link" to="/signin">
-          Войти
-        </NavLink>
-      </div>
+      </section>
     </main>
   );
 };

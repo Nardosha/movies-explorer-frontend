@@ -1,90 +1,145 @@
-import { NavLink } from "react-router-dom";
-import { SubmitButton } from "../SubmitButton/SubmitButton";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
+import Form from "../Form/Form";
+import { FormHeader } from "../FormHeader/FormHeader";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import { USER_NAME_VALIDATION } from "../../constants/validation";
 
-export const Profile = () => {
+export const Profile = ({ errorText, successText, onSignOut, onUpdateUser }) => {
+  const { values, isValid, handleChange, errors, setValues, resetForm } =
+    useFormWithValidation();
+  const { name, email } = values;
+
+  const currentUser = useContext(UserContext);
   const [isEdit, setIsEdit] = useState(false);
-  const onChange = (e) => {
-    console.log("onChange", e);
+  const [isDirtyForm, setIsDirtyForm] = useState(false);
+
+  const onEditButtonClick = () => {
+    setIsEdit(true);
+    setIsDirtyForm(() => isValuesChanged());
   };
 
-  const onEditButtonClick = (e) => {
-    console.log("onEditButtonClick");
-    setIsEdit(() => !isEdit);
+  const isValuesChanged = () => {
+   return  Object.keys(values).some(
+      (key) => values[key].trim() !== currentUser[key],
+    );
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (!isValuesChanged()) return;
+
+    onUpdateUser(values);
+    setIsEdit(false);
+  };
+
+  useEffect(() => {
+    setIsDirtyForm(() => isValuesChanged());
+  }, [values]);
+
+  useEffect(() => {
+    resetForm();
+
+    setValues({ name: currentUser.name, email: currentUser.email });
+  }, [currentUser, setValues, resetForm]);
 
   return (
-    <main className="profile">
-      <h1 className="profile__title">Привет, Виталий!</h1>
+    <section className="profile">
+      <div className="profile__wrapper">
+        <FormHeader
+          className="profile__title"
+          title={`Привет, ${currentUser.name}!`}
+        />
 
-      <form action="#" className="profile__form">
-        <div className="profile__form-item">
-          <label
-            htmlFor="user-name"
-            className="profile__form-label profile__info-label_name"
-          >
-            Имя
-          </label>
+        <Form
+          buttonText="Сохранить"
+          isValid={isValid}
+          className="profile__form"
+          formError={""}
+          btnDisabled={!isValid || !isDirtyForm}
+          btnClassName="profile__submit-button"
+          errorText={errorText}
+          isEdit={isEdit}
+          successText={successText}
+          onSubmit={onSubmit}
+        >
+          <div className="profile__form-item-wrapper">
+            <div className="profile__form-item">
+              <label
+                htmlFor="user-name"
+                className="profile__form-label profile__info-label_name"
+              >
+                Имя
+              </label>
 
-          <input
-            id="user-name"
-            className="profile__form-input profile__form-input_name"
-            placeholder="Имя"
-            value="Виталий"
-            type="text"
-            name="name"
-            minLength="2"
-            maxLength="30"
-            required
-            disabled={!isEdit}
-            onChange={onChange}
-          />
-        </div>
+              <input
+                id="user-name"
+                value={name || ""}
+                type="text"
+                disabled={!isEdit}
+                pattern={USER_NAME_VALIDATION}
+                required
+                placeholder="Имя"
+                name="name"
+                minLength="2"
+                maxLength="30"
+                className="profile__form-input profile__form-input_name"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
 
-        <div className="profile__form-item">
-          <label
-            htmlFor="user-name"
-            className="profile__form-label profile__info-label_name"
-          >
-            E-mail
-          </label>
+            <span className="form__input-error">{errors.name || ""} </span>
+          </div>
+          <div className="profile__form-item-wrapper">
+            <div className="profile__form-item">
+              <label
+                htmlFor="user-email"
+                className="profile__form-label profile__info-label_email"
+              >
+                E-mail
+              </label>
 
-          <input
-            id="user-email"
-            className="profile__form-input profile__form-input_email"
-            placeholder="E-mail"
-            type="email"
-            name="email"
-            required
-            disabled={!isEdit}
-            onChange={onChange}
-          />
-        </div>
+              <input
+                id="user-email"
+                value={email || ""}
+                disabled={!isEdit}
+                required
+                placeholder="E-mail"
+                type="email"
+                name="email"
+                className="profile__form-input profile__form-input_email"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <span className="form__input-error">{errors.email || ""} </span>
+          </div>
+        </Form>
 
-        {isEdit && (
-          <SubmitButton text="Сохранить" className="profile__submit-button" />
+        {!isEdit && (
+          <ul className="profile__action-list">
+            <li className="profile__action-button">
+              <button
+                type="button"
+                className="profile__button"
+                onClick={onEditButtonClick}
+              >
+                Редактировать
+              </button>
+            </li>
+
+            <li className="profile__action-button">
+              <button
+                type="submit"
+                className="profile__button profile__button_type_signout"
+                onClick={onSignOut}
+              >
+                Выйти из аккаунта
+              </button>
+            </li>
+          </ul>
         )}
-      </form>
-
-      {!isEdit && (
-        <ul className="profile__action-list">
-          <li className="profile__action-button">
-            <button
-              type="button"
-              className="profile__button"
-              onClick={onEditButtonClick}
-            >
-              Редактировать
-            </button>
-          </li>
-
-          <li className="profile__action-button">
-            <NavLink to="/" className="profile__link">
-              Выйти из аккаунта
-            </NavLink>
-          </li>
-        </ul>
-      )}
-    </main>
+      </div>
+    </section>
   );
 };

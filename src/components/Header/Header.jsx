@@ -8,12 +8,16 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
     onMenuToggle(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    onMenuToggle(!isMenuOpen);
+  };
+
   return (
     <header className="header">
       <div className="header__body">
         <Logo className="header__logo" />
 
-        {isLogged.current && (
+        {isLogged && (
           <div
             className={
               isMenuOpen
@@ -26,7 +30,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
           </div>
         )}
 
-        {isLogged.current && (
+        {isLogged && (
           <nav
             className={
               isMenuOpen ? "header__menu header__menu_active" : "header__menu"
@@ -37,11 +41,11 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
                 <NavLink
                   to="/"
                   className={(state) => {
-                    console.log(state, state.isActive);
                     return state.isActive
                       ? "header__link header__link_active"
                       : "header__link";
                   }}
+                  onClick={onMenuClick}
                 >
                   Главная
                 </NavLink>
@@ -54,6 +58,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
                       ? "header__link header__link_active"
                       : "header__link"
                   }
+                  onClick={closeMenu}
                 >
                   Фильмы
                 </NavLink>
@@ -67,6 +72,7 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
                       ? "header__link header__link_active"
                       : "header__link"
                   }
+                  onClick={closeMenu}
                 >
                   Сохранённые фильмы
                 </NavLink>
@@ -77,11 +83,12 @@ export const Header = ({ isLogged, isMenuOpen, onMenuToggle }) => {
               title="Аккаунт"
               to="profile"
               className="header__profile-button"
+              closeMenu={closeMenu}
             />
           </nav>
         )}
 
-        {!isLogged.current && (
+        {!isLogged && (
           <nav className="header__actions">
             <NavLink to="/signup" className="header__action-button">
               Регистрация

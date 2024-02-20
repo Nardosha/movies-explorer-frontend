@@ -6,22 +6,24 @@
 @import "./components/LoginButton/LoginButton.css";
 @import "./components/NavigationLink/NavigationLink.css";
 @import "./components/RoundedButton/RoundedButton.css";
+@import "./components/Form/Form.css";
+@import "./components/FormHeader/FormHeader.css";
 
 @import "./components/App/App.css";
-@import "./components/Main/Main.css";
-@import "./components/Main/Hero/Hero.css";
-@import "./components/Main/NavTab/NavTab.css";
-@import "./components/Main/Promo/Promo.css";
-@import "./components/Main/AboutProject/AboutProject.css";
-@import "./components/Main/Techs/Techs.css";
-@import "./components/Main/AboutMe/AboutMe.css";
+@import "./components/Layout/Layout.css";
+@import "./components/Home/Home.css";
+@import "./components/Home/Hero/Hero.css";
+@import "./components/Home/NavTab/NavTab.css";
+@import "./components/Home/AboutProject/AboutProject.css";
+@import "./components/Home/Techs/Techs.css";
+@import "./components/Home/AboutMe/AboutMe.css";
 @import "./components/Footer/Footer.css";
 
 @import "./components/Movies/MoviesCardList/MovieCardList.css";
 @import "./components/MoreButton/MoreButton.css";
 @import "./components/Movies/MoviesCard/MovieCard.css";
-@import "./components/Movies/SearchForm/SearchForm.css";
-@import "./components/Movies/Switcher/Switcher.css";
+@import "./components/SearchForm/SearchForm.css";
+@import "./components/Switcher/Switcher.css";
 
 @import "./components/Movies/Movies.css";
 @import "./components/SavedMovies/SavedMovies.css";
@@ -34,6 +36,3 @@
 
 @import "./components/NotFoundPage/NotFoundPage.css";
 @import "./components/Preloader/Preloader.css";
-
-
-/** { outline: 1px solid red; }*/
